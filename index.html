@@ -121,7 +121,35 @@
             display: block;
         }
 
-                /* === LIGHTBOX STYLES === */
+                /* Enhanced Lightbox Caption Styles */
+.lightbox-caption {
+    color: #ecf0f1;
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.lightbox-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.lightbox-alt {
+    font-size: 1rem;
+    color: #bdc3c7;
+    font-style: italic;
+    line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+    .lightbox-title {
+        font-size: 1.3rem;
+    }
+    
+    .lightbox-alt {
+        font-size: 0.9rem;
+    }
+}
         .lightbox {
             display: none;
             position: fixed;
@@ -211,6 +239,104 @@
             color: white;
             margin-top: 40px;
         }
+
+               <script>
+    // Enhanced Lightbox functionality with separate title and alt text
+    document.addEventListener('DOMContentLoaded', function() {
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        const lightboxTitle = document.getElementById('lightboxTitle');
+        const lightboxAlt = document.getElementById('lightboxAlt');
+        const closeBtn = document.getElementById('closeLightbox');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const artworks = document.querySelectorAll('.artwork');
+        
+        let currentIndex = 0;
+        
+        // Create an array of image data from your artworks
+        const imageData = Array.from(artworks).map(artwork => {
+            const img = artwork.querySelector('img');
+            const title = artwork.querySelector('h3').textContent;
+            const description = artwork.querySelector('p').textContent;
+            return {
+                src: img.src,
+                alt: img.alt,
+                title: title,
+                description: description
+            };
+        });
+        
+        // Open lightbox
+        function openLightbox(index) {
+            currentIndex = index;
+            updateLightbox();
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        // Close lightbox
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        
+        // Update lightbox content with title and alt text
+        function updateLightbox() {
+            const data = imageData[currentIndex];
+            lightboxImg.src = data.src;
+            lightboxImg.alt = data.alt;
+            lightboxTitle.textContent = data.title;
+            lightboxAlt.textContent = data.alt;
+        }
+        
+        // Navigate to next/previous image
+        function navigate(direction) {
+            currentIndex += direction;
+            
+            // Loop around if at beginning or end
+            if (currentIndex < 0) {
+                currentIndex = imageData.length - 1;
+            } else if (currentIndex >= imageData.length) {
+                currentIndex = 0;
+            }
+            
+            updateLightbox();
+        }
+        
+        // Event listeners for artworks
+        artworks.forEach((artwork, index) => {
+            artwork.addEventListener('click', () => {
+                openLightbox(index);
+            });
+        });
+        
+        // Event listeners for lightbox controls
+        closeBtn.addEventListener('click', closeLightbox);
+        prevBtn.addEventListener('click', () => navigate(-1));
+        nextBtn.addEventListener('click', () => navigate(1));
+        
+        // Close lightbox when clicking outside the image
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                closeLightbox();
+            }
+        });
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (lightbox.classList.contains('active')) {
+                if (e.key === 'Escape') {
+                    closeLightbox();
+                } else if (e.key === 'ArrowLeft') {
+                    navigate(-1);
+                } else if (e.key === 'ArrowRight') {
+                    navigate(1);
+                }
+            }
+        });
+    });
+</script>
     </style>
 </head>
 <body>
