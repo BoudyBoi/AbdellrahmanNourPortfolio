@@ -1,11 +1,17 @@
-           <!DOCTYPE html>
+     <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Art Portfolio</title>
+    <title>Abdellrahman Nour - Art Portfolio</title>
     <style>
         /* === GENERAL STYLES === */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
         body {
             font-family: 'Arial', sans-serif;
             margin: 0;
@@ -33,34 +39,21 @@
             z-index: 1000;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
- /* Enhanced Header Styles */
-.header-container {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
 
-.artist-name {
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: white;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
+        .header-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
 
-/* Responsive adjustment */
-@media (max-width: 768px) {
-    .header-container {
-        flex-direction: column;
-        gap: 5px;
-        text-align: center;
-    }
-    
-    .artist-name {
-        font-size: 1.5rem;
-    }
-}
+        .artist-name {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+        }
+
         .logo {
-            height: 75px; /* Adjust based on your logo's proportions */
+            height: 75px;
         }
 
         .nav-menu {
@@ -68,7 +61,7 @@
             list-style: none;
             margin: 0;
             padding: 0;
-            gap: 1.5rem; /* Space between menu items */
+            gap: 1.5rem;
         }
 
         .nav-item {
@@ -82,7 +75,7 @@
         }
 
         .nav-link:hover {
-            color: #a8a8a8; /* Change color on hover */
+            color: #a8a8a8;
         }
 
         /* DROPDOWN MENU */
@@ -94,7 +87,7 @@
             min-width: 200px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
             border-radius: 0 0 5px 5px;
-            display: none; /* Hidden by default */
+            display: none;
             list-style: none;
             padding: 0.5rem 0;
             margin: 0;
@@ -133,6 +126,7 @@
             border-radius: 8px;
             box-shadow: 0 3px 10px rgba(0,0,0,0.1);
             transition: transform 0.3s ease;
+            cursor: pointer;
         }
 
         .artwork:hover {
@@ -146,35 +140,7 @@
             display: block;
         }
 
-                /* Enhanced Lightbox Caption Styles */
-.lightbox-caption {
-    color: #ecf0f1;
-    margin-top: 1rem;
-    text-align: center;
-}
-
-.lightbox-title {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-bottom: 0.5rem;
-}
-
-.lightbox-alt {
-    font-size: 1rem;
-    color: #bdc3c7;
-    font-style: italic;
-    line-height: 1.4;
-}
-
-@media (max-width: 768px) {
-    .lightbox-title {
-        font-size: 1.3rem;
-    }
-    
-    .lightbox-alt {
-        font-size: 0.9rem;
-    }
-}
+        /* === LIGHTBOX STYLES === */
         .lightbox {
             display: none;
             position: fixed;
@@ -182,30 +148,50 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
+            background-color: rgba(0, 0, 0, 0.92);
             z-index: 2000;
             justify-content: center;
             align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .lightbox.active {
+            display: flex;
+            opacity: 1;
         }
 
         .lightbox-content {
             position: relative;
             max-width: 90%;
             max-height: 90%;
+            text-align: center;
         }
 
         .lightbox-img {
             max-width: 100%;
             max-height: 80vh;
-            border-radius: 5px;
-            box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
+            border-radius: 8px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
         }
 
         .lightbox-caption {
-            color: #fff;
+            color: #ecf0f1;
+            margin-top: 1rem;
             text-align: center;
-            padding: 10px;
-            font-size: 1.2rem;
+        }
+
+        .lightbox-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .lightbox-alt {
+            font-size: 1rem;
+            color: #bdc3c7;
+            font-style: italic;
+            line-height: 1.4;
         }
 
         .close {
@@ -213,13 +199,21 @@
             top: 25px;
             right: 25px;
             color: white;
-            font-size: 40px;
+            font-size: 36px;
             cursor: pointer;
             transition: color 0.3s;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
         }
 
         .close:hover {
-            color: #ccc;
+            color: #e74c3c;
+            background: rgba(255, 255, 255, 0.2);
         }
 
         .nav-btn {
@@ -227,20 +221,20 @@
             top: 50%;
             transform: translateY(-50%);
             color: white;
-            font-size: 40px;
+            font-size: 36px;
             cursor: pointer;
-            background-color: rgba(0, 0, 0, 0.5);
+            background: rgba(255, 255, 255, 0.1);
             width: 50px;
             height: 50px;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            transition: background-color 0.3s;
+            transition: background 0.3s;
         }
 
         .nav-btn:hover {
-            background-color: rgba(0, 0, 0, 0.8);
+            background: rgba(255, 255, 255, 0.2);
         }
 
         .prev {
@@ -250,6 +244,7 @@
         .next {
             right: 25px;
         }
+
         /* === ABOUT & FOOTER === */
         .about-section {
             max-width: 800px;
@@ -265,413 +260,127 @@
             margin-top: 40px;
         }
 
-               <script>
-    // Enhanced Lightbox functionality with separate title and alt text
-    document.addEventListener('DOMContentLoaded', function() {
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImg = document.getElementById('lightboxImg');
-        const lightboxTitle = document.getElementById('lightboxTitle');
-        const lightboxAlt = document.getElementById('lightboxAlt');
-        const closeBtn = document.getElementById('closeLightbox');
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-        const artworks = document.querySelectorAll('.artwork');
-        
-        let currentIndex = 0;
-        
-        // Create an array of image data from your artworks
-        const imageData = Array.from(artworks).map(artwork => {
-            const img = artwork.querySelector('img');
-            const title = artwork.querySelector('h3').textContent;
-            const description = artwork.querySelector('p').textContent;
-            return {
-                src: img.src,
-                alt: img.alt,
-                title: title,
-                description: description
-            };
-        });
-        
-        // Open lightbox
-        function openLightbox(index) {
-            currentIndex = index;
-            updateLightbox();
-            lightbox.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-        
-        // Close lightbox
-        function closeLightbox() {
-            lightbox.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-        
-        // Update lightbox content with title and alt text
-        function updateLightbox() {
-            const data = imageData[currentIndex];
-            lightboxImg.src = data.src;
-            lightboxImg.alt = data.alt;
-            lightboxTitle.textContent = data.title;
-            lightboxAlt.textContent = data.alt;
-        }
-        
-        // Navigate to next/previous image
-        function navigate(direction) {
-            currentIndex += direction;
-            
-            // Loop around if at beginning or end
-            if (currentIndex < 0) {
-                currentIndex = imageData.length - 1;
-            } else if (currentIndex >= imageData.length) {
-                currentIndex = 0;
+        /* Responsive adjustment */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 1rem;
             }
             
-            updateLightbox();
+            .header-container {
+                flex-direction: column;
+                gap: 5px;
+                text-align: center;
+            }
+            
+            .artist-name {
+                font-size: 1.5rem;
+            }
+            
+            .nav-menu {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            
+            .lightbox-title {
+                font-size: 1.3rem;
+            }
+            
+            .lightbox-alt {
+                font-size: 0.9rem;
+            }
+            
+            .nav-btn {
+                font-size: 24px;
+                width: 40px;
+                height: 40px;
+            }
         }
-        
-        // Event listeners for artworks
-        artworks.forEach((artwork, index) => {
-            artwork.addEventListener('click', () => {
-                openLightbox(index);
-            });
-        });
-        
-        // Event listeners for lightbox controls
-        closeBtn.addEventListener('click', closeLightbox);
-        prevBtn.addEventListener('click', () => navigate(-1));
-        nextBtn.addEventListener('click', () => navigate(1));
-        
-        // Close lightbox when clicking outside the image
-        lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) {
-                closeLightbox();
-            }
-        });
-        
-        // Keyboard navigation
-        document.addEventListener('keydown', (e) => {
-            if (lightbox.classList.contains('active')) {
-                if (e.key === 'Escape') {
-                    closeLightbox();
-                } else if (e.key === 'ArrowLeft') {
-                    navigate(-1);
-                } else if (e.key === 'ArrowRight') {
-                    navigate(1);
-                }
-            }
-        });
-    });
-</script>
     </style>
 </head>
 <body>
     <!-- HEADER WITH LOGO AND NAV -->
     <header>
-       <header>
-    <div class="header-container">
-               <!-- Replace "logo.png" with your actual logo filename -->
-        <a href="index.html" class="logo-link">
-            <img src="hhehehehehe-0514-4906-9fb3-90fd699fe718.PNG-removebg-preview.png" alt="My Logo" class="logo">
-        </a>
-        <span class="artist-name">Abdellrahman Nour</span>
-    </div>
+        <div class="header-container">
+            <a href="index.html" class="logo-link">
+                <img src="hhehehehehe-0514-4906-9fb3-90fd699fe718.PNG-removebg-preview.png" alt="My Logo" class="logo">
+            </a>
+            <span class="artist-name">Abdellrahman Nour</span>
+        </div>
 
- <nav>
-        <ul class="nav-menu">
-            <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-            <li class="nav-item">
-                <a href="#projects" class="nav-link">Projects ▼</a>
-                <ul class="dropdown">
-                    <li><a href="#scientific" class="dropdown-link">Scientific Illustration</a></li>
-                    <li><a href="#character" class="dropdown-link">Character Design</a></li>
-                    <li><a href="#miscellaneous" class="dropdown-link">Miscellaneous</a></li>
-                </ul>
-            </li>
-            <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
-        </ul>
-    </nav>
-</header>
-        
- <nav>
+        <nav>
             <ul class="nav-menu">
                 <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-
                 <li class="nav-item">
-                    <a href="#projects" class="nav-link">Projects ▼</a> <!-- Down arrow indicator -->
+                    <a href="#projects" class="nav-link">Projects ▼</a>
                     <ul class="dropdown">
                         <li><a href="#scientific" class="dropdown-link">Scientific Illustration</a></li>
                         <li><a href="#character" class="dropdown-link">Character Design</a></li>
                         <li><a href="#miscellaneous" class="dropdown-link">Miscellaneous</a></li>
                     </ul>
                 </li>
-
                 <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
             </ul>
         </nav>
     </header>
-        </a>
-
 
     <!-- MAIN GALLERY CONTENT -->
     <div class="gallery">
         <!-- Artwork 1 -->
-        <div class="artwork">
-            <!-- Replace "artwork1.jpg" with your actual image filename -->
+        <div class="artwork" data-index="0">
             <img src="072fc3d5-f013-4a23-b40e-c8de7e755bcd.jpg" alt="this illustartion shows the main anatomical features of human lungs">
             <h3>An illustartion of human lungs</h3>
-            <p>Medium, Year 2023</p>
+            <p>Digital Illustration, 2023</p>
         </div>
 
         <!-- Artwork 2 -->
-        <div class="artwork">
-            <!-- Replace "artwork2.jpg" with your actual image filename -->
+        <div class="artwork" data-index="1">
             <img src="16ffe32d-1e93-47d6-bb89-81a30a228b4b.jpg" alt="this illustartion displays the main anatomical features of a human kidney">
             <h3>An illustration of a cross-section of a human kidney</h3>
-            <p>Medium, Year 2023</p>
+            <p>Digital Illustration, 2023</p>
         </div>
 
         <!-- Artwork 3 -->
-        <div class="artwork">
-            <!-- Replace "artwork2.jpg" with your actual image filename -->
+        <div class="artwork" data-index="2">
             <img src="4b7b21c2-1390-4c38-b2d7-c35f698d880a.jpg" alt="thtis illustartion displays the basic morphology of a chromosome at different states of duplication">
             <h3>An illustration of a chromosome (duplicated & unduplicated)</h3>
-            <p>Medium, Year 2025</p>
+            <p>Digital Illustration, 2025</p>
         </div>
-
-
-        <!-- Add more artwork entries as needed -->
-
     </div>
 
-            <script>
-        // Lightbox functionality
-        let currentIndex = 0;
-        const artworks = document.querySelectorAll('.artwork');
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImg = document.querySelector('.lightbox-img');
-        const lightboxCaption = document.querySelector('.lightbox-caption');
-
-        // Create an array of image data
-        const imageData = Array.from(artworks).map(artwork => {
-            const img = artwork.querySelector('img');
-            const title = artwork.querySelector('h3').textContent;
-            const description = artwork.querySelector('p').textContent;
-            return {
-                src: img.src,
-                alt: img.alt,
-                title: title,
-                description: description,
-                fullCaption: `${title} - ${description}`
-            };
-        });
-
-        function openLightbox(index) {
-            currentIndex = index;
-            updateLightbox();
-            lightbox.style.display = 'flex';
-            document.body.style.overflow = 'hidden'; // Prevent scrolling
-        }
-
-        function closeLightbox() {
-            lightbox.style.display = 'none';
-            document.body.style.overflow = ''; // Re-enable scrolling
-        }
-
-        function changeSlide(direction) {
-            currentIndex += direction;
-            
-            // Loop around if at beginning or end
-            if (currentIndex < 0) {
-                currentIndex = imageData.length - 1;
-            } else if (currentIndex >= imageData.length) {
-                currentIndex = 0;
-            }
-            
-            updateLightbox();
-        }
-
-        function updateLightbox() {
-            const data = imageData[currentIndex];
-            lightboxImg.src = data.src;
-            lightboxImg.alt = data.alt;
-            lightboxCaption.textContent = data.fullCaption;
-        }
-
-        // Close lightbox when clicking outside the image
-        lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) {
-                closeLightbox();
-
-                       <a href="images/1.png" data-lightbox="image-1">
-    <img src="images/1.png" alt="Description" />
-</a>
-            }
-        });
-
-        // Keyboard navigation
-        document.addEventListener('keydown', (e) => {
-            if (lightbox.style.display === 'flex') {
-                if (e.key === 'Escape') {
-                    closeLightbox();
-                } else if (e.key === 'ArrowLeft') {
-                    changeSlide(-1);
-                } else if (e.key === 'ArrowRight') {
-                    changeSlide(1);
-                }
-            }
-        });
-                       
-    </script>
-</body>
-</html>
-
-    <!-- ABOUT SECTION -->
-    <section id="about" class="about-section">
-        <h2>About Me</h2>
-        <p>hello, i'm Abdellrahman Nour, i am an aspiring scientific illustrator, & i am really passionate about everything drawing & art reated, i hope that this portfolio helps bring a quick glimps of my works as an artist</p>
-    </section>
-
-    <footer>
-        <p>Contact me at: abdellrahman.nour22@gmail.com</p>
-        <p>© 2025 Abdellrahman Nour. All rights reserved.</p>
-    </footer>
-</body>
-
-
-
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Art Portfolio</title>
-    <style>
-        /* === YOUR EXISTING STYLES GO HERE === */
-        
-        /* === PASTE LIGHTBOX STYLES RIGHT AFTER YOUR EXISTING STYLES === */
-        /* LIGHTBOX STYLES */
-        .lightbox {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .lightbox.active {
-            display: flex;
-        }
-
-        .lightbox-content {
-            position: relative;
-            max-width: 90%;
-            max-height: 90%;
-            text-align: center;
-        }
-
-        .lightbox-img {
-            max-width: 100%;
-            max-height: 80vh;
-            border-radius: 5px;
-            box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
-        }
-
-        .lightbox-caption {
-            color: #fff;
-            text-align: center;
-            padding: 10px;
-            font-size: 1.2rem;
-            margin-top: 15px;
-        }
-
-        .close {
-            position: absolute;
-            top: 25px;
-            right: 25px;
-            color: white;
-            font-size: 40px;
-            cursor: pointer;
-            transition: color 0.3s;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .close:hover {
-            color: #ccc;
-        }
-
-        .nav-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            color: white;
-            font-size: 40px;
-            cursor: pointer;
-            background-color: rgba(0, 0, 0, 0.5);
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: background-color 0.3s;
-        }
-
-        .nav-btn:hover {
-            background-color: rgba(0, 0, 0, 0.8);
-        }
-
-        .prev {
-            left: 25px;
-        }
-
-        .next {
-            right: 25px;
-        }
-        
-        /* Make images clickable */
-        .artwork img {
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-        
-        .artwork img:hover {
-            transform: scale(1.02);
-        }
-    </style>
-</head>
-<body>
-    <!-- YOUR EXISTING HEADER AND GALLERY CONTENT GOES HERE -->
-    
-    <!-- PASTE LIGHTBOX HTML RIGHT BEFORE THE CLOSING </body> TAG -->
-    <!-- LIGHTBOX HTML -->
+    <!-- LIGHTBOX -->
     <div id="lightbox" class="lightbox">
         <span class="close" id="closeLightbox">&times;</span>
         <span class="nav-btn prev" id="prevBtn">&#10094;</span>
         <span class="nav-btn next" id="nextBtn">&#10095;</span>
         <div class="lightbox-content">
             <img class="lightbox-img" id="lightboxImg" src="" alt="">
-            <div class="lightbox-caption" id="lightboxCaption"></div>
+            <div class="lightbox-caption">
+                <div class="lightbox-title" id="lightboxTitle"></div>
+                <div class="lightbox-alt" id="lightboxAlt"></div>
+            </div>
         </div>
     </div>
 
-    <!-- PASTE LIGHTBOX JAVASCRIPT RIGHT AFTER THE LIGHTBOX HTML -->
+    <!-- ABOUT SECTION -->
+    <section id="about" class="about-section">
+        <h2>About Me</h2>
+        <p>Hello, I'm Abdellrahman Nour. I am an aspiring scientific illustrator, and I am really passionate about everything drawing and art related. I hope that this portfolio helps bring a quick glimpse of my works as an artist.</p>
+    </section>
+
+    <footer>
+        <p>Contact me at: abdellrahman.nour22@gmail.com</p>
+        <p>© 2025 Abdellrahman Nour. All rights reserved.</p>
+    </footer>
+
     <script>
-        // Lightbox functionality
+        // Enhanced Lightbox functionality with separate title and alt text
         document.addEventListener('DOMContentLoaded', function() {
             const lightbox = document.getElementById('lightbox');
             const lightboxImg = document.getElementById('lightboxImg');
-            const lightboxCaption = document.getElementById('lightboxCaption');
+            const lightboxTitle = document.getElementById('lightboxTitle');
+            const lightboxAlt = document.getElementById('lightboxAlt');
             const closeBtn = document.getElementById('closeLightbox');
             const prevBtn = document.getElementById('prevBtn');
             const nextBtn = document.getElementById('nextBtn');
@@ -688,31 +397,35 @@
                     src: img.src,
                     alt: img.alt,
                     title: title,
-                    description: description,
-                    fullCaption: `${title} - ${description}`
+                    description: description
                 };
             });
             
-            // Add click event to each artwork
-            artworks.forEach((artwork, index) => {
-                artwork.addEventListener('click', () => {
-                    openLightbox(index);
-                });
-            });
-            
+            // Open lightbox
             function openLightbox(index) {
                 currentIndex = index;
                 updateLightbox();
                 lightbox.classList.add('active');
-                document.body.style.overflow = 'hidden'; // Prevent scrolling
+                document.body.style.overflow = 'hidden';
             }
             
+            // Close lightbox
             function closeLightbox() {
                 lightbox.classList.remove('active');
-                document.body.style.overflow = ''; // Re-enable scrolling
+                document.body.style.overflow = '';
             }
             
-            function changeSlide(direction) {
+            // Update lightbox content with title and alt text
+            function updateLightbox() {
+                const data = imageData[currentIndex];
+                lightboxImg.src = data.src;
+                lightboxImg.alt = data.alt;
+                lightboxTitle.textContent = data.title;
+                lightboxAlt.textContent = data.alt;
+            }
+            
+            // Navigate to next/previous image
+            function navigate(direction) {
                 currentIndex += direction;
                 
                 // Loop around if at beginning or end
@@ -725,17 +438,17 @@
                 updateLightbox();
             }
             
-            function updateLightbox() {
-                const data = imageData[currentIndex];
-                lightboxImg.src = data.src;
-                lightboxImg.alt = data.alt;
-                lightboxCaption.textContent = data.fullCaption;
-            }
+            // Event listeners for artworks
+            artworks.forEach((artwork, index) => {
+                artwork.addEventListener('click', () => {
+                    openLightbox(index);
+                });
+            });
             
             // Event listeners for lightbox controls
             closeBtn.addEventListener('click', closeLightbox);
-            prevBtn.addEventListener('click', () => changeSlide(-1));
-            nextBtn.addEventListener('click', () => changeSlide(1));
+            prevBtn.addEventListener('click', () => navigate(-1));
+            nextBtn.addEventListener('click', () => navigate(1));
             
             // Close lightbox when clicking outside the image
             lightbox.addEventListener('click', (e) => {
@@ -750,117 +463,13 @@
                     if (e.key === 'Escape') {
                         closeLightbox();
                     } else if (e.key === 'ArrowLeft') {
-                        changeSlide(-1);
+                        navigate(-1);
                     } else if (e.key === 'ArrowRight') {
-                        changeSlide(1);
+                        navigate(1);
                     }
                 }
             });
         });
-
-               <script>
-    // Enhanced Lightbox functionality with separate title and alt text
-    document.addEventListener('DOMContentLoaded', function() {
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImg = document.getElementById('lightboxImg');
-        const lightboxTitle = document.getElementById('lightboxTitle');
-        const lightboxAlt = document.getElementById('lightboxAlt');
-        const closeBtn = document.getElementById('closeLightbox');
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-        const artworks = document.querySelectorAll('.artwork');
-        
-        let currentIndex = 0;
-        
-        // Create an array of image data from your artworks
-        const imageData = Array.from(artworks).map(artwork => {
-            const img = artwork.querySelector('img');
-            const title = artwork.querySelector('h3').textContent;
-            const description = artwork.querySelector('p').textContent;
-            return {
-                src: img.src,
-                alt: img.alt,
-                title: title,
-                description: description
-            };
-        });
-        
-        // Open lightbox
-        function openLightbox(index) {
-            currentIndex = index;
-            updateLightbox();
-            lightbox.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-        
-        // Close lightbox
-        function closeLightbox() {
-            lightbox.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-        
-        // Update lightbox content with title and alt text
-        function updateLightbox() {
-            const data = imageData[currentIndex];
-            lightboxImg.src = data.src;
-            lightboxImg.alt = data.alt;
-            lightboxTitle.textContent = data.title;
-            lightboxAlt.textContent = data.alt;
-        }
-        
-        // Navigate to next/previous image
-        function navigate(direction) {
-            currentIndex += direction;
-            
-            // Loop around if at beginning or end
-            if (currentIndex < 0) {
-                currentIndex = imageData.length - 1;
-            } else if (currentIndex >= imageData.length) {
-                currentIndex = 0;
-            }
-            
-            updateLightbox();
-        }
-        
-        // Event listeners for artworks
-        artworks.forEach((artwork, index) => {
-            artwork.addEventListener('click', () => {
-                openLightbox(index);
-            });
-        });
-        
-        // Event listeners for lightbox controls
-        closeBtn.addEventListener('click', closeLightbox);
-        prevBtn.addEventListener('click', () => navigate(-1));
-        nextBtn.addEventListener('click', () => navigate(1));
-        
-        // Close lightbox when clicking outside the image
-        lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) {
-                closeLightbox();
-            }
-        });
-        
-        // Keyboard navigation
-        document.addEventListener('keydown', (e) => {
-            if (lightbox.classList.contains('active')) {
-                if (e.key === 'Escape') {
-                    closeLightbox();
-                } else if (e.key === 'ArrowLeft') {
-                    navigate(-1);
-                } else if (e.key === 'ArrowRight') {
-                    navigate(1);
-                           <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<link href="css/lightbox.css" rel="stylesheet">
-
-<!-- Before closing body tag -->
-<script src="js/lightbox.js"></script>
-                }
-            }
-        });
-    });
-</script>
     </script>
 </body>
-</html>
 </html>
