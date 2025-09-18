@@ -1,80 +1,199 @@
-<!DOCTYPE html>
+           <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Art Portfolio</title>
     <style>
+        /* === GENERAL STYLES === */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
             background-color: #f8f8f8;
             color: #333;
+            line-height: 1.6;
         }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* === HEADER & NAVIGATION === */
         header {
             background-color: #2d2d2d;
             color: white;
-            padding: 2rem;
-            text-align: center;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
+
+        .logo {
+            height: 50px; /* Adjust based on your logo's proportions */
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 2rem; /* Space between menu items */
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            padding: 0.5rem 1rem;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #a8a8a8; /* Change color on hover */
+        }
+
+        /* DROPDOWN MENU */
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #3d3d3d;
+            min-width: 200px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            border-radius: 0 0 5px 5px;
+            display: none; /* Hidden by default */
+            list-style: none;
+            padding: 0.5rem 0;
+            margin: 0;
+        }
+
+        .dropdown-link {
+            display: block;
+            padding: 0.8rem 1.5rem;
+            color: #ddd;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-link:hover {
+            background-color: #555;
+            color: white;
+        }
+
+        /* Show dropdown on hover */
+        .nav-item:hover .dropdown {
+            display: block;
+        }
+
+        /* === GALLERY SECTION === */
         .gallery {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-            padding: 20px;
+            gap: 25px;
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
+
         .artwork {
             background: white;
             padding: 15px;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
         }
+
+        .artwork:hover {
+            transform: translateY(-5px);
+        }
+
         .artwork img {
             width: 100%;
             height: auto;
-            border-radius: 3px;
+            border-radius: 5px;
+            display: block;
         }
+
+        /* === ABOUT & FOOTER === */
+        .about-section {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
         footer {
             text-align: center;
             padding: 2rem;
             background-color: #2d2d2d;
             color: white;
+            margin-top: 40px;
         }
     </style>
 </head>
 <body>
+    <!-- HEADER WITH LOGO AND NAV -->
     <header>
-        <h1>My Art Portfolio</h1>
-        <p>Welcome to my creative space</p>
+        <!-- Replace "logo.png" with your actual logo filename -->
+        <a href="index.html" class="logo-link">
+            <img src="hhehehehehe-0514-4906-9fb3-90fd699fe718.PNG-removebg-preview.png" alt="My Logo" class="logo">
+        </a>
+
+        <nav>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+
+                <li class="nav-item">
+                    <a href="#projects" class="nav-link">Projects ▼</a> <!-- Down arrow indicator -->
+                    <ul class="dropdown">
+                        <li><a href="#scientific" class="dropdown-link">Scientific Illustration</a></li>
+                        <li><a href="#character" class="dropdown-link">Character Design</a></li>
+                        <li><a href="#miscellaneous" class="dropdown-link">Miscellaneous</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
+            </ul>
+        </nav>
     </header>
-    
+
+    <!-- MAIN GALLERY CONTENT -->
     <div class="gallery">
         <!-- Artwork 1 -->
         <div class="artwork">
-            <img src="artwork1.jpg" alt="Description of first artwork">
-            <h3>Artwork Title 1</h3>
-            <p>Medium, Year</p>
+            <!-- Replace "artwork1.jpg" with your actual image filename -->
+            <img src="072fc3d5-f013-4a23-b40e-c8de7e755bcd.jpg" alt="this illustartion shows the main anatomical features of human lungs">
+            <h3>An illustartion of human lungs</h3>
+            <p>Medium, Year 2023</p>
         </div>
-        
+
         <!-- Artwork 2 -->
         <div class="artwork">
-            <img src="artwork2.jpg" alt="Description of second artwork">
-            <h3>Artwork Title 2</h3>
+            <!-- Replace "artwork2.jpg" with your actual image filename -->
+            <img src="16ffe32d-1e93-47d6-bb89-81a30a228b4b.jpg" alt="thtis illustartion displays the main anatomical features of a human kidney">
+            <h3>An illustration of a human kidney</h3>
             <p>Medium, Year</p>
         </div>
-        
+
         <!-- Add more artwork entries as needed -->
+
     </div>
-    
-    <section style="max-width: 800px; margin: 40px auto; padding: 0 20px;">
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="about-section">
         <h2>About Me</h2>
-        <p>Write a brief biography here. Describe your artistic journey, influences, and techniques.</p>
+        <p>hello, i', Abdellrahman Nour, i am an aspiring scientific illustrator, & i am really passionate about everything drawing & art reated, i hope that this portfolio helps bring a quick glimps of my works as an artist</p>
     </section>
-    
+
     <footer>
-        <p>Contact me at: your-email@example.com</p>
-        <p>© 2025 Your Name. All rights reserved.</p>
+        <p>Contact me at: abdellrahman.nour22@gmail.com</p>
+        <p>© 2025 Abdellrahman Nour. All rights reserved.</p>
     </footer>
 </body>
 </html>
