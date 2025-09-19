@@ -29,8 +29,8 @@
 
         /* === HEADER & NAVIGATION === */
         header {
-            background-color: #aaaaaa;
-            color: white;
+            background-color: #2d5a2d; /* Dark green header */
+            color: #000; /* Black text */
             padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
@@ -50,7 +50,7 @@
         .artist-name {
             font-size: 1.8rem;
             font-weight: bold;
-            color: white;
+            color: #000; /* Black text */
         }
 
         .logo {
@@ -74,15 +74,16 @@
             padding: 0.5rem 1rem;
             font-weight: bold;
             transition: color 0.3s ease;
+            color: #000; /* Black text */
         }
 
         .nav-link:hover {
-            color: #a8a8a8;
+            color: #1e3e1e; /* Darker green on hover */
         }
 
         .linkedin-icon {
             font-size: 1.8rem;
-            color: white;
+            color: #000; /* Black icon */
             transition: transform 0.3s ease;
         }
 
@@ -138,15 +139,17 @@
         .home-image {
             flex: 1;
             display: flex;
-            justify-content: center;
+            justify-content: flex-start;
             align-items: center;
+            overflow: hidden;
         }
 
         .home-image img {
-            max-width: 100%;
-            max-height: 70vh;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            max-width: 140%;
+            max-height: 90vh;
+            margin-left: -20%;
+            border-radius: 0;
+            /* No shadow as requested */
         }
 
         .home-content {
@@ -155,28 +158,65 @@
         }
 
         .home-content p {
-            font-size: 1.1rem;
+            font-size: 1.3rem; /* Larger text */
             line-height: 1.8;
             margin-bottom: 2rem;
             color: #444;
         }
 
+        .projects-button-container {
+            position: relative;
+            display: inline-block;
+        }
+
         .projects-button {
             display: inline-block;
-            background-color: #a8e6cf;
-            color: #2d2d2d;
+            background-color: #2d5a2d; /* Matching dark green */
+            color: white;
             padding: 12px 25px;
             border-radius: 30px;
             font-weight: bold;
             font-size: 1.2rem;
             transition: all 0.3s ease;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
         }
 
         .projects-button:hover {
-            background-color: #88d4ba;
+            background-color: #1e3e1e;
             transform: translateY(-3px);
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .home-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #3d3d3d;
+            min-width: 200px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            border-radius: 0 0 5px 5px;
+            display: none;
+            list-style: none;
+            padding: 0.5rem 0;
+            margin: 0;
+            z-index: 1001;
+        }
+
+        .home-dropdown-link {
+            display: block;
+            padding: 0.8rem 1.5rem;
+            color: #ddd;
+            transition: all 0.3s ease;
+        }
+
+        .home-dropdown-link:hover {
+            background-color: #555;
+            color: white;
+        }
+
+        .projects-button-container:hover .home-dropdown {
+            display: block;
         }
 
         /* === PROJECTS SECTION === */
@@ -208,11 +248,12 @@
 
         .artwork {
             background: white;
-            padding: 15px;
+            padding: 20px;
             border-radius: 8px;
             box-shadow: 0 3px 10px rgba(0,0,0,0.1);
             transition: transform 0.3s ease;
             cursor: pointer;
+            text-align: center; /* Center align content */
         }
 
         .artwork:hover {
@@ -224,6 +265,18 @@
             height: auto;
             border-radius: 5px;
             display: block;
+            margin-bottom: 15px; /* Increased space between image and title */
+        }
+
+        .artwork h3 {
+            margin: 15px 0 10px 0; /* Increased space around title */
+            font-size: 1.2rem;
+        }
+
+        .artwork p {
+            text-align: center; /* Center align the secondary text */
+            color: #666;
+            margin: 0;
         }
 
         /* === LIGHTBOX STYLES === */
@@ -351,6 +404,11 @@
                 flex: none;
                 width: 100%;
             }
+            
+            .home-image img {
+                max-width: 100%;
+                margin-left: 0;
+            }
         }
 
         @media (max-width: 768px) {
@@ -391,7 +449,7 @@
             }
             
             .home-content p {
-                font-size: 1rem;
+                font-size: 1.1rem;
             }
             
             .projects-button {
@@ -439,7 +497,14 @@
         </div>
         <div class="home-content">
             <p>Hello, I'm Abdellrahman Ali Nour. I am a biology nerd & an aspiring scientific illustrator, & I am really passionate about everything drawing-&-art related. I hope that this portfolio helps in revealing the kind of artist i am to the world, & show my passion & love for biology, art, & creativity.</p>
-            <a href="#scientific-illustration" class="projects-button">View my projects</a>
+            <div class="projects-button-container">
+                <div class="projects-button">View my projects</div>
+                <div class="home-dropdown">
+                    <a href="#scientific-illustration" class="home-dropdown-link">Scientific Illustration</a>
+                    <a href="#character-design" class="home-dropdown-link">Character Design</a>
+                    <a href="#miscellaneous" class="home-dropdown-link">Miscellaneous</a>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -469,14 +534,14 @@
             </div>
              
             <!-- Artwork 4 -->
-            <div class="artwork" data-index="2">
+            <div class="artwork" data-index="3">
                 <img src="4b7b21c2-1390-4c38-b2d7-c35f698d880a.jpg" alt="This illustartion displays the basic morphology of a chromosome at different states of duplication">
                 <h3>An illustration of a typical chromosome (duplicated & unduplicated)</h3>
                 <p>Digital Illustration, 2025</p>
             </div>
 
               <!-- Artwork 5 -->
-            <div class="artwork" data-index="2">
+            <div class="artwork" data-index="4">
                 <img src="e3c087c2-8e89-4997-8039-de9f467913fe.jpg" alt="This illustartion shows a semi-realistic view of the human digestive system, revealing organs like the stomach, intestines, & liver (unlabelled)">
                 <h3>An illustration of a human digestive system</h3>
                 <p>Digital Illustration, 2023</p>
@@ -488,7 +553,12 @@
     <section id="character-design" class="projects-section">
         <h2 class="section-title">Character Design</h2>
         <div class="gallery">
-            <p style="text-align: center; grid-column: 1 / -1;">Character design projects coming soon!</p>
+             <!-- Artwork 1 -->
+            <div class="artwork" data-index="0">
+                <img src="710d4b7d-4603-412a-b1e0-9617bb65ff8d.jpg" alt="This illustartion shows a character for a fictional story i was writing: a grumpy duck, with anger issues, that is fond of bread & companionship">
+                <h3>A character design sheet for an angry duck character</h3>
+                <p>Digital Illustration, 2023</p>
+            </div>
         </div>
     </section>
 
@@ -496,7 +566,7 @@
     <section id="miscellaneous" class="projects-section">
         <h2 class="section-title">Miscellaneous</h2>
         <div class="gallery">
-            <p style="text-align: center; grid-column: 1 / -1;">Miscellaneous projects coming soon!</p>
+            <p style="text-align: center; grid-column: 1 / -1; padding: 40px;">Miscellaneous projects coming soon!</p>
         </div>
     </section>
 
