@@ -17,7 +17,7 @@
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #e2cce7; /* New background color */
+            background-color: #ffffcc; /* Changed to requested color */
             color: #333;
             line-height: 1.6;
             scroll-behavior: smooth;
@@ -313,6 +313,29 @@
             background-color: #3a7a3a;
         }
 
+        /* Year filter for Previous Works */
+        .year-filter-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .year-filter-btn {
+            background-color: #6a9c6a;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .year-filter-btn:hover, .year-filter-btn.active {
+            background-color: #5a8a5a;
+        }
+
         /* === GALLERY SECTION === */
         .gallery {
             display: grid;
@@ -489,9 +512,9 @@
         }
 
         @media (max-width: 768px) {
-            /* Header adjustments for mobile */
+            /* Header adjustments for mobile - keep logo and title on same line */
             header {
-                flex-direction: column;
+                flex-direction: row; /* Changed from column to row */
                 gap: 0.8rem; /* Reduced gap for stronger shrinkage */
                 padding: 0.8rem;
             }
@@ -501,10 +524,11 @@
             }
             
             .header-container {
-                flex-direction: column;
-                gap: 5px;
+                flex-direction: row; /* Changed from column to row */
+                gap: 10px;
                 text-align: center;
                 order: 1; /* Ensure logo and title come first */
+                align-items: center;
             }
             
             .artist-name {
@@ -525,7 +549,7 @@
             
             nav {
                 order: 2; /* Ensure nav comes after logo/title */
-                width: 100%;
+                width: auto;
             }
             
             .nav-menu {
@@ -670,7 +694,7 @@
     <!-- ALL PROJECTS SECTION -->
     <section id="all" class="projects-section">
         <h2 class="section-title">All Projects</h2>
-        <p class="category-description">A comprehensive collection of all my artwork across different categories and styles.</p>
+        <p class="category-description">A comprehensive collection showcasing my diverse artistic journey, from scientific precision to creative character designs and everything in between.</p>
         <div class="filter-container">
             <button class="filter-btn active" data-filter="all">All</button>
             <button class="filter-btn" data-filter="scientific">Scientific Illustration</button>
@@ -766,34 +790,52 @@
             </div>
 
             <!-- Previous Works Artworks -->
-            <div class="artwork" data-category="previous" data-index="14">
+            <div class="artwork" data-category="previous" data-year="2022" data-index="14">
                 <img src="placeholder-image.jpg" alt="Example of previous work">
                 <h3>Previous Work Example 1</h3>
                 <p>Digital Illustration, 2022</p>
             </div>
 
-            <div class="artwork" data-category="previous" data-index="15">
+            <div class="artwork" data-category="previous" data-year="2022" data-index="15">
                 <img src="placeholder-image.jpg" alt="Example of previous work">
                 <h3>Previous Work Example 2</h3>
                 <p>Digital Illustration, 2022</p>
             </div>
 
+            <div class="artwork" data-category="previous" data-year="2023" data-index="16">
+                <img src="placeholder-image.jpg" alt="Example of previous work">
+                <h3>Previous Work Example 3</h3>
+                <p>Digital Illustration, 2023</p>
+            </div>
+
             <!-- Miscellaneous Artworks -->
-            <div class="artwork" data-category="misc" data-index="16">
+            <div class="artwork" data-category="misc" data-index="17">
                 <img src="jelly.jpg" alt="This artwork shows a cute green jelly jumping up">
                 <h3>jumping jello</h3>
                 <p>Digital Illustration, 2023</p>
             </div>
 
-            <div class="artwork" data-category="misc" data-index="17">
+            <div class="artwork" data-category="misc" data-index="18">
                 <img src="alien from outer space.jpg" alt="This artwork shows a cute alien on the moon in an extraterrestrial shot">
                 <h3>alien on the moon</h3>
                 <p>Digital Illustration, 2025</p>
             </div>
 
-            <div class="artwork" data-category="misc" data-index="18">
+            <div class="artwork" data-category="misc" data-index="19">
                 <img src="mushroom hero.jpg" alt="This artwork shows a mushroom that poses like a superhero, & is wearing a cape">
                 <h3>Mushroom hero</h3>
+                <p>Digital Illustration, 2025</p>
+            </div>
+
+            <div class="artwork" data-category="misc" data-index="20">
+                <img src="panicking coffee spiller.jpg" alt="This artwork shows a an office worker that'spanicking because he accidentally spilled a cup of coffee over some electronics">
+                <h3>Spilling Accident</h3>
+                <p>Digital Illustration, 2025</p>
+            </div>
+
+            <div class="artwork" data-category="misc" data-index="21">
+                <img src="rainy frog day.jpg" alt="This artwork shows a kid, wearing an oversized frog costume, & enjoyingplaying in a water puddle">
+                <h3>Frog suit time!</h3>
                 <p>Digital Illustration, 2025</p>
             </div>
         </div>
@@ -802,7 +844,7 @@
     <!-- SCIENTIFIC ILLUSTRATION SECTION -->
     <section id="scientific-illustration" class="projects-section">
         <h2 class="section-title">Scientific Illustration</h2>
-        <p class="category-description">Detailed anatomical and biological illustrations showcasing my passion for science and accuracy in visual representation.</p>
+        <p class="category-description">Precise anatomical and biological illustrations that merge scientific accuracy with artistic expression. These works demonstrate my passion for biology and attention to detail in visualizing complex biological structures.</p>
         <div class="gallery">
             <!-- Artwork 1 -->
             <div class="artwork" data-index="0">
@@ -879,7 +921,7 @@
     <!-- CHARACTER DESIGN SECTION -->
     <section id="character-design" class="projects-section">
         <h2 class="section-title">Character Design</h2>
-        <p class="category-description">Creative character designs and concept art showcasing my ability to create unique personalities and visual stories.</p>
+        <p class="category-description">Creative character designs and concept art that showcase my ability to develop unique personalities and visual stories. These characters were created for various fictional narratives, each with their own backstory and distinctive visual identity.</p>
         <div class="gallery">
             <!-- Artwork 1 -->
             <div class="artwork" data-index="10">
@@ -914,20 +956,33 @@
     <!-- PREVIOUS WORKS SECTION -->
     <section id="previous-works" class="projects-section">
         <h2 class="section-title">Previous Works</h2>
-        <p class="category-description">A collection of earlier projects and experiments that showcase my artistic journey and development over time.</p>
+        <p class="category-description">A chronological collection of my earlier projects that showcase my artistic evolution and development over the years. Explore works from different periods to see how my style and technique have progressed.</p>
+        
+        <div class="year-filter-container">
+            <button class="year-filter-btn active" data-year="all">All Years</button>
+            <button class="year-filter-btn" data-year="2022">2022 Projects</button>
+            <button class="year-filter-btn" data-year="2023">2023 Projects</button>
+        </div>
+        
         <div class="gallery">
-            <!-- Artwork 1 -->
-            <div class="artwork" data-index="14">
+            <!-- 2022 Artworks -->
+            <div class="artwork" data-year="2022" data-index="14">
                 <img src="placeholder-image.jpg" alt="Example of previous work">
                 <h3>Previous Work Example 1</h3>
                 <p>Digital Illustration, 2022</p>
             </div>
 
-            <!-- Artwork 2 -->
-            <div class="artwork" data-index="15">
+            <div class="artwork" data-year="2022" data-index="15">
                 <img src="placeholder-image.jpg" alt="Example of previous work">
                 <h3>Previous Work Example 2</h3>
                 <p>Digital Illustration, 2022</p>
+            </div>
+
+            <!-- 2023 Artworks -->
+            <div class="artwork" data-year="2023" data-index="16">
+                <img src="placeholder-image.jpg" alt="Example of previous work">
+                <h3>Previous Work Example 3</h3>
+                <p>Digital Illustration, 2023</p>
             </div>
         </div>
     </section>
@@ -935,38 +990,38 @@
     <!-- MISCELLANEOUS SECTION -->
     <section id="miscellaneous" class="projects-section">
         <h2 class="section-title">Miscellaneous</h2>
-        <p class="category-description">A variety of creative projects and experiments that don't fit into other categories but showcase my diverse artistic interests.</p>
+        <p class="category-description">A diverse collection of creative experiments and personal projects that showcase my versatility as an artist. These works explore different themes, styles, and concepts beyond my primary focus areas.</p>
         <div class="gallery">
              <!-- Artwork 1 -->
-            <div class="artwork" data-index="16">
+            <div class="artwork" data-index="17">
                 <img src="jelly.jpg" alt="This artwork shows a cute green jelly jumping up">
                 <h3>jumping jello</h3>
                 <p>Digital Illustration, 2023</p>
             </div>
 
             <!-- Artwork 2 -->
-            <div class="artwork" data-index="17">
+            <div class="artwork" data-index="18">
                 <img src="alien from outer space.jpg" alt="This artwork shows a cute alien on the moon in an extraterrestrial shot">
                 <h3>alien on the moon</h3>
                 <p>Digital Illustration, 2025</p>
             </div>
 
             <!-- Artwork 3 -->
-            <div class="artwork" data-index="18">
+            <div class="artwork" data-index="19">
                 <img src="mushroom hero.jpg" alt="This artwork shows a mushroom that poses like a superhero, & is wearing a cape">
                 <h3>Mushroom hero</h3>
                 <p>Digital Illustration, 2025</p>
             </div>
 
               <!-- Artwork 4 -->
-            <div class="artwork" data-index="18">
+            <div class="artwork" data-index="20">
                 <img src="panicking coffee spiller.jpg" alt="This artwork shows a an office worker that'spanicking because he accidentally spilled a cup of coffee over some electronics">
                 <h3>Spilling Accident</h3>
                 <p>Digital Illustration, 2025</p>
             </div>
 
              <!-- Artwork 5 -->
-            <div class="artwork" data-index="18">
+            <div class="artwork" data-index="21">
                 <img src="rainy frog day.jpg" alt="This artwork shows a kid, wearing an oversized frog costume, & enjoyingplaying in a water puddle">
                 <h3>Frog suit time!</h3>
                 <p>Digital Illustration, 2025</p>
@@ -1006,6 +1061,7 @@
             const artworks = document.querySelectorAll('.artwork');
             const projectSections = document.querySelectorAll('.projects-section');
             const filterButtons = document.querySelectorAll('.filter-btn');
+            const yearFilterButtons = document.querySelectorAll('.year-filter-btn');
             const header = document.getElementById('main-header');
             const dropdowns = document.querySelectorAll('.dropdown, .home-dropdown');
             
@@ -1110,6 +1166,28 @@
                 });
             }
             
+            // Filter artworks by year in Previous Works section
+            function filterByYear(year) {
+                const previousArtworks = document.querySelectorAll('#previous-works .artwork');
+                
+                previousArtworks.forEach(artwork => {
+                    if (year === 'all' || artwork.getAttribute('data-year') === year) {
+                        artwork.style.display = 'block';
+                    } else {
+                        artwork.style.display = 'none';
+                    }
+                });
+                
+                // Update active year filter button
+                yearFilterButtons.forEach(btn => {
+                    if (btn.getAttribute('data-year') === year) {
+                        btn.classList.add('active');
+                    } else {
+                        btn.classList.remove('active');
+                    }
+                });
+            }
+            
             // Header shrink on scroll
             function handleHeaderScroll() {
                 if (window.scrollY > 200) {
@@ -1190,7 +1268,9 @@
                     showProjectSection(targetId);
                     
                     // Close dropdowns after selection (especially for mobile)
-                    closeAllDropdowns();
+                    if (window.innerWidth <= 768) {
+                        closeAllDropdowns();
+                    }
                 });
             });
             
@@ -1206,9 +1286,6 @@
                 projectSections.forEach(section => {
                     section.classList.remove('active');
                 });
-                
-                // Close dropdowns
-                closeAllDropdowns();
             });
             
             // Projects link in header
@@ -1226,14 +1303,24 @@
                 });
             });
             
+            // Year filter buttons
+            yearFilterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const year = button.getAttribute('data-year');
+                    filterByYear(year);
+                });
+            });
+            
             // Scroll event for header shrink
             window.addEventListener('scroll', handleHeaderScroll);
             
-            // Close dropdowns when clicking outside
+            // Close dropdowns when clicking outside (only for mobile)
             document.addEventListener('click', (e) => {
-                if (!e.target.matches('.nav-link, .projects-button') && 
-                    !e.target.closest('.dropdown, .home-dropdown')) {
-                    closeAllDropdowns();
+                if (window.innerWidth <= 768) {
+                    if (!e.target.matches('.nav-link, .projects-button') && 
+                        !e.target.closest('.dropdown, .home-dropdown')) {
+                        closeAllDropdowns();
+                    }
                 }
             });
             
@@ -1249,6 +1336,28 @@
                             if (!isVisible) {
                                 dropdown.style.display = 'block';
                             }
+                        }
+                    });
+                });
+            }
+            
+            // Keep dropdowns open on hover for desktop
+            if (window.innerWidth > 768) {
+                document.querySelectorAll('.nav-item, .projects-button-container').forEach(container => {
+                    container.addEventListener('mouseleave', () => {
+                        // Small delay before closing to allow moving to dropdown
+                        setTimeout(() => {
+                            const dropdown = container.querySelector('.dropdown, .home-dropdown');
+                            if (dropdown && !dropdown.matches(':hover')) {
+                                dropdown.style.display = 'none';
+                            }
+                        }, 300);
+                    });
+                    
+                    container.addEventListener('mouseenter', () => {
+                        const dropdown = container.querySelector('.dropdown, .home-dropdown');
+                        if (dropdown) {
+                            dropdown.style.display = 'block';
                         }
                     });
                 });
