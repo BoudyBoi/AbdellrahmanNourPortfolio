@@ -34,12 +34,12 @@
             width: 200%;
             height: 200%;
             background-image: url('hhehehehehe-0514-4906-9fb3-90fd699fe718.PNG-removebg-preview.png');
-            background-size: 195px; /* Increased from 150px for more spacing */
+            background-size: 185px; /* Increased from 150px for more spacing */
             background-repeat: repeat;
             opacity: 0.09; /* Increased from 0.04 for less transparency */
             z-index: -1;
-            animation: floatBackground 88s linear infinite; /* Faster animation (100s instead of 120s) */
-            transform: rotate(6.5deg);
+            animation: floatBackground 75s linear infinite; /* Faster animation (100s instead of 120s) */
+            transform: rotate(6.9deg);
             pointer-events: none;
         }
 
@@ -1018,7 +1018,7 @@
             <img src="chromosome lookingremovebg-preview.png" alt="Decorative art">
         </div>
         <div class="home-content">
-            <p>Hello, I'm Abdellrahman Ali Nour, a passionate scientific illustrator & biology enthusiast with a deep love for both art & science. My work sits at the fascinating intersection where precise biological accuracy meets creative artistic expression, allowing me to visualize complex scientific concepts in ways that are both educational and visually captivating. I'm passionate about making science accessible through visual storytelling that educates and inspires wonder about the natural world, & I hope that this portfolio helps in revealing the kind of artist i am to the world, & show my passion & love for biology, art, & creativity.</p>
+            <p>Hello, I'm Abdellrahman Ali Nour, a passionate scientific illustrator & biology enthusiast with a deep love for both science & art My work sits at the fascinating intersection where precise biological accuracy meets creative artistic expression. I'm passionate about making science accessible through visual storytelling that educates and inspires wonder about the natural world, & I hope that this portfolio helps in revealing the kind of artist i am to the world, & show my passion & love for Biology, Art, & Creativity.</p>
             <div class="projects-button-container">
                 <div class="projects-button">View Projects</div>
                 <div class="home-dropdown">
@@ -2081,7 +2081,341 @@
                             }
                         }, 300);
                     });
-                    
+
+                    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Back to Top Button</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #6a89cc 0%, #4a69bd 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 150vh; /* For demonstration */
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #2c3e50;
+            font-size: 2.8rem;
+        }
+        
+        p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .code-container {
+            background: #2c3e50;
+            color: #f8f8f8;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+        }
+        
+        .explanation {
+            background: #edf2f7;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+        }
+        
+        h3 {
+            color: #2c3e50;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.4rem;
+        }
+        
+        ul {
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        /* Back to Top Button Styles */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4a8c4a 0%, #3a7a3a 100%);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            opacity: 0;
+            visibility: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            border: none;
+            outline: none;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background: linear-gradient(135deg, #3a7a3a 0%, #2d5a2d 100%);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+        }
+        
+        .back-to-top:active {
+            transform: translateY(-2px) scale(1.02);
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+            
+            .back-to-top {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+        
+        /* Demo content styling */
+        .demo-content {
+            margin-top: 40px;
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .demo-placeholder {
+            height: 800px;
+            background: linear-gradient(to bottom, #f8f9fa, #e9ecef);
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            color: #6c757d;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .instructions {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Back to Top Button</h1>
+        
+        <div class="instructions">
+            <p><strong>Instructions:</strong> Scroll down to see the "Back to Top" button appear. Click it to smoothly scroll back to the top of the page.</p>
+        </div>
+        
+        <div class="content">
+            <div class="code-container">
+                <h2>HTML & CSS Code</h2>
+                <pre><code>&lt;!-- Back to Top Button --&gt;
+&lt;button class="back-to-top" id="backToTop"&gt;
+    &lt;i class="fas fa-arrow-up"&gt;&lt;/i&gt;
+&lt;/button&gt;
+
+&lt;style&gt;
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #4a8c4a 0%, #3a7a3a 100%);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    opacity: 0;
+    visibility: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    border: none;
+    outline: none;
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.back-to-top:hover {
+    background: linear-gradient(135deg, #3a7a3a 0%, #2d5a2d 100%);
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.back-to-top:active {
+    transform: translateY(-2px) scale(1.02);
+}
+
+@media (max-width: 768px) {
+    .back-to-top {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+        bottom: 20px;
+        right: 20px;
+    }
+}
+&lt;/style&gt;
+
+&lt;script&gt;
+document.addEventListener('DOMContentLoaded', function() {
+    const backToTopBtn = document.getElementById('backToTop');
+    
+    // Show button when scrolling down
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 300) {
+            backToTopBtn.classList.add('visible');
+        } else {
+            backToTopBtn.classList.remove('visible');
+        }
+    });
+    
+    // Scroll to top when clicked
+    backToTopBtn.addEventListener('click', function() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+});
+&lt;/script&gt;
+</code></pre>
+            </div>
+            
+            <div class="explanation">
+                <h2>How to Implement</h2>
+                <p>This "Back to Top" button is designed to work seamlessly with your portfolio website. Here's how to implement it:</p>
+                
+                <h3>Step 1: Add the HTML</h3>
+                <p>Place the button HTML right before the closing <code>&lt;/body&gt;</code> tag.</p>
+                
+                <h3>Step 2: Add the CSS</h3>
+                <p>Copy the CSS styles into your stylesheet. The button uses a green gradient that matches your portfolio's color scheme.</p>
+                
+                <h3>Step 3: Add the JavaScript</h3>
+                <p>Include the JavaScript code in your script file or within <code>&lt;script&gt;</code> tags.</p>
+                
+                <h3>Customization Options</h3>
+                <ul>
+                    <li>Change the colors by modifying the gradient values</li>
+                    <li>Adjust the size by changing width and height</li>
+                    <li>Modify the scroll trigger point (currently 300px)</li>
+                    <li>Change the icon by using a different Font Awesome class</li>
+                </ul>
+                
+                <h3>Features</h3>
+                <ul>
+                    <li>Smooth scrolling animation</li>
+                    <li>Fade in/out effect when scrolling</li>
+                    <li>Hover and active states for better UX</li>
+                    <li>Fully responsive design</li>
+                    <li>Accessible with proper button semantics</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="demo-content">
+            <h2>Demo</h2>
+            <p>Scroll down to see the button in action:</p>
+            <div class="demo-placeholder">
+                Scroll down to see the "Back to Top" button appear at the bottom right of the screen.
+            </div>
+        </div>
+    </div>
+    
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const backToTopBtn = document.getElementById('backToTop');
+            
+            // Show button when scrolling down
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 300) {
+                    backToTopBtn.classList.add('visible');
+                } else {
+                    backToTopBtn.classList.remove('visible');
+                }
+            });
+            
+            // Scroll to top when clicked
+            backToTopBtn.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
                     container.addEventListener('mouseenter', () => {
                         const dropdown = container.querySelector('.dropdown, .home-dropdown');
                         if (dropdown) {
