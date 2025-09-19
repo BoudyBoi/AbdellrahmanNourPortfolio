@@ -17,7 +17,7 @@
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f8f8f8;
+            background-color: #e2cce7; /* New background color */
             color: #333;
             line-height: 1.6;
             scroll-behavior: smooth;
@@ -44,7 +44,7 @@
         }
 
         header.shrink {
-            padding: 0.5rem 2rem;
+            padding: 0.4rem 2rem; /* Increased shrinkage by 10% */
         }
 
         .header-container {
@@ -55,7 +55,7 @@
         }
 
         header.shrink .header-container {
-            gap: 10px;
+            gap: 8px;
         }
 
         .artist-name {
@@ -66,16 +66,16 @@
         }
 
         header.shrink .artist-name {
-            font-size: 1.4rem;
+            font-size: 1.3rem; /* Slightly smaller on shrink */
         }
 
         .logo {
-            height: 75px;
+            height: 95px; /* Increased by 25% (from 75px) */
             transition: all 0.3s ease;
         }
 
         header.shrink .logo {
-            height: 50px;
+            height: 45px; /* Adjusted for new size */
         }
 
         .nav-menu {
@@ -83,13 +83,13 @@
             list-style: none;
             margin: 0;
             padding: 0;
-            gap: 1.5rem;
+            gap: 1.8rem; /* Increased gap for larger elements */
             align-items: center;
             transition: all 0.3s ease;
         }
 
         header.shrink .nav-menu {
-            gap: 1rem;
+            gap: 0.9rem;
         }
 
         .nav-item {
@@ -97,17 +97,17 @@
         }
 
         .nav-link {
-            padding: 0.5rem 1rem;
+            padding: 0.6rem 1.2rem; /* Slightly larger */
             font-weight: bold;
             transition: color 0.3s ease;
             color: #000; /* Black text */
-            font-size: 1rem;
+            font-size: 1.1rem; /* Slightly larger font */
             transition: all 0.3s ease;
         }
 
         header.shrink .nav-link {
-            font-size: 0.9rem;
-            padding: 0.4rem 0.8rem;
+            font-size: 0.85rem;
+            padding: 0.35rem 0.7rem;
         }
 
         .nav-link:hover {
@@ -115,13 +115,13 @@
         }
 
         .linkedin-icon {
-            font-size: 1.8rem;
+            font-size: 2rem; /* Larger icon */
             color: #000; /* Black icon */
             transition: transform 0.3s ease;
         }
 
         header.shrink .linkedin-icon {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
         }
 
         .linkedin-icon:hover {
@@ -165,8 +165,8 @@
         /* === HOME SECTION === */
         .home-section {
             display: flex;
-            min-height: 80vh;
-            padding: 2rem;
+            min-height: 75vh; /* Reduced height to decrease distance from header */
+            padding: 1.5rem 2rem; /* Reduced padding */
             max-width: 1200px;
             margin: 0 auto;
             align-items: center;
@@ -182,7 +182,7 @@
         }
 
         .home-image img {
-            max-width: 160%; /* Increased to 160% */
+            max-width: 210%; /* Increased by 50% (from 160%) */
             max-height: 90vh;
             border-radius: 0;
             /* No shadow as requested */
@@ -190,7 +190,7 @@
 
         .home-content {
             flex: 2;
-            padding: 2rem;
+            padding: 1.5rem; /* Reduced padding */
             text-align: center; /* Center align text */
             display: flex;
             flex-direction: column;
@@ -274,9 +274,20 @@
 
         .section-title {
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 1rem; /* Reduced margin for category description */
             color: #2d2d2d;
             font-size: 2.2rem;
+        }
+
+        .category-description {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #555;
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
         }
 
         /* Filter section for All category */
@@ -389,6 +400,7 @@
             font-size: 1.5rem;
             font-weight: bold;
             margin-bottom: 0.5rem;
+            color: white;
         }
 
         .lightbox-alt {
@@ -477,26 +489,88 @@
         }
 
         @media (max-width: 768px) {
+            /* Header adjustments for mobile */
             header {
                 flex-direction: column;
-                gap: 1rem;
-                padding: 1rem;
+                gap: 0.8rem; /* Reduced gap for stronger shrinkage */
+                padding: 0.8rem;
+            }
+            
+            header.shrink {
+                padding: 0.3rem 0.8rem; /* Stronger shrinkage on mobile */
             }
             
             .header-container {
                 flex-direction: column;
                 gap: 5px;
                 text-align: center;
+                order: 1; /* Ensure logo and title come first */
             }
             
             .artist-name {
                 font-size: 1.5rem;
             }
             
+            header.shrink .artist-name {
+                font-size: 1.2rem; /* Stronger shrinkage on mobile */
+            }
+            
+            .logo {
+                height: 80px; /* Slightly smaller on mobile */
+            }
+            
+            header.shrink .logo {
+                height: 40px; /* Stronger shrinkage on mobile */
+            }
+            
+            nav {
+                order: 2; /* Ensure nav comes after logo/title */
+                width: 100%;
+            }
+            
             .nav-menu {
                 flex-direction: column;
-                gap: 1rem;
+                gap: 0.8rem;
                 text-align: center;
+                width: 100%;
+            }
+            
+            .nav-link {
+                font-size: 1rem;
+                padding: 0.5rem 1rem;
+            }
+            
+            header.shrink .nav-link {
+                font-size: 0.8rem;
+                padding: 0.3rem 0.6rem;
+            }
+            
+            .linkedin-icon {
+                font-size: 1.8rem;
+            }
+            
+            header.shrink .linkedin-icon {
+                font-size: 1.2rem; /* Stronger shrinkage on mobile */
+            }
+            
+            /* Gallery adjustments for mobile */
+            .gallery {
+                grid-template-columns: repeat(2, 1fr); /* 2 columns on mobile */
+                gap: 15px;
+                padding: 15px;
+            }
+            
+            .artwork {
+                padding: 15px;
+            }
+            
+            .artwork img {
+                margin-bottom: 10px;
+            }
+            
+            .artwork h3 {
+                font-size: 1rem;
+                margin: 10px 0 5px 0;
             }
             
             .lightbox-title {
@@ -526,6 +600,17 @@
             .nav-btn {
                 display: none;
             }
+            
+            /* Category description adjustments */
+            .category-description {
+                font-size: 1rem;
+                padding: 0 1rem;
+            }
+            
+            /* Section title adjustments */
+            .section-title {
+                font-size: 1.8rem;
+            }
         }
     </style>
 </head>
@@ -545,10 +630,11 @@
                 <li class="nav-item">
                     <a href="#projects" class="nav-link">Projects ▼</a>
                     <ul class="dropdown">
+                        <li><a href="#all" class="dropdown-link">All</a></li>
                         <li><a href="#scientific-illustration" class="dropdown-link">Scientific Illustration</a></li>
                         <li><a href="#character-design" class="dropdown-link">Character Design</a></li>
+                        <li><a href="#previous-works" class="dropdown-link">Previous Works</a></li>
                         <li><a href="#miscellaneous" class="dropdown-link">Miscellaneous</a></li>
-                        <li><a href="#all" class="dropdown-link">All</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -569,12 +655,13 @@
         <div class="home-content">
             <p>Hello, I'm Abdellrahman Ali Nour. I am a biology nerd & an aspiring scientific illustrator, & I am really passionate about everything drawing-&-art related. I hope that this portfolio helps in revealing the kind of artist i am to the world, & show my passion & love for biology, art, & creativity.</p>
             <div class="projects-button-container">
-                <div class="projects-button">View my projects</div>
+                <div class="projects-button">View Projects</div> <!-- Changed text -->
                 <div class="home-dropdown">
+                    <a href="#all" class="home-dropdown-link">All</a>
                     <a href="#scientific-illustration" class="home-dropdown-link">Scientific Illustration</a>
                     <a href="#character-design" class="home-dropdown-link">Character Design</a>
+                    <a href="#previous-works" class="home-dropdown-link">Previous Works</a>
                     <a href="#miscellaneous" class="home-dropdown-link">Miscellaneous</a>
-                    <a href="#all" class="home-dropdown-link">All</a>
                 </div>
             </div>
         </div>
@@ -583,10 +670,12 @@
     <!-- ALL PROJECTS SECTION -->
     <section id="all" class="projects-section">
         <h2 class="section-title">All Projects</h2>
+        <p class="category-description">A comprehensive collection of all my artwork across different categories and styles.</p>
         <div class="filter-container">
             <button class="filter-btn active" data-filter="all">All</button>
             <button class="filter-btn" data-filter="scientific">Scientific Illustration</button>
             <button class="filter-btn" data-filter="character">Character Design</button>
+            <button class="filter-btn" data-filter="previous">Previous Works</button>
             <button class="filter-btn" data-filter="misc">Miscellaneous</button>
         </div>
         <div class="gallery">
@@ -676,20 +765,33 @@
                 <p>Digital Illustration, 2023</p>
             </div>
 
+            <!-- Previous Works Artworks -->
+            <div class="artwork" data-category="previous" data-index="14">
+                <img src="placeholder-image.jpg" alt="Example of previous work">
+                <h3>Previous Work Example 1</h3>
+                <p>Digital Illustration, 2022</p>
+            </div>
+
+            <div class="artwork" data-category="previous" data-index="15">
+                <img src="placeholder-image.jpg" alt="Example of previous work">
+                <h3>Previous Work Example 2</h3>
+                <p>Digital Illustration, 2022</p>
+            </div>
+
             <!-- Miscellaneous Artworks -->
-            <div class="artwork" data-category="misc" data-index="14">
+            <div class="artwork" data-category="misc" data-index="16">
                 <img src="jelly.jpg" alt="This artwork shows a cute green jelly jumping up">
                 <h3>jumping jello</h3>
                 <p>Digital Illustration, 2023</p>
             </div>
 
-            <div class="artwork" data-category="misc" data-index="14">
+            <div class="artwork" data-category="misc" data-index="17">
                 <img src="alien from outer space.jpg" alt="This artwork shows a cute alien on the moon in an extraterrestrial shot">
                 <h3>alien on the moon</h3>
                 <p>Digital Illustration, 2025</p>
             </div>
 
-            <div class="artwork" data-category="misc" data-index="14">
+            <div class="artwork" data-category="misc" data-index="18">
                 <img src="mushroom hero.jpg" alt="This artwork shows a mushroom that poses like a superhero, & is wearing a cape">
                 <h3>Mushroom hero</h3>
                 <p>Digital Illustration, 2025</p>
@@ -700,6 +802,7 @@
     <!-- SCIENTIFIC ILLUSTRATION SECTION -->
     <section id="scientific-illustration" class="projects-section">
         <h2 class="section-title">Scientific Illustration</h2>
+        <p class="category-description">Detailed anatomical and biological illustrations showcasing my passion for science and accuracy in visual representation.</p>
         <div class="gallery">
             <!-- Artwork 1 -->
             <div class="artwork" data-index="0">
@@ -776,6 +879,7 @@
     <!-- CHARACTER DESIGN SECTION -->
     <section id="character-design" class="projects-section">
         <h2 class="section-title">Character Design</h2>
+        <p class="category-description">Creative character designs and concept art showcasing my ability to create unique personalities and visual stories.</p>
         <div class="gallery">
             <!-- Artwork 1 -->
             <div class="artwork" data-index="10">
@@ -807,15 +911,65 @@
         </div>
     </section>
 
+    <!-- PREVIOUS WORKS SECTION -->
+    <section id="previous-works" class="projects-section">
+        <h2 class="section-title">Previous Works</h2>
+        <p class="category-description">A collection of earlier projects and experiments that showcase my artistic journey and development over time.</p>
+        <div class="gallery">
+            <!-- Artwork 1 -->
+            <div class="artwork" data-index="14">
+                <img src="placeholder-image.jpg" alt="Example of previous work">
+                <h3>Previous Work Example 1</h3>
+                <p>Digital Illustration, 2022</p>
+            </div>
+
+            <!-- Artwork 2 -->
+            <div class="artwork" data-index="15">
+                <img src="placeholder-image.jpg" alt="Example of previous work">
+                <h3>Previous Work Example 2</h3>
+                <p>Digital Illustration, 2022</p>
+            </div>
+        </div>
+    </section>
+
     <!-- MISCELLANEOUS SECTION -->
     <section id="miscellaneous" class="projects-section">
         <h2 class="section-title">Miscellaneous</h2>
+        <p class="category-description">A variety of creative projects and experiments that don't fit into other categories but showcase my diverse artistic interests.</p>
         <div class="gallery">
              <!-- Artwork 1 -->
-            <div class="artwork" data-index="14">
+            <div class="artwork" data-index="16">
                 <img src="jelly.jpg" alt="This artwork shows a cute green jelly jumping up">
                 <h3>jumping jello</h3>
                 <p>Digital Illustration, 2023</p>
+            </div>
+
+            <!-- Artwork 2 -->
+            <div class="artwork" data-index="17">
+                <img src="alien from outer space.jpg" alt="This artwork shows a cute alien on the moon in an extraterrestrial shot">
+                <h3>alien on the moon</h3>
+                <p>Digital Illustration, 2025</p>
+            </div>
+
+            <!-- Artwork 3 -->
+            <div class="artwork" data-index="18">
+                <img src="mushroom hero.jpg" alt="This artwork shows a mushroom that poses like a superhero, & is wearing a cape">
+                <h3>Mushroom hero</h3>
+                <p>Digital Illustration, 2025</p>
+            </div>
+
+              <!-- Artwork 4 -->
+            <div class="artwork" data-index="18">
+                <img src="panicking coffee spiller.jpg" alt="This artwork shows a an office worker that'spanicking because he accidentally spilled a cup of coffee over some electronics">
+                <h3>Spilling Accident</h3>
+                <p>Digital Illustration, 2025</p>
+            </div>
+
+             <!-- Artwork 5 -->
+            <div class="artwork" data-index="18">
+                <img src="rainy frog day.jpg" alt="This artwork shows a kid, wearing an oversized frog costume, & enjoyingplaying in a water puddle">
+                <h3>Frog suit time!</h3>
+                <p>Digital Illustration, 2025</p>
             </div>
         </div>
     </section>
@@ -853,6 +1007,7 @@
             const projectSections = document.querySelectorAll('.projects-section');
             const filterButtons = document.querySelectorAll('.filter-btn');
             const header = document.getElementById('main-header');
+            const dropdowns = document.querySelectorAll('.dropdown, .home-dropdown');
             
             let currentIndex = 0;
             let touchStartX = 0;
@@ -865,7 +1020,8 @@
                 const description = artwork.querySelector('p').textContent;
                 const category = artwork.getAttribute('data-category') || 
                                (artwork.closest('.projects-section').id === 'scientific-illustration' ? 'scientific' :
-                                artwork.closest('.projects-section').id === 'character-design' ? 'character' : 'misc');
+                                artwork.closest('.projects-section').id === 'character-design' ? 'character' :
+                                artwork.closest('.projects-section').id === 'previous-works' ? 'previous' : 'misc');
                 return {
                     src: img.src,
                     alt: img.alt,
@@ -963,6 +1119,13 @@
                 }
             }
             
+            // Close all dropdowns
+            function closeAllDropdowns() {
+                dropdowns.forEach(dropdown => {
+                    dropdown.style.display = 'none';
+                });
+            }
+            
             // Event listeners for artworks
             artworks.forEach((artwork, index) => {
                 artwork.addEventListener('click', () => {
@@ -1025,6 +1188,9 @@
                     e.preventDefault();
                     const targetId = link.getAttribute('href').substring(1);
                     showProjectSection(targetId);
+                    
+                    // Close dropdowns after selection (especially for mobile)
+                    closeAllDropdowns();
                 });
             });
             
@@ -1040,13 +1206,16 @@
                 projectSections.forEach(section => {
                     section.classList.remove('active');
                 });
+                
+                // Close dropdowns
+                closeAllDropdowns();
             });
             
             // Projects link in header
             document.querySelector('a[href="#projects"]').addEventListener('click', (e) => {
                 e.preventDefault();
                 // Show the first project section by default
-                showProjectSection('scientific-illustration');
+                showProjectSection('all');
             });
             
             // Filter buttons
@@ -1059,6 +1228,31 @@
             
             // Scroll event for header shrink
             window.addEventListener('scroll', handleHeaderScroll);
+            
+            // Close dropdowns when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!e.target.matches('.nav-link, .projects-button') && 
+                    !e.target.closest('.dropdown, .home-dropdown')) {
+                    closeAllDropdowns();
+                }
+            });
+            
+            // Handle mobile view dropdowns
+            if (window.innerWidth <= 768) {
+                document.querySelectorAll('.nav-link, .projects-button').forEach(element => {
+                    element.addEventListener('click', (e) => {
+                        const dropdown = element.nextElementSibling;
+                        if (dropdown && (dropdown.classList.contains('dropdown') || dropdown.classList.contains('home-dropdown'))) {
+                            e.preventDefault();
+                            const isVisible = dropdown.style.display === 'block';
+                            closeAllDropdowns();
+                            if (!isVisible) {
+                                dropdown.style.display = 'block';
+                            }
+                        }
+                    });
+                });
+            }
         });
     </script>
 </body>
