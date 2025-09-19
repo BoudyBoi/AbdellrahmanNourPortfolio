@@ -34,11 +34,11 @@
             width: 200%;
             height: 200%;
             background-image: url('hhehehehehe-0514-4906-9fb3-90fd699fe718.PNG-removebg-preview.png');
-            background-size: 150px;
+            background-size: 180px; /* Increased from 150px for more spacing */
             background-repeat: repeat;
-            opacity: 0.04;
+            opacity: 0.08; /* Increased from 0.04 for less transparency */
             z-index: -1;
-            animation: floatBackground 120s linear infinite;
+            animation: floatBackground 100s linear infinite; /* Faster animation (100s instead of 120s) */
             transform: rotate(5deg);
             pointer-events: none;
         }
@@ -443,7 +443,7 @@
             position: relative;
             max-width: 90%;
             max-height: 90%;
-            text-align: center;
+            text-align: left; /* Changed from center to left */
             overflow: hidden;
         }
 
@@ -451,6 +451,7 @@
             position: relative;
             overflow: hidden;
             cursor: grab;
+            max-height: 80vh;
         }
 
         .lightbox-img {
@@ -465,9 +466,10 @@
         .lightbox-caption {
             position: absolute;
             bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80%;
+            right: 20px; /* Changed from left:50% to right:20px */
+            transform: none; /* Removed translateX(-50%) */
+            width: auto; /* Changed from 80% to auto */
+            max-width: 40%;
             background: rgba(0, 0, 0, 0.7);
             padding: 15px;
             border-radius: 8px;
@@ -548,12 +550,16 @@
             left: 20px;
             z-index: 2002;
             display: flex;
+            flex-direction: column; /* Changed to column for 2 rows */
             gap: 10px;
         }
 
-        .zoom-controls {
-            position: static;
-            transform: none;
+        .zoom-controls-row {
+            display: flex;
+            gap: 10px;
+        }
+
+        .magnify-controls-row {
             display: flex;
             gap: 10px;
         }
@@ -592,7 +598,7 @@
             transition: background 0.3s;
         }
 
-        .magnify-btn:hover {
+        .magnify-btn:hover, .magnify-btn.active {
             background: rgba(255, 255, 255, 0.2);
         }
 
@@ -611,13 +617,33 @@
             background: rgba(255, 255, 255, 0.2);
         }
 
-        /* Magnify mode styles */
-        .magnify-mode .lightbox-img {
-            cursor: zoom-in;
+        /* Magnifier lens for Amazon-style zoom */
+        .magnifier-lens {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            border: 2px solid white;
+            border-radius: 50%;
+            overflow: hidden;
+            pointer-events: none;
+            display: none;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            z-index: 2003;
         }
 
-        .magnify-mode.active .lightbox-img {
-            cursor: crosshair;
+        .magnifier-lens.active {
+            display: block;
+        }
+
+        .magnifier-lens-img {
+            position: absolute;
+            transform: scale(2);
+            transform-origin: 0 0;
+        }
+
+        /* Magnify mode styles */
+        .magnify-mode .lightbox-img {
+            cursor: none;
         }
 
         /* === FOOTER === */
@@ -799,9 +825,21 @@
                 font-size: 12px;
             }
             
+            /* Lightbox caption for mobile */
+            .lightbox-caption {
+                max-width: 80%;
+                right: 10px;
+                bottom: 10px;
+            }
+            
             /* Adjust background animation for mobile */
             body::before {
                 animation: floatBackground 180s linear infinite;
+            }
+            
+            /* Hide magnifier lens on mobile */
+            .magnifier-lens {
+                display: none !important;
             }
         }
     </style>
@@ -1382,9 +1420,11 @@
         <span class="nav-btn next" id="nextBtn">&#10095;</span>
         
         <div class="lightbox-controls">
-            <div class="zoom-controls">
+            <div class="zoom-controls-row">
                 <button class="zoom-btn" id="zoomIn">+</button>
                 <button class="zoom-btn" id="zoomOut">-</button>
+            </div>
+            <div class="magnify-controls-row">
                 <button class="magnify-btn" id="magnifyBtn">🔍</button>
                 <button class="reset-zoom" id="resetZoom">Reset</button>
             </div>
@@ -1393,6 +1433,9 @@
         <div class="lightbox-content">
             <div class="lightbox-img-container">
                 <img class="lightbox-img" id="lightboxImg" src="" alt="">
+                <div class="magnifier-lens" id="magnifierLens">
+                    <img class="magnifier-lens-img" id="magnifierLensImg" src="" alt="">
+                </div>
             </div>
             <div class="lightbox-caption">
                 <div class="lightbox-title" id="lightboxTitle"></div>
@@ -1421,6 +1464,8 @@
             const zoomOutBtn = document.getElementById('zoomOut');
             const resetZoomBtn = document.getElementById('resetZoom');
             const magnifyBtn = document.getElementById('magnifyBtn');
+            const magnifierLens = document.getElementById('magnifierLens');
+            const magnifierLensImg = document.getElementById('magnifierLensImg');
             const artworks = document.querySelectorAll('.artwork');
             const projectSections = document.querySelectorAll('.projects-section');
             const filterButtons = document.querySelectorAll('.filter-btn');
@@ -1435,6 +1480,8 @@
             let isDragging = false;
             let startX, startY, scrollLeft, scrollTop;
             let magnifyMode = false;
+            let lensSize = 150;
+            let lensZoom = 2;
             
             // Create an array of image data from your artworks
             const imageData = Array.from(artworks).map(artwork => {
@@ -1467,6 +1514,11 @@
             function closeLightbox() {
                 lightbox.classList.remove('active');
                 document.body.style.overflow = '';
+                resetZoom();
+                magnifyMode = false;
+                magnifierLens.classList.remove('active');
+                magnifyBtn.classList.remove('active');
+                lightbox.classList.remove('magnify-mode');
             }
             
             // Update lightbox content with title and alt text
@@ -1474,6 +1526,7 @@
                 const data = imageData[currentIndex];
                 lightboxImg.src = data.src;
                 lightboxImg.alt = data.alt;
+                magnifierLensImg.src = data.src;
                 lightboxTitle.textContent = data.title;
                 lightboxAlt.textContent = data.alt;
             }
@@ -1509,6 +1562,7 @@
                 magnifyMode = false;
                 lightbox.classList.remove('magnify-mode');
                 magnifyBtn.classList.remove('active');
+                magnifierLens.classList.remove('active');
                 applyZoom();
                 lightboxImgContainer.scrollTo(0, 0);
             }
@@ -1517,7 +1571,7 @@
                 lightboxImg.style.transform = `scale(${scale})`;
             }
             
-            // Magnify functions
+            // Magnify functions - Amazon-style magnifier
             function toggleMagnifyMode() {
                 if (scale !== 1) {
                     resetZoom();
@@ -1529,8 +1583,10 @@
                 magnifyBtn.classList.toggle('active', magnifyMode);
                 
                 if (magnifyMode) {
-                    lightboxImg.style.cursor = 'crosshair';
+                    magnifierLens.classList.add('active');
+                    lightboxImg.style.cursor = 'none';
                 } else {
+                    magnifierLens.classList.remove('active');
                     lightboxImg.style.cursor = 'grab';
                 }
             }
@@ -1538,14 +1594,32 @@
             function handleMagnify(e) {
                 if (!magnifyMode) return;
                 
-                // Calculate position for magnified view
                 const rect = lightboxImg.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
+                const img = lightboxImg;
                 
-                // Show magnified area
-                lightboxImg.style.transformOrigin = `${x}px ${y}px`;
-                lightboxImg.style.transform = 'scale(2)';
+                // Calculate position relative to the image
+                let x = e.clientX - rect.left;
+                let y = e.clientY - rect.top;
+                
+                // Prevent the lens from being positioned outside the image
+                if (x < 0) x = 0;
+                if (y < 0) y = 0;
+                if (x > rect.width) x = rect.width;
+                if (y > rect.height) y = rect.height;
+                
+                // Position the lens at the cursor
+                magnifierLens.style.left = (e.clientX - lensSize/2) + 'px';
+                magnifierLens.style.top = (e.clientY - lensSize/2) + 'px';
+                
+                // Calculate the background position for the lens
+                const bgX = - (x * lensZoom - lensSize/2);
+                const bgY = - (y * lensZoom - lensSize/2);
+                
+                // Set the lens image position and size
+                magnifierLensImg.style.width = (img.naturalWidth * lensZoom) + 'px';
+                magnifierLensImg.style.height = (img.naturalHeight * lensZoom) + 'px';
+                magnifierLensImg.style.left = bgX + 'px';
+                magnifierLensImg.style.top = bgY + 'px';
             }
             
             // Show specific project section
@@ -1740,7 +1814,7 @@
 
             // Mouse drag for panning when zoomed
             lightboxImgContainer.addEventListener('mousedown', (e) => {
-                if (scale > 1) {
+                if (scale > 1 && !magnifyMode) {
                     isDragging = true;
                     startX = e.pageX - lightboxImgContainer.offsetLeft;
                     startY = e.pageY - lightboxImgContainer.offsetTop;
@@ -1752,12 +1826,16 @@
             
             lightboxImgContainer.addEventListener('mouseleave', () => {
                 isDragging = false;
-                lightboxImgContainer.style.cursor = 'grab';
+                if (!magnifyMode) {
+                    lightboxImgContainer.style.cursor = 'grab';
+                }
             });
             
             lightboxImgContainer.addEventListener('mouseup', () => {
                 isDragging = false;
-                lightboxImgContainer.style.cursor = 'grab';
+                if (!magnifyMode) {
+                    lightboxImgContainer.style.cursor = 'grab';
+                }
             });
             
             lightboxImgContainer.addEventListener('mousemove', (e) => {
