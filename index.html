@@ -29,7 +29,7 @@
 
         /* === HEADER & NAVIGATION === */
         header {
-            background-color: #2d5a2d; /* Dark green header */
+            background-color: #4a8c4a; /* Lighter green header */
             color: #000; /* Black text */
             padding: 1rem 2rem;
             display: flex;
@@ -78,7 +78,7 @@
         }
 
         .nav-link:hover {
-            color: #1e3e1e; /* Darker green on hover */
+            color: #2d5a2d; /* Darker green on hover */
         }
 
         .linkedin-icon {
@@ -139,15 +139,14 @@
         .home-image {
             flex: 1;
             display: flex;
-            justify-content: flex-start;
+            justify-content: center;
             align-items: center;
-            overflow: hidden;
+            overflow: visible;
         }
 
         .home-image img {
-            max-width: 140%;
-            max-height: 90vh;
-            margin-left: -20%;
+            max-width: 100%;
+            max-height: 80vh;
             border-radius: 0;
             /* No shadow as requested */
         }
@@ -155,6 +154,10 @@
         .home-content {
             flex: 2;
             padding: 2rem;
+            text-align: center; /* Center align text */
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center align children */
         }
 
         .home-content p {
@@ -162,6 +165,7 @@
             line-height: 1.8;
             margin-bottom: 2rem;
             color: #444;
+            text-align: center; /* Center align paragraph */
         }
 
         .projects-button-container {
@@ -171,7 +175,7 @@
 
         .projects-button {
             display: inline-block;
-            background-color: #2d5a2d; /* Matching dark green */
+            background-color: #4a8c4a; /* Matching lighter green */
             color: white;
             padding: 12px 25px;
             border-radius: 30px;
@@ -183,7 +187,7 @@
         }
 
         .projects-button:hover {
-            background-color: #1e3e1e;
+            background-color: #3a7a3a;
             transform: translateY(-3px);
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
@@ -227,7 +231,7 @@
             margin: 0 auto;
         }
 
-        .projects-section:target {
+        .projects-section.active {
             display: block;
         }
 
@@ -293,6 +297,7 @@
             align-items: center;
             opacity: 0;
             transition: opacity 0.3s ease;
+            touch-action: pan-y; /* Enable vertical scrolling but prevent horizontal */
         }
 
         .lightbox.active {
@@ -406,7 +411,7 @@
             }
             
             .home-image img {
-                max-width: 100%;
+                max-width: 80%;
                 margin-left: 0;
             }
         }
@@ -456,6 +461,11 @@
                 font-size: 1.1rem;
                 padding: 10px 20px;
             }
+            
+            /* Hide navigation arrows on mobile */
+            .nav-btn {
+                display: none;
+            }
         }
     </style>
 </head>
@@ -463,7 +473,7 @@
     <!-- HEADER WITH LOGO AND NAV -->
     <header>
         <div class="header-container">
-            <a href="index.html" class="logo-link">
+            <a href="#home" class="logo-link">
                 <img src="hhehehehehe-0514-4906-9fb3-90fd699fe718.PNG-removebg-preview.png" alt="My Logo" class="logo">
             </a>
             <span class="artist-name">Abdellrahman Nour</span>
@@ -471,7 +481,7 @@
 
         <nav>
             <ul class="nav-menu">
-                <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="#home" class="nav-link">Home</a></li>
                 <li class="nav-item">
                     <a href="#projects" class="nav-link">Projects ▼</a>
                     <ul class="dropdown">
@@ -514,59 +524,120 @@
         <div class="gallery">
             <!-- Artwork 1 -->
             <div class="artwork" data-index="0">
-                <img src="072fc3d5-f013-4a23-b40e-c8de7e755bcd.jpg" alt="This illustartion shows the main anatomical features of human lungs">
+                <img src="lung scientific illustration.jpg" alt="This illustartion shows the main anatomical features of human lungs">
                 <h3>An illustartion of human lungs</h3>
                 <p>Digital Illustration, 2023</p>
             </div>
 
             <!-- Artwork 2 -->
             <div class="artwork" data-index="1">
-                <img src="16ffe32d-1e93-47d6-bb89-81a30a228b4b.jpg" alt="This illustartion displays the main anatomical features of a human kidney">
+                <img src="cross-section of a human kidney.jpg" alt="This illustartion displays the main anatomical features of a human kidney">
                 <h3>An illustration of a cross-section of a human kidney</h3>
                 <p>Digital Illustration, 2023</p>
             </div>
 
-              <!-- Artwork 3 -->
+            <!-- Artwork 3 -->
             <div class="artwork" data-index="2">
-                <img src="da13cf67-c5e2-4f9a-b4e9-1d77ecd87e5d.jpg" alt="This illustartion displays the anatomy of a dissected toad, revealing its internal organs">
+                <img src="toad dissection.jpg" alt="This illustartion displays the anatomy of a dissected toad, revealing its internal organs">
                 <h3>An Anatomical illustration of a dissected toad</h3>
                 <p>Digital Illustration, 2025</p>
             </div>
-             
+            
             <!-- Artwork 4 -->
             <div class="artwork" data-index="3">
-                <img src="4b7b21c2-1390-4c38-b2d7-c35f698d880a.jpg" alt="This illustartion displays the basic morphology of a chromosome at different states of duplication">
+                <img src="chromosome morphology.jpg" alt="This illustartion displays the basic morphology of a chromosome at different states of duplication">
                 <h3>An illustration of a typical chromosome (duplicated & unduplicated)</h3>
                 <p>Digital Illustration, 2025</p>
             </div>
 
-              <!-- Artwork 5 -->
+            <!-- Artwork 5 -->
             <div class="artwork" data-index="4">
-                <img src="e3c087c2-8e89-4997-8039-de9f467913fe.jpg" alt="This illustartion shows a semi-realistic view of the human digestive system, revealing organs like the stomach, intestines, & liver (unlabelled)">
+                <img src="digestive system.jpg" alt="This illustartion shows a semi-realistic view of the human digestive system, revealing organs like the stomach, intestines, & liver (unlabelled)">
                 <h3>An illustration of a human digestive system</h3>
                 <p>Digital Illustration, 2023</p>
             </div>
+
+             <!-- Artwork 6 -->
+            <div class="artwork" data-index="4">
+                <img src="drosophila melanogaster.jpg" alt="This illustartion shows a fruit fly (Drosophila melanogaster) (unlabelled)">
+                <h3>An illustration of a fruit fly (Drosophila melanogaster)</h3>
+                <p>Digital Illustration, 2023</p>
+            </div>
+
+              <!-- Artwork 7 -->
+            <div class="artwork" data-index="4">
+                <img src="Egyptian toad.jpg" alt="This illustartion displays a common Egyptian toad (Sclerophrys regularis, reuss 1833) showing its warty, mottled skin, toxin glands, & in sitting position (unlabelled)">
+                <h3>An illustration of a common Egyptian toad (Sclerophrys regularis, reuss 1833)</h3>
+                <p>Digital Illustration, 2025</p>
+            </div>
+
+            <!-- Artwork 8 -->
+            <div class="artwork" data-index="4">
+                <img src="tree beetle.jpg" alt="This illustartion displays a common tree beetle (species undefined)">
+                <h3>An illustration of a common tree beetle</h3>
+                <p>Digital Illustration, 2024</p>
+            </div>
+
+             <!-- Artwork 9 -->
+            <div class="artwork" data-index="4">
+                <img src="blue tree frog.jpg" alt="This illustartion displays a type of blue tree frog that is toxic to the touch">
+                <h3>An illustration of a blue tree frog</h3>
+                <p>Digital Illustration, 2025</p>
+            </div>
+
+              <!-- Artwork 10 -->
+            <div class="artwork" data-index="4">
+                <img src="hot footed tree frog.jpg" alt="This illustartion displays a type of tree frog known as the red-eyed tree frog, its unique appearance & color pallete make it an iconic type of frog">
+                <h3>An illustration of red-eyed tree frog</h3>
+                <p>Digital Illustration, 2025</p>
+            </div>
         </div>
     </section>
 
-    <!-- CHARACTER DESIGN SECTION (Empty for now) -->
+    <!-- CHARACTER DESIGN SECTION -->
     <section id="character-design" class="projects-section">
         <h2 class="section-title">Character Design</h2>
         <div class="gallery">
-             <!-- Artwork 1 -->
-            <div class="artwork" data-index="0">
-                <img src="710d4b7d-4603-412a-b1e0-9617bb65ff8d.jpg" alt="This illustartion shows a character for a fictional story i was writing: a grumpy duck, with anger issues, that is fond of bread & companionship">
+            <!-- Artwork 1 -->
+            <div class="artwork" data-index="5">
+                <img src="me in a character design sheet.jpg" alt="This illustartion shows a character for a fictional story i was writing:it's me! wearing my favorite hoodie with the cute frog hood, this character was inspired by my appearance during my 3rd year of college, & that character (like me) carries everything you could imagine in his handy backpack (you never know when you will need this stuff)">
+                <h3>A character design sheet for traveller character (inspired by my own looks & antics)</h3>
+                <p>Digital Illustration, 2023</p>
+            </div>
+
+             <!-- Artwork 2 -->
+            <div class="artwork" data-index="5">
+                <img src="angry ducky character design sheet.jpg" alt="This illustartion shows a character for a fictional story i was writing: a viscious wizard that lives in the forest alone, with his magical wooden scepter">
+                <h3>A character design sheet for a forest wizard character</h3>
+                <p>Digital Illustration, 2023</p>
+            </div>
+            
+             <!-- Artwork 3 -->
+            <div class="artwork" data-index="5">
+                <img src="wizard character design sheet.jpg" alt="This illustartion shows a character for a fictional story i was writing: a grumpy duck, with anger issues, that is fond of bread & companionship">
                 <h3>A character design sheet for an angry duck character</h3>
+                <p>Digital Illustration, 2023</p>
+            </div>
+
+              <!-- Artwork 4 -->
+            <div class="artwork" data-index="5">
+                <img src="librarian character design sheet.jpg" alt="This illustartion shows a character for a fictional story i was writing: a helpful librarian who studied magic to better defend himself against dark forces">
+                <h3>A character design sheet for a librarian character</h3>
                 <p>Digital Illustration, 2023</p>
             </div>
         </div>
     </section>
 
-    <!-- MISCELLANEOUS SECTION (Empty for now) -->
+    <!-- MISCELLANEOUS SECTION -->
     <section id="miscellaneous" class="projects-section">
         <h2 class="section-title">Miscellaneous</h2>
         <div class="gallery">
-            <p style="text-align: center; grid-column: 1 / -1; padding: 40px;">Miscellaneous projects coming soon!</p>
+             <!-- Artwork 1 -->
+            <div class="artwork" data-index="5">
+                <img src="jelly.jpg" alt="This artwork shows a cute green jelly jumping up">
+                <h3>jumping jello</h3>
+                <p>Digital Illustration, 2023</p>
+            </div>
         </div>
     </section>
 
@@ -600,8 +671,11 @@
             const prevBtn = document.getElementById('prevBtn');
             const nextBtn = document.getElementById('nextBtn');
             const artworks = document.querySelectorAll('.artwork');
+            const projectSections = document.querySelectorAll('.projects-section');
             
             let currentIndex = 0;
+            let touchStartX = 0;
+            let touchEndX = 0;
             
             // Create an array of image data from your artworks
             const imageData = Array.from(artworks).map(artwork => {
@@ -653,6 +727,26 @@
                 updateLightbox();
             }
             
+            // Show specific project section
+            function showProjectSection(sectionId) {
+                // Hide all project sections
+                projectSections.forEach(section => {
+                    section.classList.remove('active');
+                });
+                
+                // Show the selected section
+                const targetSection = document.getElementById(sectionId);
+                if (targetSection) {
+                    targetSection.classList.add('active');
+                    
+                    // Scroll to the section
+                    window.scrollTo({
+                        top: targetSection.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+            
             // Event listeners for artworks
             artworks.forEach((artwork, index) => {
                 artwork.addEventListener('click', () => {
@@ -684,36 +778,59 @@
                     }
                 }
             });
+            
+            // Touch events for mobile swipe
+            lightbox.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            }, false);
+            
+            lightbox.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            }, false);
+            
+            function handleSwipe() {
+                const minSwipeDistance = 50; // Minimum distance for a swipe to be registered
+                
+                if (touchStartX - touchEndX > minSwipeDistance) {
+                    // Swipe left - next image
+                    navigate(1);
+                } 
+                
+                if (touchEndX - touchStartX > minSwipeDistance) {
+                    // Swipe right - previous image
+                    navigate(-1);
+                }
+            }
 
-            // Smooth scrolling for navigation
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
+            // Navigation event listeners
+            document.querySelectorAll('.dropdown-link, .home-dropdown-link').forEach(link => {
+                link.addEventListener('click', (e) => {
                     e.preventDefault();
-                    
-                    const targetId = this.getAttribute('href');
-                    if (targetId === '#') return;
-                    
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        window.scrollTo({
-                            top: targetElement.offsetTop - 80,
-                            behavior: 'smooth'
-                        });
-                        
-                        // If it's a project section, make sure it's visible
-                        if (targetId.startsWith('#scientific') || 
-                            targetId.startsWith('#character') || 
-                            targetId.startsWith('#miscellaneous')) {
-                            // Hide all project sections first
-                            document.querySelectorAll('.projects-section').forEach(section => {
-                                section.style.display = 'none';
-                            });
-                            
-                            // Show the target section
-                            targetElement.style.display = 'block';
-                        }
-                    }
+                    const targetId = link.getAttribute('href').substring(1);
+                    showProjectSection(targetId);
                 });
+            });
+            
+            // Home link
+            document.querySelector('a[href="#home"]').addEventListener('click', (e) => {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+                
+                // Hide all project sections
+                projectSections.forEach(section => {
+                    section.classList.remove('active');
+                });
+            });
+            
+            // Projects link in header
+            document.querySelector('a[href="#projects"]').addEventListener('click', (e) => {
+                e.preventDefault();
+                // Show the first project section by default
+                showProjectSection('scientific-illustration');
             });
         });
     </script>
