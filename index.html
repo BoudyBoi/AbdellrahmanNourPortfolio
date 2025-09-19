@@ -21,6 +21,44 @@
             color: #333;
             line-height: 1.6;
             scroll-behavior: smooth;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Animated background pattern */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 200%;
+            height: 200%;
+            background-image: url('hhehehehehe-0514-4906-9fb3-90fd699fe718.PNG-removebg-preview.png');
+            background-size: 150px;
+            background-repeat: repeat;
+            opacity: 0.04;
+            z-index: -1;
+            animation: floatBackground 120s linear infinite;
+            transform: rotate(5deg);
+            pointer-events: none;
+        }
+
+        @keyframes floatBackground {
+            0% {
+                transform: rotate(5deg) translate(0, 0);
+            }
+            25% {
+                transform: rotate(5deg) translate(-5%, 5%);
+            }
+            50% {
+                transform: rotate(5deg) translate(-10%, 0);
+            }
+            75% {
+                transform: rotate(5deg) translate(-5%, -5%);
+            }
+            100% {
+                transform: rotate(5deg) translate(0, 0);
+            }
         }
 
         a {
@@ -32,7 +70,7 @@
         header {
             background-color: #4a8c4a;
             color: #000;
-            padding: 1rem 2rem;
+            padding: 1rem 3rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -40,11 +78,11 @@
             top: 0;
             z-index: 1000;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smoother transition */
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
         header.shrink {
-            padding: 0.3rem 2rem; /* Increased shrinkage */
+            padding: 0.3rem 2.5rem;
         }
 
         .header-container {
@@ -66,7 +104,7 @@
         }
 
         header.shrink .artist-name {
-            font-size: 1.2rem; /* Smaller on shrink */
+            font-size: 1.2rem;
         }
 
         .logo {
@@ -75,7 +113,7 @@
         }
 
         header.shrink .logo {
-            height: 40px; /* Smaller on shrink */
+            height: 40px;
         }
 
         .nav-menu {
@@ -83,13 +121,13 @@
             list-style: none;
             margin: 0;
             padding: 0;
-            gap: 1.8rem;
+            gap: 2.5rem;
             align-items: center;
             transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
         header.shrink .nav-menu {
-            gap: 0.9rem;
+            gap: 1.5rem;
         }
 
         .nav-item {
@@ -165,8 +203,8 @@
         /* === HOME SECTION === */
         .home-section {
             display: flex;
-            min-height: 65vh; /* Reduced height by ~28% */
-            padding: 1rem 2rem; /* Reduced padding */
+            min-height: 65vh;
+            padding: 1rem 2rem;
             max-width: 1200px;
             margin: 0 auto;
             align-items: center;
@@ -182,7 +220,7 @@
         }
 
         .home-image img {
-            max-width: 294%; /* Increased by 40% (from 210%) */
+            max-width: 294%;
             max-height: 90vh;
             border-radius: 0;
         }
@@ -194,7 +232,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            background-color: #a8d5a8; /* Lighter green background */
+            background-color: #a8d5a8;
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
@@ -393,7 +431,7 @@
             align-items: center;
             opacity: 0;
             transition: opacity 0.3s ease;
-            touch-action: none; /* Changed to allow zooming */
+            touch-action: none;
         }
 
         .lightbox.active {
@@ -425,9 +463,15 @@
         }
 
         .lightbox-caption {
-            color: #ecf0f1;
-            margin-top: 1rem;
-            text-align: center;
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 15px;
+            border-radius: 8px;
+            z-index: 2001;
         }
 
         .lightbox-title {
@@ -497,15 +541,21 @@
             right: 25px;
         }
 
-        /* Zoom controls */
-        .zoom-controls {
+        /* Lightbox controls at top left */
+        .lightbox-controls {
             position: absolute;
-            bottom: 25px;
-            left: 50%;
-            transform: translateX(-50%);
+            top: 20px;
+            left: 20px;
+            z-index: 2002;
             display: flex;
             gap: 10px;
-            z-index: 2001;
+        }
+
+        .zoom-controls {
+            position: static;
+            transform: none;
+            display: flex;
+            gap: 10px;
         }
 
         .zoom-btn {
@@ -527,10 +577,26 @@
             background: rgba(255, 255, 255, 0.2);
         }
 
+        .magnify-btn {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+            transition: background 0.3s;
+        }
+
+        .magnify-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
         .reset-zoom {
-            position: absolute;
-            bottom: 25px;
-            right: 25px;
             background: rgba(255, 255, 255, 0.1);
             color: white;
             border: none;
@@ -539,18 +605,26 @@
             cursor: pointer;
             font-size: 14px;
             transition: background 0.3s;
-            z-index: 2001;
         }
 
         .reset-zoom:hover {
             background: rgba(255, 255, 255, 0.2);
         }
 
+        /* Magnify mode styles */
+        .magnify-mode .lightbox-img {
+            cursor: zoom-in;
+        }
+
+        .magnify-mode.active .lightbox-img {
+            cursor: crosshair;
+        }
+
         /* === FOOTER === */
         footer {
             text-align: center;
             padding: 2rem;
-            background-color: #2d2d2d;
+            background-color: #3a7a3a; /* Slightly darker than header */
             color: white;
             margin-top: 40px;
         }
@@ -574,15 +648,15 @@
         }
 
         @media (max-width: 768px) {
-            /* Header adjustments for mobile - keep logo and title on same line */
+            /* Header adjustments for mobile */
             header {
                 flex-direction: row;
                 gap: 0.8rem;
-                padding: 0.6rem; /* Reduced padding for mobile */
+                padding: 0.6rem;
             }
             
             header.shrink {
-                padding: 0.2rem 0.8rem; /* More aggressive shrinkage on mobile */
+                padding: 0.2rem 0.8rem;
             }
             
             .header-container {
@@ -598,7 +672,7 @@
             }
             
             header.shrink .artist-name {
-                font-size: 1rem; /* More aggressive shrinkage on mobile */
+                font-size: 1rem;
             }
             
             .logo {
@@ -606,7 +680,7 @@
             }
             
             header.shrink .logo {
-                height: 35px; /* More aggressive shrinkage on mobile */
+                height: 35px;
             }
             
             nav {
@@ -636,7 +710,7 @@
             }
             
             header.shrink .linkedin-icon {
-                font-size: 1rem; /* More aggressive shrinkage on mobile */
+                font-size: 1rem;
             }
             
             /* Home section adjustments for mobile */
@@ -708,22 +782,26 @@
                 font-size: 1.8rem;
             }
             
-            /* Zoom controls for mobile */
-            .zoom-controls {
-                bottom: 15px;
+            /* Lightbox controls for mobile */
+            .lightbox-controls {
+                top: 10px;
+                left: 10px;
             }
             
-            .zoom-btn {
+            .zoom-btn, .magnify-btn {
                 width: 35px;
                 height: 35px;
                 font-size: 16px;
             }
             
             .reset-zoom {
-                bottom: 15px;
-                right: 15px;
                 padding: 6px 12px;
                 font-size: 12px;
+            }
+            
+            /* Adjust background animation for mobile */
+            body::before {
+                animation: floatBackground 180s linear infinite;
             }
         }
     </style>
@@ -885,52 +963,131 @@
             </div>
 
             <!-- Previous Works Artworks -->
-            <div class="artwork" data-category="previous" data-year="2022" data-index="15">
-                <img src="placeholder-image.jpg" alt="Example of previous work">
-                <h3>Previous Work Example 1</h3>
-                <p>Digital Illustration, 2022</p>
-            </div>
-
-            <div class="artwork" data-category="previous" data-year="2022" data-index="16">
-                <img src="placeholder-image.jpg" alt="Example of previous work">
-                <h3>Previous Work Example 2</h3>
-                <p>Digital Illustration, 2022</p>
-            </div>
-
-            <div class="artwork" data-category="previous" data-year="2023" data-index="17">
-                <img src="placeholder-image.jpg" alt="Example of previous work">
-                <h3>Previous Work Example 3</h3>
+            <div class="artwork" data-category="previous" data-year="2023" data-index="15">
+                <img src="Drosophila work.jpg" alt="This illustartion shows a fruit fly (Drosophila melanogaster) wearing a top hat in a semi-realistic style, representing the insect specimen used by the group">
+                <h3>fruitfly (Drosophila melanogaster)</h3>
                 <p>Digital Illustration, 2023</p>
             </div>
 
+            <div class="artwork" data-category="previous" data-year="2023" data-index="16">
+                <img src="crying onion.jpg" alt="This illustration shows a crying onionm representing the hardships that the onion group had to go through & the frustration they felt during their work">
+                <h3>A crying onion</h3>
+                <p>Digital Illustration, 2023</p>
+            </div>
+
+            <div class="artwork" data-category="previous" data-year="2023" data-index="17">
+                <img src="fungi playing in a puddle of oil.jpg" alt="This illustration shows a group of fungal hyphae (taken from different fungal species, semi-accurate depictions) playing in a puddle of oil. that group worked on oil bioremediation using different species of fungi">
+                <h3>"Oil bioremediation using different fungal species"</h3>
+                <p>Digital Illustration, 2023</p>
+            </div>
+
+            <div class="artwork" data-category="previous" data-year="2023" data-index="18">
+                <img src="hugging beans.jpg" alt="This illustration shows two broad beans hugging (this group really enjoyed working with beans)">
+                <h3>Hugging beans</h3>
+                <p>Digital Illustration, 2023</p>
+            </div>
+
+            <div class="artwork" data-category="previous" data-year="2023" data-index="19">
+                <img src="hot mouse.jpg" alt="This illustration shows a mouse suffereing from a heat stroke. this group worked on the effects of heat stress on vital mice genes">
+                <h3>"the effects of heat stress on vital mice genes"</h3>
+                <p>Digital Illustration, 2023</p>
+            </div>
+
+             <div class="artwork" data-category="previous" data-year="2023" data-index="20">
+                <img src="very rice.jpg" alt="This illustration shows two rice plnts & a DNA double helix">
+                <h3>Rice & DNA</h3>
+                <p>Digital Illustration, 2023</p>
+            </div>
+
+             <div class="artwork" data-category="previous" data-year="2023" data-index="21">
+                <img src="frog & heart.jpg" alt="This illustration shows a frog holding a beating heart. this group worked on frog cardiac tissues">
+                <h3>A frog & a heart</h3>
+                <p>Digital Illustration, 2023</p>
+            </div>
+
+            <div class="artwork" data-category="previous" data-year="2023" data-index="22">
+                <img src="the chlorella squad.jpg" alt="This illustration shows a group of chlorella cells (a typeof micro-algae) each in an action heroic pose, the group members working on this projects were heavily inspired by avatar">
+                <h3>The chlorella squad</h3>
+                <p>Digital Illustration, 2023</p>
+            </div>
+
+             <div class="artwork" data-category="previous" data-year="2023" data-index="23">
+                <img src="bacteria 1.jpg" alt="This illustration shows two bacterial species: Pseudomonas, & Rhizobacterium swimming around">
+                <h3>Pseudomonas & Rhizobacterium</h3>
+                <p>Digital Illustration, 2023</p>
+            </div>
+
+             <div class="artwork" data-category="previous" data-year="2023" data-index="24">
+                <img src="bacteria 2.jpg" alt="This illustration shows the bacterium: Lactobacillus plantarum, swimming around">
+                <h3>Lactobacillus plantarum</h3>
+                <p>Digital Illustration, 2023</p>
+            </div>
+            
+            <div class="artwork" data-category="previous" data-year="2023" data-index="25">
+                <img src="algal super hero.jpg" alt="This illustration shows the algae: Spirulina sp. as a comic style superhero, with two banners on the side, the upper showcasing the actual look of Spirulina cells under the microscope, & the lower one showing a juice bottle, as a nod to the fact that Spirulina can be added to juices as a super food">
+                <h3>Spirulina</h3>
+                <p>Digital Illustration, 2023</p>
+            </div>
+
+            <div class="artwork" data-category="previous" data-year="2023" data-index="26">
+                <img src="barley seeds & a salt shaker.jpg" alt="This illustration shows two barley seeds hanging around a salt shaker, this group worked on the effects of salinity o barley seeds">
+                <h3>Barley & salinity</h3>
+                <p>Digital Illustration, 2023</p>
+            </div>
+            
+            <!-- 2024 Artworks -->
+            <div class="artwork" data-category="previous" data-year="2024" data-index="27">
+                <img src="mushroom scientist (the best image let's gooo).jpg" alt="This illustartion shows a mushroom, wearing a lab coat, & holding a falcon tube in each hand">
+                <h3>Mushroom science</h3>
+                <p>Digital Illustration, 2024</p>
+            </div>
+
+             <div class="artwork" data-category="previous" data-year="2024" data-index="28">
+                <img src="fenugreek with salt.jpg" alt="This illustartion shows some fenugreek seeds around a salt shakerm this group studied the effects of salinity on fenugreek">
+                <h3>fenugreek & salinity</h3>
+                <p>Digital Illustration, 2024</p>
+            </div>
+
             <!-- Miscellaneous Artworks -->
-            <div class="artwork" data-category="misc" data-index="18">
+            <div class="artwork" data-category="misc" data-index="29">
                 <img src="jelly.jpg" alt="This artwork shows a cute green jelly jumping up">
                 <h3>jumping jello</h3>
                 <p>Digital Illustration, 2023</p>
             </div>
 
-            <div class="artwork" data-category="misc" data-index="19">
+            <div class="artwork" data-category="misc" data-index="30">
                 <img src="alien from outer space.jpg" alt="This artwork shows a cute alien on the moon in an extraterrestrial shot">
                 <h3>alien on the moon</h3>
                 <p>Digital Illustration, 2025</p>
             </div>
 
-            <div class="artwork" data-category="misc" data-index="20">
+            <div class="artwork" data-category="misc" data-index="31">
                 <img src="mushroom hero.jpg" alt="This artwork shows a mushroom that poses like a superhero, & is wearing a cape">
                 <h3>Mushroom hero</h3>
                 <p>Digital Illustration, 2025</p>
             </div>
 
-            <div class="artwork" data-category="misc" data-index="21">
+            <div class="artwork" data-category="misc" data-index="32">
                 <img src="panicking coffee spiller.jpg" alt="This artwork shows a an office worker that'spanicking because he accidentally spilled a cup of coffee over some electronics">
                 <h3>Spilling Accident</h3>
                 <p>Digital Illustration, 2025</p>
             </div>
 
-            <div class="artwork" data-category="misc" data-index="22">
+            <div class="artwork" data-category="misc" data-index="33">
                 <img src="rainy frog day.jpg" alt="This artwork shows a kid, wearing an oversized frog costume, & enjoyingplaying in a water puddle">
                 <h3>Frog suit time!</h3>
+                <p>Digital Illustration, 2025</p>
+            </div>
+
+            <div class="artwork" data-category="misc" data-index="34">
+                <img src="the flower of life.jpg" alt="This artwork shows a flower coming out of someone's head">
+                <h3>The flower of life</h3>
+                <p>Digital Illustration, 2025</p>
+            </div>
+
+            <div class="artwork" data-category="misc" data-index="35">
+                <img src="wiggly arms.jpg" alt="This artwork shows a very happy person, wiggling their arms in the air from excitement">
+                <h3>Wiggly arms</h3>
                 <p>Digital Illustration, 2025</p>
             </div>
         </div>
@@ -1062,8 +1219,8 @@
         
         <div class="year-filter-container">
             <button class="year-filter-btn active" data-year="all">All Years</button>
-            <button class="year-filter-btn" data-year="2022">2022 Projects</button>
             <button class="year-filter-btn" data-year="2023">2023 Projects</button>
+            <button class="year-filter-btn" data-year="2024">2024 Projects</button>
         </div>
         
         <div class="gallery">
@@ -1147,7 +1304,7 @@
                 <p>Digital Illustration, 2024</p>
             </div>
 
-             <div class="artwork" data-year="2024" data-index="27">
+             <div class="artwork" data-year="2024" data-index="28">
                 <img src="fenugreek with salt.jpg" alt="This illustartion shows some fenugreek seeds around a salt shakerm this group studied the effects of salinity on fenugreek">
                 <h3>fenugreek & salinity</h3>
                 <p>Digital Illustration, 2024</p>
@@ -1161,55 +1318,55 @@
         <p class="category-description">A diverse collection of creative experiments and personal projects that showcase my versatility as an artist. These works explore different themes, styles, and concepts beyond my primary focus areas.</p>
         <div class="gallery">
              <!-- Artwork 1 -->
-            <div class="artwork" data-index="28">
+            <div class="artwork" data-index="29">
                 <img src="jelly.jpg" alt="This artwork shows a cute green jelly jumping up">
                 <h3>jumping jello</h3>
                 <p>Digital Illustration, 2023</p>
             </div>
 
             <!-- Artwork 2 -->
-            <div class="artwork" data-index="29">
+            <div class="artwork" data-index="30">
                 <img src="alien from outer space.jpg" alt="This artwork shows a cute alien on the moon in an extraterrestrial shot">
-                <h3>Alien on the moon</h3>
+                <h3>alien on the moon</h3>
                 <p>Digital Illustration, 2025</p>
             </div>
 
             <!-- Artwork 3 -->
-            <div class="artwork" data-index="30">
+            <div class="artwork" data-index="31">
                 <img src="mushroom hero.jpg" alt="This artwork shows a mushroom that poses like a superhero, & is wearing a cape">
-                <h3>Mushroom Hero</h3>
+                <h3>Mushroom hero</h3>
                 <p>Digital Illustration, 2025</p>
             </div>
 
               <!-- Artwork 4 -->
-            <div class="artwork" data-index="31">
+            <div class="artwork" data-index="32">
                 <img src="panicking coffee spiller.jpg" alt="This artwork shows a an office worker that'spanicking because he accidentally spilled a cup of coffee over some electronics">
                 <h3>Spilling Accident</h3>
                 <p>Digital Illustration, 2025</p>
             </div>
 
              <!-- Artwork 5 -->
-            <div class="artwork" data-index="32">
+            <div class="artwork" data-index="33">
                 <img src="rainy frog day.jpg" alt="This artwork shows a kid, wearing an oversized frog costume, & enjoyingplaying in a water puddle">
                 <h3>Frog suit time!</h3>
                 <p>Digital Illustration, 2025</p>
             </div>
 
             <!-- Artwork 6 -->
-            <div class="artwork" data-index="33">
+            <div class="artwork" data-index="34">
                 <img src="the flower of life.jpg" alt="This artwork shows a flower coming out of someone's head">
-                <h3>The Flower of Life</h3>
+                <h3>The flower of life</h3>
                 <p>Digital Illustration, 2025</p>
             </div>
 
              <!-- Artwork 7 -->
-            <div class="artwork" data-index="34">
+            <div class="artwork" data-index="35">
                 <img src="wiggly arms.jpg" alt="This artwork shows a very happy person, wiggling their arms in the air from excitement">
-                <h3>Wiggly Arms</h3>
+                <h3>Wiggly arms</h3>
                 <p>Digital Illustration, 2025</p>
             </div>
 
-             <!-- Artwork 8 -->
+            <!-- Artwork 8 -->
             <div class="artwork" data-index="34">
                 <img src="wizard frog.jpg" alt="This artwork shows a frog, wearing a wizard atire, with a magical wand in his hand">
                 <h3>Wizard Frog</h3>
@@ -1223,6 +1380,16 @@
         <span class="close" id="closeLightbox">&times;</span>
         <span class="nav-btn prev" id="prevBtn">&#10094;</span>
         <span class="nav-btn next" id="nextBtn">&#10095;</span>
+        
+        <div class="lightbox-controls">
+            <div class="zoom-controls">
+                <button class="zoom-btn" id="zoomIn">+</button>
+                <button class="zoom-btn" id="zoomOut">-</button>
+                <button class="magnify-btn" id="magnifyBtn">🔍</button>
+                <button class="reset-zoom" id="resetZoom">Reset</button>
+            </div>
+        </div>
+        
         <div class="lightbox-content">
             <div class="lightbox-img-container">
                 <img class="lightbox-img" id="lightboxImg" src="" alt="">
@@ -1232,11 +1399,6 @@
                 <div class="lightbox-alt" id="lightboxAlt"></div>
             </div>
         </div>
-        <div class="zoom-controls">
-            <button class="zoom-btn" id="zoomIn">+</button>
-            <button class="zoom-btn" id="zoomOut">-</button>
-        </div>
-        <button class="reset-zoom" id="resetZoom">Reset Zoom</button>
     </div>
 
     <footer>
@@ -1258,6 +1420,7 @@
             const zoomInBtn = document.getElementById('zoomIn');
             const zoomOutBtn = document.getElementById('zoomOut');
             const resetZoomBtn = document.getElementById('resetZoom');
+            const magnifyBtn = document.getElementById('magnifyBtn');
             const artworks = document.querySelectorAll('.artwork');
             const projectSections = document.querySelectorAll('.projects-section');
             const filterButtons = document.querySelectorAll('.filter-btn');
@@ -1271,6 +1434,7 @@
             let scale = 1;
             let isDragging = false;
             let startX, startY, scrollLeft, scrollTop;
+            let magnifyMode = false;
             
             // Create an array of image data from your artworks
             const imageData = Array.from(artworks).map(artwork => {
@@ -1342,12 +1506,46 @@
             
             function resetZoom() {
                 scale = 1;
+                magnifyMode = false;
+                lightbox.classList.remove('magnify-mode');
+                magnifyBtn.classList.remove('active');
                 applyZoom();
                 lightboxImgContainer.scrollTo(0, 0);
             }
             
             function applyZoom() {
                 lightboxImg.style.transform = `scale(${scale})`;
+            }
+            
+            // Magnify functions
+            function toggleMagnifyMode() {
+                if (scale !== 1) {
+                    resetZoom();
+                    return;
+                }
+                
+                magnifyMode = !magnifyMode;
+                lightbox.classList.toggle('magnify-mode', magnifyMode);
+                magnifyBtn.classList.toggle('active', magnifyMode);
+                
+                if (magnifyMode) {
+                    lightboxImg.style.cursor = 'crosshair';
+                } else {
+                    lightboxImg.style.cursor = 'grab';
+                }
+            }
+            
+            function handleMagnify(e) {
+                if (!magnifyMode) return;
+                
+                // Calculate position for magnified view
+                const rect = lightboxImg.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                // Show magnified area
+                lightboxImg.style.transformOrigin = `${x}px ${y}px`;
+                lightboxImg.style.transform = 'scale(2)';
             }
             
             // Show specific project section
@@ -1375,7 +1573,8 @@
                 const allArtworks = document.querySelectorAll('#all .artwork');
                 
                 allArtworks.forEach(artwork => {
-                    if (category === 'all' || artwork.getAttribute('data-category') === category) {
+                    const artworkCategory = artwork.getAttribute('data-category');
+                    if (category === 'all' || artworkCategory === category) {
                         artwork.style.display = 'block';
                     } else {
                         artwork.style.display = 'none';
@@ -1444,6 +1643,8 @@
             zoomInBtn.addEventListener('click', zoomIn);
             zoomOutBtn.addEventListener('click', zoomOut);
             resetZoomBtn.addEventListener('click', resetZoom);
+            magnifyBtn.addEventListener('click', toggleMagnifyMode);
+            lightboxImg.addEventListener('mousemove', handleMagnify);
             
             // Close lightbox when clicking outside the image
             lightbox.addEventListener('click', (e) => {
@@ -1467,6 +1668,8 @@
                         zoomOut();
                     } else if (e.key === '0') {
                         resetZoom();
+                    } else if (e.key === 'm' || e.key === 'M') {
+                        toggleMagnifyMode();
                     }
                 }
             });
