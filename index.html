@@ -20,6 +20,7 @@
             background-color: #f8f8f8;
             color: #333;
             line-height: 1.6;
+            scroll-behavior: smooth;
         }
 
         a {
@@ -39,22 +40,42 @@
             top: 0;
             z-index: 1000;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        header.shrink {
+            padding: 0.5rem 2rem;
         }
 
         .header-container {
             display: flex;
             align-items: center;
             gap: 15px;
+            transition: all 0.3s ease;
+        }
+
+        header.shrink .header-container {
+            gap: 10px;
         }
 
         .artist-name {
             font-size: 1.8rem;
             font-weight: bold;
             color: #000; /* Black text */
+            transition: all 0.3s ease;
+        }
+
+        header.shrink .artist-name {
+            font-size: 1.4rem;
         }
 
         .logo {
             height: 75px;
+            transition: all 0.3s ease;
+        }
+
+        header.shrink .logo {
+            height: 50px;
         }
 
         .nav-menu {
@@ -64,6 +85,11 @@
             padding: 0;
             gap: 1.5rem;
             align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        header.shrink .nav-menu {
+            gap: 1rem;
         }
 
         .nav-item {
@@ -75,6 +101,13 @@
             font-weight: bold;
             transition: color 0.3s ease;
             color: #000; /* Black text */
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        header.shrink .nav-link {
+            font-size: 0.9rem;
+            padding: 0.4rem 0.8rem;
         }
 
         .nav-link:hover {
@@ -85,6 +118,10 @@
             font-size: 1.8rem;
             color: #000; /* Black icon */
             transition: transform 0.3s ease;
+        }
+
+        header.shrink .linkedin-icon {
+            font-size: 1.5rem;
         }
 
         .linkedin-icon:hover {
@@ -145,8 +182,8 @@
         }
 
         .home-image img {
-            max-width: 100%;
-            max-height: 80vh;
+            max-width: 160%; /* Increased to 160% */
+            max-height: 90vh;
             border-radius: 0;
             /* No shadow as requested */
         }
@@ -161,7 +198,7 @@
         }
 
         .home-content p {
-            font-size: 1.3rem; /* Larger text */
+            font-size: 1.4rem; /* Slightly larger text */
             line-height: 1.8;
             margin-bottom: 2rem;
             color: #444;
@@ -240,6 +277,29 @@
             margin-bottom: 3rem;
             color: #2d2d2d;
             font-size: 2.2rem;
+        }
+
+        /* Filter section for All category */
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background-color: #4a8c4a;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background-color: #3a7a3a;
         }
 
         /* === GALLERY SECTION === */
@@ -411,7 +471,7 @@
             }
             
             .home-image img {
-                max-width: 80%;
+                max-width: 100%;
                 margin-left: 0;
             }
         }
@@ -454,7 +514,7 @@
             }
             
             .home-content p {
-                font-size: 1.1rem;
+                font-size: 1.2rem;
             }
             
             .projects-button {
@@ -471,7 +531,7 @@
 </head>
 <body>
     <!-- HEADER WITH LOGO AND NAV -->
-    <header>
+    <header id="main-header">
         <div class="header-container">
             <a href="#home" class="logo-link">
                 <img src="hhehehehehe-0514-4906-9fb3-90fd699fe718.PNG-removebg-preview.png" alt="My Logo" class="logo">
@@ -488,6 +548,7 @@
                         <li><a href="#scientific-illustration" class="dropdown-link">Scientific Illustration</a></li>
                         <li><a href="#character-design" class="dropdown-link">Character Design</a></li>
                         <li><a href="#miscellaneous" class="dropdown-link">Miscellaneous</a></li>
+                        <li><a href="#all" class="dropdown-link">All</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -513,7 +574,125 @@
                     <a href="#scientific-illustration" class="home-dropdown-link">Scientific Illustration</a>
                     <a href="#character-design" class="home-dropdown-link">Character Design</a>
                     <a href="#miscellaneous" class="home-dropdown-link">Miscellaneous</a>
+                    <a href="#all" class="home-dropdown-link">All</a>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ALL PROJECTS SECTION -->
+    <section id="all" class="projects-section">
+        <h2 class="section-title">All Projects</h2>
+        <div class="filter-container">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="scientific">Scientific Illustration</button>
+            <button class="filter-btn" data-filter="character">Character Design</button>
+            <button class="filter-btn" data-filter="misc">Miscellaneous</button>
+        </div>
+        <div class="gallery">
+            <!-- Scientific Illustration Artworks -->
+            <div class="artwork" data-category="scientific" data-index="0">
+                <img src="lung scientific illustration.jpg" alt="This illustartion shows the main anatomical features of human lungs">
+                <h3>An illustartion of human lungs</h3>
+                <p>Digital Illustration, 2023</p>
+            </div>
+
+            <div class="artwork" data-category="scientific" data-index="1">
+                <img src="cross-section of a human kidney.jpg" alt="This illustartion displays the main anatomical features of a human kidney">
+                <h3>An illustration of a cross-section of a human kidney</h3>
+                <p>Digital Illustration, 2023</p>
+            </div>
+
+            <div class="artwork" data-category="scientific" data-index="2">
+                <img src="toad dissection.jpg" alt="This illustartion displays the anatomy of a dissected toad, revealing its internal organs">
+                <h3>An Anatomical illustration of a dissected toad</h3>
+                <p>Digital Illustration, 2025</p>
+            </div>
+            
+            <div class="artwork" data-category="scientific" data-index="3">
+                <img src="chromosome morphology.jpg" alt="This illustartion displays the basic morphology of a chromosome at different states of duplication">
+                <h3>An illustration of a typical chromosome (duplicated & unduplicated)</h3>
+                <p>Digital Illustration, 2025</p>
+            </div>
+
+            <div class="artwork" data-category="scientific" data-index="4">
+                <img src="digestive system.jpg" alt="This illustartion shows a semi-realistic view of the human digestive system, revealing organs like the stomach, intestines, & liver (unlabelled)">
+                <h3>An illustration of a human digestive system</h3>
+                <p>Digital Illustration, 2023</p>
+            </div>
+
+            <div class="artwork" data-category="scientific" data-index="5">
+                <img src="drosophila melanogaster.jpg" alt="This illustartion shows a fruit fly (Drosophila melanogaster) (unlabelled)">
+                <h3>An illustration of a fruit fly (Drosophila melanogaster)</h3>
+                <p>Digital Illustration, 2023</p>
+            </div>
+
+            <div class="artwork" data-category="scientific" data-index="6">
+                <img src="Egyptian toad.jpg" alt="This illustartion displays a common Egyptian toad (Sclerophrys regularis, reuss 1833) showing its warty, mottled skin, toxin glands, & in sitting position (unlabelled)">
+                <h3>An illustration of a common Egyptian toad (Sclerophrys regularis, reuss 1833)</h3>
+                <p>Digital Illustration, 2025</p>
+            </div>
+
+            <div class="artwork" data-category="scientific" data-index="7">
+                <img src="tree beetle.jpg" alt="This illustartion displays a common tree beetle (species undefined)">
+                <h3>An illustration of a common tree beetle</h3>
+                <p>Digital Illustration, 2024</p>
+            </div>
+
+            <div class="artwork" data-category="scientific" data-index="8">
+                <img src="blue tree frog.jpg" alt="This illustartion displays a type of blue tree frog that is toxic to the touch">
+                <h3>An illustration of a blue tree frog</h3>
+                <p>Digital Illustration, 2025</p>
+            </div>
+
+            <div class="artwork" data-category="scientific" data-index="9">
+                <img src="hot footed tree frog.jpg" alt="This illustartion displays a type of tree frog known as the red-eyed tree frog, its unique appearance & color pallete make it an iconic type of frog">
+                <h3>An illustration of red-eyed tree frog</h3>
+                <p>Digital Illustration, 2025</p>
+            </div>
+
+            <!-- Character Design Artworks -->
+            <div class="artwork" data-category="character" data-index="10">
+                <img src="me in a character design sheet.jpg" alt="This illustartion shows a character for a fictional story i was writing:it's me! wearing my favorite hoodie with the cute frog hood, this character was inspired by my appearance during my 3rd year of college, & that character (like me) carries everything you could imagine in his handy backpack (you never know when you will need this stuff)">
+                <h3>A character design sheet for traveller character (inspired by my own looks & antics)</h3>
+                <p>Digital Illustration, 2023</p>
+            </div>
+
+            <div class="artwork" data-category="character" data-index="11">
+                <img src="angry ducky character design sheet.jpg" alt="This illustartion shows a character for a fictional story i was writing: a viscious wizard that lives in the forest alone, with his magical wooden scepter">
+                <h3>A character design sheet for a forest wizard character</h3>
+                <p>Digital Illustration, 2023</p>
+            </div>
+            
+            <div class="artwork" data-category="character" data-index="12">
+                <img src="wizard character design sheet.jpg" alt="This illustartion shows a character for a fictional story i was writing: a grumpy duck, with anger issues, that is fond of bread & companionship">
+                <h3>A character design sheet for an angry duck character</h3>
+                <p>Digital Illustration, 2023</p>
+            </div>
+
+            <div class="artwork" data-category="character" data-index="13">
+                <img src="librarian character design sheet.jpg" alt="This illustartion shows a character for a fictional story i was writing: a helpful librarian who studied magic to better defend himself against dark forces">
+                <h3>A character design sheet for a librarian character</h3>
+                <p>Digital Illustration, 2023</p>
+            </div>
+
+            <!-- Miscellaneous Artworks -->
+            <div class="artwork" data-category="misc" data-index="14">
+                <img src="jelly.jpg" alt="This artwork shows a cute green jelly jumping up">
+                <h3>jumping jello</h3>
+                <p>Digital Illustration, 2023</p>
+            </div>
+
+            <div class="artwork" data-category="misc" data-index="14">
+                <img src="alien from outer space.jpg" alt="This artwork shows a cute alien on the moon in an extraterrestrial shot">
+                <h3>alien on the moon</h3>
+                <p>Digital Illustration, 2025</p>
+            </div>
+
+            <div class="artwork" data-category="misc" data-index="14">
+                <img src="mushroom hero.jpg" alt="This artwork shows a mushroom that poses like a superhero, & is wearing a cape">
+                <h3>Mushroom hero</h3>
+                <p>Digital Illustration, 2025</p>
             </div>
         </div>
     </section>
@@ -558,35 +737,35 @@
             </div>
 
              <!-- Artwork 6 -->
-            <div class="artwork" data-index="4">
+            <div class="artwork" data-index="5">
                 <img src="drosophila melanogaster.jpg" alt="This illustartion shows a fruit fly (Drosophila melanogaster) (unlabelled)">
                 <h3>An illustration of a fruit fly (Drosophila melanogaster)</h3>
                 <p>Digital Illustration, 2023</p>
             </div>
 
               <!-- Artwork 7 -->
-            <div class="artwork" data-index="4">
+            <div class="artwork" data-index="6">
                 <img src="Egyptian toad.jpg" alt="This illustartion displays a common Egyptian toad (Sclerophrys regularis, reuss 1833) showing its warty, mottled skin, toxin glands, & in sitting position (unlabelled)">
                 <h3>An illustration of a common Egyptian toad (Sclerophrys regularis, reuss 1833)</h3>
                 <p>Digital Illustration, 2025</p>
             </div>
 
             <!-- Artwork 8 -->
-            <div class="artwork" data-index="4">
+            <div class="artwork" data-index="7">
                 <img src="tree beetle.jpg" alt="This illustartion displays a common tree beetle (species undefined)">
                 <h3>An illustration of a common tree beetle</h3>
                 <p>Digital Illustration, 2024</p>
             </div>
 
              <!-- Artwork 9 -->
-            <div class="artwork" data-index="4">
+            <div class="artwork" data-index="8">
                 <img src="blue tree frog.jpg" alt="This illustartion displays a type of blue tree frog that is toxic to the touch">
                 <h3>An illustration of a blue tree frog</h3>
                 <p>Digital Illustration, 2025</p>
             </div>
 
               <!-- Artwork 10 -->
-            <div class="artwork" data-index="4">
+            <div class="artwork" data-index="9">
                 <img src="hot footed tree frog.jpg" alt="This illustartion displays a type of tree frog known as the red-eyed tree frog, its unique appearance & color pallete make it an iconic type of frog">
                 <h3>An illustration of red-eyed tree frog</h3>
                 <p>Digital Illustration, 2025</p>
@@ -599,28 +778,28 @@
         <h2 class="section-title">Character Design</h2>
         <div class="gallery">
             <!-- Artwork 1 -->
-            <div class="artwork" data-index="5">
+            <div class="artwork" data-index="10">
                 <img src="me in a character design sheet.jpg" alt="This illustartion shows a character for a fictional story i was writing:it's me! wearing my favorite hoodie with the cute frog hood, this character was inspired by my appearance during my 3rd year of college, & that character (like me) carries everything you could imagine in his handy backpack (you never know when you will need this stuff)">
                 <h3>A character design sheet for traveller character (inspired by my own looks & antics)</h3>
                 <p>Digital Illustration, 2023</p>
             </div>
 
              <!-- Artwork 2 -->
-            <div class="artwork" data-index="5">
+            <div class="artwork" data-index="11">
                 <img src="angry ducky character design sheet.jpg" alt="This illustartion shows a character for a fictional story i was writing: a viscious wizard that lives in the forest alone, with his magical wooden scepter">
                 <h3>A character design sheet for a forest wizard character</h3>
                 <p>Digital Illustration, 2023</p>
             </div>
             
              <!-- Artwork 3 -->
-            <div class="artwork" data-index="5">
+            <div class="artwork" data-index="12">
                 <img src="wizard character design sheet.jpg" alt="This illustartion shows a character for a fictional story i was writing: a grumpy duck, with anger issues, that is fond of bread & companionship">
                 <h3>A character design sheet for an angry duck character</h3>
                 <p>Digital Illustration, 2023</p>
             </div>
 
               <!-- Artwork 4 -->
-            <div class="artwork" data-index="5">
+            <div class="artwork" data-index="13">
                 <img src="librarian character design sheet.jpg" alt="This illustartion shows a character for a fictional story i was writing: a helpful librarian who studied magic to better defend himself against dark forces">
                 <h3>A character design sheet for a librarian character</h3>
                 <p>Digital Illustration, 2023</p>
@@ -633,7 +812,7 @@
         <h2 class="section-title">Miscellaneous</h2>
         <div class="gallery">
              <!-- Artwork 1 -->
-            <div class="artwork" data-index="5">
+            <div class="artwork" data-index="14">
                 <img src="jelly.jpg" alt="This artwork shows a cute green jelly jumping up">
                 <h3>jumping jello</h3>
                 <p>Digital Illustration, 2023</p>
@@ -672,6 +851,8 @@
             const nextBtn = document.getElementById('nextBtn');
             const artworks = document.querySelectorAll('.artwork');
             const projectSections = document.querySelectorAll('.projects-section');
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const header = document.getElementById('main-header');
             
             let currentIndex = 0;
             let touchStartX = 0;
@@ -682,11 +863,15 @@
                 const img = artwork.querySelector('img');
                 const title = artwork.querySelector('h3').textContent;
                 const description = artwork.querySelector('p').textContent;
+                const category = artwork.getAttribute('data-category') || 
+                               (artwork.closest('.projects-section').id === 'scientific-illustration' ? 'scientific' :
+                                artwork.closest('.projects-section').id === 'character-design' ? 'character' : 'misc');
                 return {
                     src: img.src,
                     alt: img.alt,
                     title: title,
-                    description: description
+                    description: description,
+                    category: category
                 };
             });
             
@@ -744,6 +929,37 @@
                         top: targetSection.offsetTop - 80,
                         behavior: 'smooth'
                     });
+                }
+            }
+            
+            // Filter artworks in All section
+            function filterArtworks(category) {
+                const allArtworks = document.querySelectorAll('#all .artwork');
+                
+                allArtworks.forEach(artwork => {
+                    if (category === 'all' || artwork.getAttribute('data-category') === category) {
+                        artwork.style.display = 'block';
+                    } else {
+                        artwork.style.display = 'none';
+                    }
+                });
+                
+                // Update active filter button
+                filterButtons.forEach(btn => {
+                    if (btn.getAttribute('data-filter') === category) {
+                        btn.classList.add('active');
+                    } else {
+                        btn.classList.remove('active');
+                    }
+                });
+            }
+            
+            // Header shrink on scroll
+            function handleHeaderScroll() {
+                if (window.scrollY > 200) {
+                    header.classList.add('shrink');
+                } else {
+                    header.classList.remove('shrink');
                 }
             }
             
@@ -832,6 +1048,17 @@
                 // Show the first project section by default
                 showProjectSection('scientific-illustration');
             });
+            
+            // Filter buttons
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const filter = button.getAttribute('data-filter');
+                    filterArtworks(filter);
+                });
+            });
+            
+            // Scroll event for header shrink
+            window.addEventListener('scroll', handleHeaderScroll);
         });
     </script>
 </body>
