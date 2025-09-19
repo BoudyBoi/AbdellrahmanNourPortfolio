@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,11 +34,11 @@
             width: 200%;
             height: 200%;
             background-image: url('hhehehehehe-0514-4906-9fb3-90fd699fe718.PNG-removebg-preview.png');
-            background-size: 180px; /* Increased from 150px for more spacing */
+            background-size: 200px; /* Increased from 150px for more spacing */
             background-repeat: repeat;
             opacity: 0.09; /* Increased from 0.04 for less transparency */
             z-index: -1;
-            animation: floatBackground 6.9s linear infinite; /* Faster animation (100s instead of 120s) */
+            animation: floatBackground 83s linear infinite; /* Faster animation (100s instead of 120s) */
             transform: rotate(6.9deg);
             pointer-events: none;
         }
@@ -444,8 +443,9 @@
             position: relative;
             max-width: 90%;
             max-height: 90%;
-            text-align: left; /* Changed from center to left */
-            overflow: hidden;
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
         }
 
         .lightbox-img-container {
@@ -453,6 +453,7 @@
             overflow: hidden;
             cursor: grab;
             max-height: 80vh;
+            flex: 0 1 auto;
         }
 
         .lightbox-img {
@@ -465,22 +466,19 @@
         }
 
         .lightbox-caption {
-            position: absolute;
-            bottom: 20px;
-            right: 20px; /* Changed from left:50% to right:20px */
-            transform: none; /* Removed translateX(-50%) */
-            width: auto; /* Changed from 80% to auto */
-            max-width: 40%;
+            flex: 0 0 300px;
             background: rgba(0, 0, 0, 0.7);
-            padding: 15px;
+            padding: 20px;
             border-radius: 8px;
-            z-index: 2001;
+            color: white;
+            max-height: 80vh;
+            overflow-y: auto;
         }
 
         .lightbox-title {
             font-size: 1.5rem;
             font-weight: bold;
-            margin-bottom: 0.5rem;
+            margin-bottom: 1rem;
             color: white;
         }
 
@@ -551,17 +549,6 @@
             left: 20px;
             z-index: 2002;
             display: flex;
-            flex-direction: column; /* Changed to column for 2 rows */
-            gap: 10px;
-        }
-
-        .zoom-controls-row {
-            display: flex;
-            gap: 10px;
-        }
-
-        .magnify-controls-row {
-            display: flex;
             gap: 10px;
         }
 
@@ -584,25 +571,6 @@
             background: rgba(255, 255, 255, 0.2);
         }
 
-        .magnify-btn {
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 18px;
-            transition: background 0.3s;
-        }
-
-        .magnify-btn:hover, .magnify-btn.active {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
         .reset-zoom {
             background: rgba(255, 255, 255, 0.1);
             color: white;
@@ -616,35 +584,6 @@
 
         .reset-zoom:hover {
             background: rgba(255, 255, 255, 0.2);
-        }
-
-        /* Magnifier lens for Amazon-style zoom */
-        .magnifier-lens {
-            position: absolute;
-            width: 150px;
-            height: 150px;
-            border: 2px solid white;
-            border-radius: 50%;
-            overflow: hidden;
-            pointer-events: none;
-            display: none;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            z-index: 2003;
-        }
-
-        .magnifier-lens.active {
-            display: block;
-        }
-
-        .magnifier-lens-img {
-            position: absolute;
-            transform: scale(2);
-            transform-origin: 0 0;
-        }
-
-        /* Magnify mode styles */
-        .magnify-mode .lightbox-img {
-            cursor: none;
         }
 
         /* === FOOTER === */
@@ -671,6 +610,17 @@
             .home-image img {
                 max-width: 100%;
                 margin-left: 0;
+            }
+            
+            .lightbox-content {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .lightbox-caption {
+                flex: 0 0 auto;
+                max-width: 100%;
+                margin-top: 20px;
             }
         }
 
@@ -815,7 +765,7 @@
                 left: 10px;
             }
             
-            .zoom-btn, .magnify-btn {
+            .zoom-btn {
                 width: 35px;
                 height: 35px;
                 font-size: 16px;
@@ -826,21 +776,9 @@
                 font-size: 12px;
             }
             
-            /* Lightbox caption for mobile */
-            .lightbox-caption {
-                max-width: 80%;
-                right: 10px;
-                bottom: 10px;
-            }
-            
             /* Adjust background animation for mobile */
             body::before {
                 animation: floatBackground 180s linear infinite;
-            }
-            
-            /* Hide magnifier lens on mobile */
-            .magnifier-lens {
-                display: none !important;
             }
         }
     </style>
@@ -1230,7 +1168,7 @@
 
              <!-- Artwork 2 -->
             <div class="artwork" data-index="12">
-                <img src="angry ducky character design sheet.jpg" alt="This illustartion shows a character for a fictional story i was writing: a viscious wizard that lives in the forest alone, with his magical wooden scepter">
+                <img src="angry ducky character design sheet.jpg" alt="This illustartion shows a極端 for a fictional story i was writing: a viscious wizard that lives in the forest alone, with his magical wooden scepter">
                 <h3>A character design sheet for a forest wizard character</h3>
                 <p>Digital Illustration, 2023</p>
             </div>
@@ -1272,14 +1210,14 @@
 
             <div class="artwork" data-year="2023" data-index="16">
                 <img src="crying onion.jpg" alt="This illustration shows a crying onionm representing the hardships that the onion group had to go through & the frustration they felt during their work">
-                <h3>A crying onion</h3>
+                <h3>A crying onion</极>
                 <p>Digital Illustration, 2023</p>
             </div>
 
             <div class="artwork" data-year="2023" data-index="17">
-                <img src="fungi playing in a puddle of oil.jpg" alt="This illustration shows a group of fungal hyphae (taken from different fungal species, semi-accurate depictions) playing in a puddle of oil. that group worked on oil bioremediation using different species of fungi">
+               极 <img src="fungi playing in a puddle of oil.jpg" alt="This illustration shows a group of fungal hyphae (taken from different fungal species, semi-accurate depictions) playing in a puddle of oil. that group worked on oil bioremediation using different species of fungi">
                 <h3>"Oil bioremediation using different fungal species"</h3>
-                <p>Digital Illustration, 2023</p>
+                <p>Digital Illustration, 202极>
             </div>
 
             <div class="artwork" data-year="2023" data-index="18">
@@ -1289,7 +1227,7 @@
             </div>
 
             <div class="artwork" data-year="2023" data-index="19">
-                <img src="hot mouse.jpg" alt="This illustration shows a mouse suffereing from a heat stroke. this group worked on the effects of heat stress on vital mice genes">
+                <img极="hot mouse.jpg" alt="This illustration shows a mouse suffereing from a heat stroke. this group worked on the effects of heat stress on vital mice genes">
                 <h3>"the effects of heat stress on vital mice genes"</h3>
                 <p>Digital Illustration, 2023</p>
             </div>
@@ -1300,7 +1238,7 @@
                 <p>Digital Illustration, 2023</p>
             </div>
 
-             <div class="artwork" data-year="2023" data-index="21">
+             <div class="artwork" data-year="2023极 data-index="21">
                 <img src="frog & heart.jpg" alt="This illustration shows a frog holding a beating heart. this group worked on frog cardiac tissues">
                 <h3>A frog & a heart</h3>
                 <p>Digital Illustration, 2023</p>
@@ -1314,7 +1252,7 @@
 
              <div class="artwork" data-year="2023" data-index="23">
                 <img src="bacteria 1.jpg" alt="This illustration shows two bacterial species: Pseudomonas, & Rhizobacterium swimming around">
-                <h3>Pseudomonas & Rhizobacterium</h3>
+                <极>Pseudomonas & Rhizobacterium</h3>
                 <p>Digital Illustration, 2023</p>
             </div>
 
@@ -1325,12 +1263,12 @@
             </div>
             
             <div class="artwork" data-year="2023" data-index="25">
-                <img src="algal super hero.jpg" alt="This illustration shows the algae: Spirulina sp. as a comic style superhero, with two banners on the side, the upper showcasing the actual look of Spirulina cells under the microscope, & the lower one showing a juice bottle, as a nod to the fact that Spirulina can be added to juices as a super food">
+                <img src="algal super hero.jpg" alt="This illustration shows the algae: Spirulina sp. as a comic style superhero, with two banners on the side, the upper showcasing the actual look of Spirulina cells under the microscope, & the lower one showing a juice bottle, as a nod to the fact that Spirulina can极 added to juices as a super food">
                 <h3>Spirulina</h3>
                 <p>Digital Illustration, 2023</p>
             </div>
 
-            <div class="artwork" data-year="2023" data-index="26">
+            <div class="artwork" data-year="2023" data-index极6">
                 <img src="barley seeds & a salt shaker.jpg" alt="This illustration shows two barley seeds hanging around a salt shaker, this group worked on the effects of salinity o barley seeds">
                 <h3>Barley & salinity</h3>
                 <p>Digital Illustration, 2023</p>
@@ -1348,13 +1286,25 @@
                 <h3>fenugreek & salinity</h3>
                 <p>Digital Illustration, 2024</p>
             </div>
+
+             <div class="artwork" data-year="2024" data-index="28">
+                <img src="running pots.jpg" alt="This illustartion shows two plant pots running accompanied by yelloe orbs surrounding them, this group worked on the positive effects of nanoparticles (the yelloo orbs) on improving drought tolerance in Moringa & Mint plants">
+                <h3>"the positive effects of nanoparticles on improving drought tolerance in Moringa & Mint plants"</h3>
+                <p>Digital Illustration, 2024</p>
+            </div>
+
+            <div class="artwork" data-year="2024" data-index="28">
+                <img src="plants with salt.jpg" alt="This illustartion shows two plants in salted water & a salt shaker">
+                <h3>"halophytes in an ever evolving world"</h3>
+                <p>Digital Illustration, 2024</p>
+            </div>
         </div>
     </section>
 
     <!-- MISCELLANEOUS SECTION -->
     <section id="miscellaneous" class="projects-section">
         <h2 class="section-title">Miscellaneous</h2>
-        <p class="category-description">A diverse collection of creative experiments and personal projects that showcase my versatility as an artist. These works explore different themes, styles, and concepts beyond my primary focus areas.</p>
+        <p class极category-description">A diverse collection of creative experiments and personal projects that showcase my versatility as an artist. These works explore different themes, styles, and concepts beyond my primary focus areas.</p>
         <div class="gallery">
              <!-- Artwork 1 -->
             <div class="artwork" data-index="29">
@@ -1381,7 +1331,7 @@
             <div class="artwork" data-index="32">
                 <img src="panicking coffee spiller.jpg" alt="This artwork shows a an office worker that'spanicking because he accidentally spilled a cup of coffee over some electronics">
                 <h3>Spilling Accident</h3>
-                <p>Digital Illustration, 2025</p>
+                <p>Digital Illustration, 2025</极>
             </div>
 
              <!-- Artwork 5 -->
@@ -1421,22 +1371,14 @@
         <span class="nav-btn next" id="nextBtn">&#10095;</span>
         
         <div class="lightbox-controls">
-            <div class="zoom-controls-row">
-                <button class="zoom-btn" id="zoomIn">+</button>
-                <button class="zoom-btn" id="zoomOut">-</button>
-            </div>
-            <div class="magnify-controls-row">
-                <button class="magnify-btn" id="magnifyBtn">🔍</button>
-                <button class="reset-zoom" id="resetZoom">Reset</button>
-            </div>
+            <button class="zoom-btn" id="zoomIn">+</button>
+            <button class="zoom-btn" id="zoomOut">-</button>
+            <button class="reset-zoom" id="resetZoom">Reset</button>
         </div>
         
         <div class="lightbox-content">
             <div class="lightbox-img-container">
                 <img class="lightbox-img" id="lightboxImg" src="" alt="">
-                <div class="magnifier-lens" id="magnifierLens">
-                    <img class="magnifier-lens-img" id="magnifierLensImg" src="" alt="">
-                </div>
             </div>
             <div class="lightbox-caption">
                 <div class="lightbox-title" id="lightboxTitle"></div>
@@ -1464,9 +1406,6 @@
             const zoomInBtn = document.getElementById('zoomIn');
             const zoomOutBtn = document.getElementById('zoomOut');
             const resetZoomBtn = document.getElementById('resetZoom');
-            const magnifyBtn = document.getElementById('magnifyBtn');
-            const magnifierLens = document.getElementById('magnifierLens');
-            const magnifierLensImg = document.getElementById('magnifierLensImg');
             const artworks = document.querySelectorAll('.artwork');
             const projectSections = document.querySelectorAll('.projects-section');
             const filterButtons = document.querySelectorAll('.filter-btn');
@@ -1480,9 +1419,6 @@
             let scale = 1;
             let isDragging = false;
             let startX, startY, scrollLeft, scrollTop;
-            let magnifyMode = false;
-            let lensSize = 150;
-            let lensZoom = 2;
             
             // Create an array of image data from your artworks
             const imageData = Array.from(artworks).map(artwork => {
@@ -1516,10 +1452,6 @@
                 lightbox.classList.remove('active');
                 document.body.style.overflow = '';
                 resetZoom();
-                magnifyMode = false;
-                magnifierLens.classList.remove('active');
-                magnifyBtn.classList.remove('active');
-                lightbox.classList.remove('magnify-mode');
             }
             
             // Update lightbox content with title and alt text
@@ -1527,7 +1459,6 @@
                 const data = imageData[currentIndex];
                 lightboxImg.src = data.src;
                 lightboxImg.alt = data.alt;
-                magnifierLensImg.src = data.src;
                 lightboxTitle.textContent = data.title;
                 lightboxAlt.textContent = data.alt;
             }
@@ -1560,67 +1491,12 @@
             
             function resetZoom() {
                 scale = 1;
-                magnifyMode = false;
-                lightbox.classList.remove('magnify-mode');
-                magnifyBtn.classList.remove('active');
-                magnifierLens.classList.remove('active');
                 applyZoom();
                 lightboxImgContainer.scrollTo(0, 0);
             }
             
             function applyZoom() {
                 lightboxImg.style.transform = `scale(${scale})`;
-            }
-            
-            // Magnify functions - Amazon-style magnifier
-            function toggleMagnifyMode() {
-                if (scale !== 1) {
-                    resetZoom();
-                    return;
-                }
-                
-                magnifyMode = !magnifyMode;
-                lightbox.classList.toggle('magnify-mode', magnifyMode);
-                magnifyBtn.classList.toggle('active', magnifyMode);
-                
-                if (magnifyMode) {
-                    magnifierLens.classList.add('active');
-                    lightboxImg.style.cursor = 'none';
-                } else {
-                    magnifierLens.classList.remove('active');
-                    lightboxImg.style.cursor = 'grab';
-                }
-            }
-            
-            function handleMagnify(e) {
-                if (!magnifyMode) return;
-                
-                const rect = lightboxImg.getBoundingClientRect();
-                const img = lightboxImg;
-                
-                // Calculate position relative to the image
-                let x = e.clientX - rect.left;
-                let y = e.clientY - rect.top;
-                
-                // Prevent the lens from being positioned outside the image
-                if (x < 0) x = 0;
-                if (y < 0) y = 0;
-                if (x > rect.width) x = rect.width;
-                if (y > rect.height) y = rect.height;
-                
-                // Position the lens at the cursor
-                magnifierLens.style.left = (e.clientX - lensSize/2) + 'px';
-                magnifierLens.style.top = (e.clientY - lensSize/2) + 'px';
-                
-                // Calculate the background position for the lens
-                const bgX = - (x * lensZoom - lensSize/2);
-                const bgY = - (y * lensZoom - lensSize/2);
-                
-                // Set the lens image position and size
-                magnifierLensImg.style.width = (img.naturalWidth * lensZoom) + 'px';
-                magnifierLensImg.style.height = (img.naturalHeight * lensZoom) + 'px';
-                magnifierLensImg.style.left = bgX + 'px';
-                magnifierLensImg.style.top = bgY + 'px';
             }
             
             // Show specific project section
@@ -1712,14 +1588,12 @@
             });
             
             // Event listeners for lightbox controls
-            closeBtn.addEventListener('click', closeLightbox);
+            closeBtn.addEventListener极click', closeLightbox);
             prevBtn.addEventListener('click', () => navigate(-1));
             nextBtn.addEventListener('click', () => navigate(1));
             zoomInBtn.addEventListener('click', zoomIn);
             zoomOutBtn.addEventListener('click', zoomOut);
             resetZoomBtn.addEventListener('click', resetZoom);
-            magnifyBtn.addEventListener('click', toggleMagnifyMode);
-            lightboxImg.addEventListener('mousemove', handleMagnify);
             
             // Close lightbox when clicking outside the image
             lightbox.addEventListener('click', (e) => {
@@ -1743,8 +1617,108 @@
                         zoomOut();
                     } else if (e.key === '0') {
                         resetZoom();
-                    } else if (e.key === 'm' || e.key === 'M') {
-                        toggleMagnifyMode();
                     }
                 }
             });
+            
+            // Mobile touch events for lightbox navigation
+            lightboxImgContainer.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            }, false);
+            
+            lightboxImgContainer.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            }, false);
+            
+            function handleSwipe() {
+                const threshold = 50; // Minimum swipe distance
+                
+                if (touchEndX < touchStartX - threshold) {
+                    // Swipe left - next image
+                    navigate(1);
+                } else if (touchEndX > touchStartX + threshold) {
+                    // Swipe right - previous image
+                    navigate(-1);
+                }
+            }
+            
+            // Mouse drag for panning zoomed image
+            lightboxImgContainer.addEventListener('mousedown', (e) => {
+                if (scale <= 1) return;
+                
+                isDragging = true;
+                startX = e.pageX - lightboxImgContainer.offsetLeft;
+                startY = e.pageY - lightboxImgContainer.offsetTop;
+                scrollLeft = lightboxImgContainer.scrollLeft;
+                scrollTop = lightboxImgContainer.scrollTop;
+                lightboxImg.style.cursor = 'grabbing';
+            });
+            
+            document.addEventListener('mouseup', () => {
+                isDragging = false;
+                lightboxImg.style.cursor = scale > 1 ? 'grab' : 'default';
+            });
+            
+            document.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                
+                e.preventDefault();
+                const x = e.pageX - lightboxImgContainer.offsetLeft;
+                const y = e.pageY - lightboxImgContainer.offsetTop;
+                const walkX = (x - startX) * 2;
+                const walkY = (y - startY) * 2;
+                
+                lightboxImgContainer.scrollLeft = scrollLeft - walkX;
+                lightboxImgContainer.scrollTop = scrollTop - walkY;
+            });
+            
+            // Navigation dropdown functionality
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    if (this.getAttribute('href') === '#projects') {
+                        e.preventDefault();
+                        showProjectSection('all');
+                    }
+                });
+            });
+            
+            // Home dropdown functionality
+            document.querySelector('.projects-button').addEventListener('click', function() {
+                showProjectSection('all');
+            });
+            
+            document.querySelectorAll('.home-dropdown-link, .dropdown-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    showProjectSection(targetId);
+                    closeAllDropdowns();
+                });
+            });
+            
+            // Filter buttons functionality
+            filterButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const filter = this.getAttribute('data-filter');
+                    filterArtworks(filter);
+                });
+            });
+            
+            // Year filter buttons functionality
+            yearFilterButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const year = this.getAttribute('data-year');
+                    filterByYear(year);
+                });
+            });
+            
+            // Header scroll effect
+            window.addEventListener('scroll', handleHeaderScroll);
+            
+            // Initialize header state
+            handleHeaderScroll();
+        });
+    </script>
+</body>
+</html>
