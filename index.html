@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,11 +35,11 @@
             width: 200%;
             height: 200%;
             background-image: url('hhehehehehe-0514-4906-9fb3-90fd699fe718.PNG-removebg-preview.png');
-            background-size: 185px; /* Increased from 150px for more spacing */
+            background-size: 200px; /* Increased from 150px for more spacing */
             background-repeat: repeat;
-            opacity: 0.096; /* Increased from 0.04 for less transparency */
+            opacity: 0.095; /* Increased from 0.04 for less transparency */
             z-index: -1;
-            animation: floatBackground 60s linear infinite; /* Faster animation (100s instead of 120s) */
+            animation: floatBackground 6.9s linear infinite; /* Faster animation (100s instead of 120s) */
             transform: rotate(6.9deg);
             pointer-events: none;
         }
@@ -165,36 +166,6 @@
         .linkedin-icon:hover {
             color: #0e76a8;
             transform: scale(1.2);
-        }
-
-        /* Search Bar */
-        .search-container {
-            position: relative;
-            display: flex;
-            align-items: center;
-        }
-
-        .search-input {
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            border: none;
-            width: 200px;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-        }
-
-        .search-input:focus {
-            outline: none;
-            width: 250px;
-        }
-
-        .search-btn {
-            background: none;
-            border: none;
-            cursor: pointer;
-            margin-left: -30px;
-            color: #000;
-            font-size: 1rem;
         }
 
         /* DROPDOWN MENU */
@@ -406,27 +377,6 @@
             background-color: #5a8a5a;
         }
 
-        /* Search container for gallery */
-        .gallery-search-container {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 2rem;
-        }
-
-        .gallery-search {
-            padding: 0.8rem 1.5rem;
-            border-radius: 30px;
-            border: 2px solid #4a8c4a;
-            width: 100%;
-            max-width: 500px;
-            font-size: 1rem;
-        }
-
-        .gallery-search:focus {
-            outline: none;
-            box-shadow: 0 0 5px rgba(74, 140, 74, 0.5);
-        }
-
         /* === GALLERY SECTION === */
         .gallery {
             display: grid;
@@ -468,15 +418,6 @@
             margin: 0;
         }
 
-        /* No results message */
-        .no-results {
-            text-align: center;
-            grid-column: 1 / -1;
-            padding: 2rem;
-            color: #666;
-            font-style: italic;
-        }
-
         /* === LIGHTBOX STYLES === */
         .lightbox {
             display: none;
@@ -501,13 +442,10 @@
 
         .lightbox-content {
             position: relative;
-            display: flex;
             max-width: 90%;
             max-height: 90%;
-            width: auto;
-            height: auto;
-            gap: 30px;
-            align-items: flex-start;
+            text-align: left; /* Changed from center to left */
+            overflow: hidden;
         }
 
         .lightbox-img-container {
@@ -515,7 +453,6 @@
             overflow: hidden;
             cursor: grab;
             max-height: 80vh;
-            flex: 2;
         }
 
         .lightbox-img {
@@ -527,27 +464,31 @@
             transform-origin: center center;
         }
 
-        .lightbox-info {
-            flex: 1;
-            color: white;
-            padding: 20px;
+        .lightbox-caption {
+            position: absolute;
+            bottom: 20px;
+            right: 20px; /* Changed from left:50% to right:20px */
+            transform: none; /* Removed translateX(-50%) */
+            width: auto; /* Changed from 80% to auto */
+            max-width: 40%;
             background: rgba(0, 0, 0, 0.7);
+            padding: 15px;
             border-radius: 8px;
-            max-height: 80vh;
-            overflow-y: auto;
+            z-index: 2001;
         }
 
         .lightbox-title {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: bold;
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
             color: white;
         }
 
         .lightbox-alt {
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: #bdc3c7;
-            line-height: 1.6;
+            font-style: italic;
+            line-height: 1.4;
         }
 
         .close {
@@ -610,10 +551,16 @@
             left: 20px;
             z-index: 2002;
             display: flex;
+            flex-direction: column; /* Changed to column for 2 rows */
             gap: 10px;
         }
 
         .zoom-controls-row {
+            display: flex;
+            gap: 10px;
+        }
+
+        .magnify-controls-row {
             display: flex;
             gap: 10px;
         }
@@ -637,6 +584,25 @@
             background: rgba(255, 255, 255, 0.2);
         }
 
+        .magnify-btn {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+            transition: background 0.3s;
+        }
+
+        .magnify-btn:hover, .magnify-btn.active {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
         .reset-zoom {
             background: rgba(255, 255, 255, 0.1);
             color: white;
@@ -650,6 +616,35 @@
 
         .reset-zoom:hover {
             background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Magnifier lens for Amazon-style zoom */
+        .magnifier-lens {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            border: 2px solid white;
+            border-radius: 50%;
+            overflow: hidden;
+            pointer-events: none;
+            display: none;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            z-index: 2003;
+        }
+
+        .magnifier-lens.active {
+            display: block;
+        }
+
+        .magnifier-lens-img {
+            position: absolute;
+            transform: scale(2);
+            transform-origin: 0 0;
+        }
+
+        /* Magnify mode styles */
+        .magnify-mode .lightbox-img {
+            cursor: none;
         }
 
         /* === FOOTER === */
@@ -745,21 +740,6 @@
                 font-size: 1rem;
             }
             
-            /* Search bar adjustments for mobile */
-            .search-container {
-                order: 3;
-                width: 100%;
-                margin-top: 0.5rem;
-            }
-            
-            .search-input {
-                width: 100%;
-            }
-            
-            .search-input:focus {
-                width: 100%;
-            }
-            
             /* Home section adjustments for mobile */
             .home-section {
                 min-height: 60vh;
@@ -792,25 +772,6 @@
             .artwork h3 {
                 font-size: 1rem;
                 margin: 10px 0 5px 0;
-            }
-            
-            /* Lightbox adjustments for mobile */
-            .lightbox-content {
-                flex-direction: column;
-                max-width: 95%;
-                max-height: 95%;
-            }
-            
-            .lightbox-img-container {
-                max-height: 50vh;
-                flex: none;
-                width: 100%;
-            }
-            
-            .lightbox-info {
-                flex: none;
-                width: 100%;
-                max-height: 40vh;
             }
             
             .lightbox-title {
@@ -854,7 +815,7 @@
                 left: 10px;
             }
             
-            .zoom-btn {
+            .zoom-btn, .magnify-btn {
                 width: 35px;
                 height: 35px;
                 font-size: 16px;
@@ -865,9 +826,21 @@
                 font-size: 12px;
             }
             
+            /* Lightbox caption for mobile */
+            .lightbox-caption {
+                max-width: 80%;
+                right: 10px;
+                bottom: 10px;
+            }
+            
             /* Adjust background animation for mobile */
             body::before {
                 animation: floatBackground 180s linear infinite;
+            }
+            
+            /* Hide magnifier lens on mobile */
+            .magnifier-lens {
+                display: none !important;
             }
         }
     </style>
@@ -900,12 +873,6 @@
                         <i class="fab fa-linkedin"></i>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <div class="search-container">
-                        <input type="text" class="search-input" id="globalSearch" placeholder="Search...">
-                        <button class="search-btn"><i class="fas fa-search"></i></button>
-                    </div>
-                </li>
             </ul>
         </nav>
     </header>
@@ -916,7 +883,7 @@
             <img src="chromosome lookingremovebg-preview.png" alt="Decorative art">
         </div>
         <div class="home-content">
-            <p>Hello, I'm Abdellrahman Ali Nour, a biology enthusiast & a passionate scientific illustrator with a deep love for both Science & Art. My artistic passion drives me to transform intricate biological structures into compelling visual narratives that communicate scientific ideas with clarity and beauty ( i draw other random things as well). I hope that this portfolio helps in revealing the kind of artist i am to the world, & show my passion & love for Biology, Art, & Creativity.</p>
+            <p>Hello, I'm Abdellrahman Ali Nour. I am a biology nerd & an aspiring scientific illustrator, & I am really passionate about everything drawing-&-art related. I hope that this portfolio helps in revealing the kind of artist i am to the world, & show my passion & love for biology, art, & creativity.</p>
             <div class="projects-button-container">
                 <div class="projects-button">View Projects</div>
                 <div class="home-dropdown">
@@ -934,11 +901,6 @@
     <section id="all" class="projects-section">
         <h2 class="section-title">All Projects</h2>
         <p class="category-description">A comprehensive collection showcasing my diverse artistic journey, from scientific precision to creative character designs and everything in between.</p>
-        
-        <div class="gallery-search-container">
-            <input type="text" class="gallery-search" id="allSearch" placeholder="Search all projects...">
-        </div>
-        
         <div class="filter-container">
             <button class="filter-btn active" data-filter="all">All</button>
             <button class="filter-btn" data-filter="scientific">Scientific Illustration</button>
@@ -946,7 +908,7 @@
             <button class="filter-btn" data-filter="previous">Previous Works</button>
             <button class="filter-btn" data-filter="misc">Miscellaneous</button>
         </div>
-        <div class="gallery" id="allGallery">
+        <div class="gallery">
             <!-- Scientific Illustration Artworks -->
             <div class="artwork" data-category="scientific" data-index="0">
                 <img src="lung scientific illustration.jpg" alt="This illustartion shows the main anatomical features of human lungs">
@@ -1174,12 +1136,7 @@
     <section id="scientific-illustration" class="projects-section">
         <h2 class="section-title">Scientific Illustration</h2>
         <p class="category-description">Precise anatomical and biological illustrations that merge scientific accuracy with artistic expression. These works demonstrate my passion for biology and attention to detail in visualizing complex biological structures.</p>
-        
-        <div class="gallery-search-container">
-            <input type="text" class="gallery-search" id="scientificSearch" placeholder="Search scientific illustrations...">
-        </div>
-        
-        <div class="gallery" id="scientificGallery">
+        <div class="gallery">
             <!-- Artwork 1 -->
             <div class="artwork" data-index="0">
                 <img src="lung scientific illustration.jpg" alt="This illustartion shows the main anatomical features of human lungs">
@@ -1263,12 +1220,7 @@
     <section id="character-design" class="projects-section">
         <h2 class="section-title">Character Design</h2>
         <p class="category-description">Creative character designs and concept art that showcase my ability to develop unique personalities and visual stories. These characters were created for various fictional narratives, each with their own backstory and distinctive visual identity.</p>
-        
-        <div class="gallery-search-container">
-            <input type="text" class="gallery-search" id="characterSearch" placeholder="Search character designs...">
-        </div>
-        
-        <div class="gallery" id="characterGallery">
+        <div class="gallery">
             <!-- Artwork 1 -->
             <div class="artwork" data-index="11">
                 <img src="me in a character design sheet.jpg" alt="This illustartion shows a character for a fictional story i was writing:it's me! wearing my favorite hoodie with the cute frog hood, this character was inspired by my appearance during my 3rd year of college, & that character (like me) carries everything you could imagine in his handy backpack (you never know when you will need this stuff)">
@@ -1304,17 +1256,13 @@
         <h2 class="section-title">Previous Works</h2>
         <p class="category-description">A chronological collection of my earlier projects that showcase my artistic evolution and development over the years. Explore works from different periods to see how my style and technique have progressed.</p>
         
-        <div class="gallery-search-container">
-            <input type="text" class="gallery-search" id="previousSearch" placeholder="Search previous works...">
-        </div>
-        
         <div class="year-filter-container">
             <button class="year-filter-btn active" data-year="all">All Years</button>
             <button class="year-filter-btn" data-year="2023">2023 Projects</button>
             <button class="year-filter-btn" data-year="2024">2024 Projects</button>
         </div>
         
-        <div class="gallery" id="previousGallery">
+        <div class="gallery">
             <!-- 2023 Artworks -->
             <div class="artwork" data-year="2023" data-index="15">
                 <img src="Drosophila work.jpg" alt="This illustartion shows a fruit fly (Drosophila melanogaster) wearing a top hat in a semi-realistic style, representing the insect specimen used by the group">
@@ -1400,24 +1348,6 @@
                 <h3>fenugreek & salinity</h3>
                 <p>Digital Illustration, 2024</p>
             </div>
-
-            <div class="artwork" data-year="2024" data-index="28">
-                <img src="bacteria eating plastic.jpg" alt="This illustartion shows a bacterial cell consuming a plastic bottle, with the plastic bottle having a bite taken out of it, this group worked on plastic-degrading bacteria">
-                <h3>"plastic biodegredation by some species of bacteria"</h3>
-                <p>Digital Illustration, 2024</p>
-            </div>
-
-            <div class="artwork" data-year="2024" data-index="28">
-                <img src="running pots.jpg" alt="This illustartion shows two plant pots running with a bunch of yellow balls floating around them, this group worked on the positive effects of nanoparticles (The yellow balls) on improving drougt tolerance in moringa & mint plants">
-                <h3>"the positive effects of nanoparticles on improving drougt tolerance in moringa & mint plants"</h3>
-                <p>Digital Illustration, 2024</p>
-            </div>  
-
-             <div class="artwork" data-year="2024" data-index="28">
-                <img src="plants with salt.jpg" alt="This illustartion shows two plants in salted waters">
-                <h3>"halophytes in an ever changing world"</h3>
-                <p>Digital Illustration, 2024</p>
-            </div>  
         </div>
     </section>
 
@@ -1425,12 +1355,7 @@
     <section id="miscellaneous" class="projects-section">
         <h2 class="section-title">Miscellaneous</h2>
         <p class="category-description">A diverse collection of creative experiments and personal projects that showcase my versatility as an artist. These works explore different themes, styles, and concepts beyond my primary focus areas.</p>
-        
-        <div class="gallery-search-container">
-            <input type="text" class="gallery-search" id="miscSearch" placeholder="Search miscellaneous works...">
-        </div>
-        
-        <div class="gallery" id="miscGallery">
+        <div class="gallery">
              <!-- Artwork 1 -->
             <div class="artwork" data-index="29">
                 <img src="jelly.jpg" alt="This artwork shows a cute green jelly jumping up">
@@ -1486,20 +1411,6 @@
                 <h3>Wizard Frog</h3>
                 <p>Digital Illustration, 2025</p>
             </div>
-
-            <!-- Artwork 9 -->
-            <div class="artwork" data-index="34">
-                <img src="scientist & DNA helix.jpg" alt="This artwork shows a scientist wearing a lab coat & sitting bedides a huge DNA double helix">
-                <h3>DNA Scientist</h3>
-                <p>Digital Illustration, 2025</p>
-            </div>
-
-            <!-- Artwork 10 -->
-            <div class="artwork" data-index="34">
-                <img src="boxy.jpg" alt="This artwork shows a box character that worksin a mail delivery service">
-                <h3>Boxy</h3>
-                <p>Digital Illustration, 2025</p>
-            </div>
         </div>
     </section>
 
@@ -1513,6 +1424,9 @@
             <div class="zoom-controls-row">
                 <button class="zoom-btn" id="zoomIn">+</button>
                 <button class="zoom-btn" id="zoomOut">-</button>
+            </div>
+            <div class="magnify-controls-row">
+                <button class="magnify-btn" id="magnifyBtn">🔍</button>
                 <button class="reset-zoom" id="resetZoom">Reset</button>
             </div>
         </div>
@@ -1520,8 +1434,11 @@
         <div class="lightbox-content">
             <div class="lightbox-img-container">
                 <img class="lightbox-img" id="lightboxImg" src="" alt="">
+                <div class="magnifier-lens" id="magnifierLens">
+                    <img class="magnifier-lens-img" id="magnifierLensImg" src="" alt="">
+                </div>
             </div>
-            <div class="lightbox-info">
+            <div class="lightbox-caption">
                 <div class="lightbox-title" id="lightboxTitle"></div>
                 <div class="lightbox-alt" id="lightboxAlt"></div>
             </div>
@@ -1547,6 +1464,9 @@
             const zoomInBtn = document.getElementById('zoomIn');
             const zoomOutBtn = document.getElementById('zoomOut');
             const resetZoomBtn = document.getElementById('resetZoom');
+            const magnifyBtn = document.getElementById('magnifyBtn');
+            const magnifierLens = document.getElementById('magnifierLens');
+            const magnifierLensImg = document.getElementById('magnifierLensImg');
             const artworks = document.querySelectorAll('.artwork');
             const projectSections = document.querySelectorAll('.projects-section');
             const filterButtons = document.querySelectorAll('.filter-btn');
@@ -1554,20 +1474,15 @@
             const header = document.getElementById('main-header');
             const dropdowns = document.querySelectorAll('.dropdown, .home-dropdown');
             
-            // Search elements
-            const globalSearch = document.getElementById('globalSearch');
-            const allSearch = document.getElementById('allSearch');
-            const scientificSearch = document.getElementById('scientificSearch');
-            const characterSearch = document.getElementById('characterSearch');
-            const previousSearch = document.getElementById('previousSearch');
-            const miscSearch = document.getElementById('miscSearch');
-            
             let currentIndex = 0;
             let touchStartX = 0;
             let touchEndX = 0;
             let scale = 1;
             let isDragging = false;
             let startX, startY, scrollLeft, scrollTop;
+            let magnifyMode = false;
+            let lensSize = 150;
+            let lensZoom = 2;
             
             // Create an array of image data from your artworks
             const imageData = Array.from(artworks).map(artwork => {
@@ -1601,6 +1516,10 @@
                 lightbox.classList.remove('active');
                 document.body.style.overflow = '';
                 resetZoom();
+                magnifyMode = false;
+                magnifierLens.classList.remove('active');
+                magnifyBtn.classList.remove('active');
+                lightbox.classList.remove('magnify-mode');
             }
             
             // Update lightbox content with title and alt text
@@ -1608,6 +1527,7 @@
                 const data = imageData[currentIndex];
                 lightboxImg.src = data.src;
                 lightboxImg.alt = data.alt;
+                magnifierLensImg.src = data.src;
                 lightboxTitle.textContent = data.title;
                 lightboxAlt.textContent = data.alt;
             }
@@ -1640,12 +1560,67 @@
             
             function resetZoom() {
                 scale = 1;
+                magnifyMode = false;
+                lightbox.classList.remove('magnify-mode');
+                magnifyBtn.classList.remove('active');
+                magnifierLens.classList.remove('active');
                 applyZoom();
                 lightboxImgContainer.scrollTo(0, 0);
             }
             
             function applyZoom() {
                 lightboxImg.style.transform = `scale(${scale})`;
+            }
+            
+            // Magnify functions - Amazon-style magnifier
+            function toggleMagnifyMode() {
+                if (scale !== 1) {
+                    resetZoom();
+                    return;
+                }
+                
+                magnifyMode = !magnifyMode;
+                lightbox.classList.toggle('magnify-mode', magnifyMode);
+                magnifyBtn.classList.toggle('active', magnifyMode);
+                
+                if (magnifyMode) {
+                    magnifierLens.classList.add('active');
+                    lightboxImg.style.cursor = 'none';
+                } else {
+                    magnifierLens.classList.remove('active');
+                    lightboxImg.style.cursor = 'grab';
+                }
+            }
+            
+            function handleMagnify(e) {
+                if (!magnifyMode) return;
+                
+                const rect = lightboxImg.getBoundingClientRect();
+                const img = lightboxImg;
+                
+                // Calculate position relative to the image
+                let x = e.clientX - rect.left;
+                let y = e.clientY - rect.top;
+                
+                // Prevent the lens from being positioned outside the image
+                if (x < 0) x = 0;
+                if (y < 0) y = 0;
+                if (x > rect.width) x = rect.width;
+                if (y > rect.height) y = rect.height;
+                
+                // Position the lens at the cursor
+                magnifierLens.style.left = (e.clientX - lensSize/2) + 'px';
+                magnifierLens.style.top = (e.clientY - lensSize/2) + 'px';
+                
+                // Calculate the background position for the lens
+                const bgX = - (x * lensZoom - lensSize/2);
+                const bgY = - (y * lensZoom - lensSize/2);
+                
+                // Set the lens image position and size
+                magnifierLensImg.style.width = (img.naturalWidth * lensZoom) + 'px';
+                magnifierLensImg.style.height = (img.naturalHeight * lensZoom) + 'px';
+                magnifierLensImg.style.left = bgX + 'px';
+                magnifierLensImg.style.top = bgY + 'px';
             }
             
             // Show specific project section
@@ -1689,12 +1664,6 @@
                         btn.classList.remove('active');
                     }
                 });
-                
-                // Apply search filter if there's a search term
-                const searchTerm = allSearch.value.toLowerCase();
-                if (searchTerm) {
-                    filterBySearch(searchTerm, 'all');
-                }
             }
             
             // Filter artworks by year in Previous Works section
@@ -1717,47 +1686,6 @@
                         btn.classList.remove('active');
                     }
                 });
-                
-                // Apply search filter if there's a search term
-                const searchTerm = previousSearch.value.toLowerCase();
-                if (searchTerm) {
-                    filterBySearch(searchTerm, 'previous-works');
-                }
-            }
-            
-            // Filter artworks by search term
-            function filterBySearch(searchTerm, sectionId) {
-                const gallery = document.getElementById(sectionId + 'Gallery');
-                const artworks = gallery.querySelectorAll('.artwork');
-                let hasResults = false;
-                
-                artworks.forEach(artwork => {
-                    if (artwork.style.display !== 'none') {
-                        const title = artwork.querySelector('h3').textContent.toLowerCase();
-                        const description = artwork.querySelector('p').textContent.toLowerCase();
-                        const alt = artwork.querySelector('img').alt.toLowerCase();
-                        
-                        if (title.includes(searchTerm) || description.includes(searchTerm) || alt.includes(searchTerm)) {
-                            artwork.style.display = 'block';
-                            hasResults = true;
-                        } else {
-                            artwork.style.display = 'none';
-                        }
-                    }
-                });
-                
-                // Show no results message if needed
-                let noResults = gallery.querySelector('.no-results');
-                if (!hasResults) {
-                    if (!noResults) {
-                        noResults = document.createElement('div');
-                        noResults.className = 'no-results';
-                        noResults.textContent = 'No artworks found matching your search.';
-                        gallery.appendChild(noResults);
-                    }
-                } else if (noResults) {
-                    noResults.remove();
-                }
             }
             
             // Header shrink on scroll
@@ -1790,6 +1718,8 @@
             zoomInBtn.addEventListener('click', zoomIn);
             zoomOutBtn.addEventListener('click', zoomOut);
             resetZoomBtn.addEventListener('click', resetZoom);
+            magnifyBtn.addEventListener('click', toggleMagnifyMode);
+            lightboxImg.addEventListener('mousemove', handleMagnify);
             
             // Close lightbox when clicking outside the image
             lightbox.addEventListener('click', (e) => {
@@ -1813,277 +1743,8 @@
                         zoomOut();
                     } else if (e.key === '0') {
                         resetZoom();
+                    } else if (e.key === 'm' || e.key === 'M') {
+                        toggleMagnifyMode();
                     }
                 }
             });
-            
-            // Touch events for mobile swipe
-            lightbox.addEventListener('touchstart', (e) => {
-                if (e.touches.length === 1) {
-                    // Single touch for swipe
-                    touchStartX = e.touches[0].clientX;
-                } else if (e.touches.length === 2) {
-                    // Pinch zoom
-                    e.preventDefault();
-                    const touch1 = e.touches[0];
-                    const touch2 = e.touches[1];
-                    const distance = Math.hypot(
-                        touch2.clientX - touch1.clientX,
-                        touch2.clientY - touch1.clientY
-                    );
-                    lightboxImg.setAttribute('data-start-distance', distance);
-                    lightboxImg.setAttribute('data-start-scale', scale);
-                }
-            }, { passive: false });
-            
-            lightbox.addEventListener('touchmove', (e) => {
-                if (e.touches.length === 1 && scale === 1) {
-                    // Single touch for swipe when not zoomed
-                    touchEndX = e.touches[0.clientX;
-                } else if (e.touches.length === 2) {
-                    // Pinch zoom
-                    e.preventDefault();
-                    const touch1 = e.touches[0];
-                    const touch2 = e.touches[1];
-                    const distance = Math.hypot(
-                        touch2.clientX - touch1.clientX,
-                        touch2.clientY - touch1.clientY
-                    );
-                    const startDistance = parseFloat(lightboxImg.getAttribute('data-start-distance'));
-                    const startScale = parseFloat(lightboxImg.getAttribute('data-start-scale'));
-                    
-                    scale = Math.max(0.5, Math.min(3, startScale * (distance / startDistance)));
-                    applyZoom();
-                }
-            }, { passive: false });
-            
-            lightbox.addEventListener('touchend', (e) => {
-                if (e.touches.length === 0) {
-                    // All touches ended
-                    if (scale === 1) {
-                        // Only handle swipe if not zoomed
-                        handleSwipe();
-                    }
-                }
-            }, false);
-            
-            function handleSwipe() {
-                const minSwipeDistance = 50;
-                
-                if (touchStartX - touchEndX > minSwipeDistance) {
-                    // Swipe left - next image
-                    navigate(1);
-                } 
-                
-                if (touchEndX - touchStartX > minSwipeDistance) {
-                    // Swipe right - previous image
-                    navigate(-1);
-                }
-            }
-
-            // Mouse drag for panning when zoomed
-            lightboxImgContainer.addEventListener('mousedown', (e) => {
-                if (scale > 1) {
-                    isDragging = true;
-                    startX = e.pageX - lightboxImgContainer.offsetLeft;
-                    startY = e.pageY - lightboxImgContainer.offsetTop;
-                    scrollLeft = lightboxImgContainer.scrollLeft;
-                    scrollTop = lightboxImgContainer.scrollTop;
-                    lightboxImgContainer.style.cursor = 'grabbing';
-                }
-            });
-            
-            lightboxImgContainer.addEventListener('mouseleave', () => {
-                isDragging = false;
-                lightboxImgContainer.style.cursor = 'grab';
-            });
-            
-            lightboxImgContainer.addEventListener('mouseup', () => {
-                isDragging = false;
-                lightboxImgContainer.style.cursor = 'grab';
-            });
-            
-            lightboxImgContainer.addEventListener('mousemove', (e) => {
-                if (!isDragging) return;
-                e.preventDefault();
-                const x = e.pageX - lightboxImgContainer.offsetLeft;
-                const y = e.pageY - lightboxImgContainer.offsetTop;
-                const walkX = (x - startX) * 2;
-                const walkY = (y - startY) * 2;
-                lightboxImgContainer.scrollLeft = scrollLeft - walkX;
-                lightboxImgContainer.scrollTop = scrollTop - walkY;
-            });
-
-            // Navigation event listeners
-            document.querySelectorAll('.dropdown-link, .home-dropdown-link').forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const targetId = link.getAttribute('href').substring(1);
-                    showProjectSection(targetId);
-                    
-                    // Close dropdowns after selection (especially for mobile)
-                    if (window.innerWidth <= 768) {
-                        closeAllDropdowns();
-                    }
-                });
-            });
-            
-            // Home link
-            document.querySelector('a[href="#home"]').addEventListener('click', (e) => {
-                e.preventDefault();
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-                
-                // Hide all project sections
-                projectSections.forEach(section => {
-                    section.classList.remove('active');
-                });
-            });
-            
-            // Projects link in header
-            document.querySelector('a[href="#projects"]').addEventListener('click', (e) => {
-                e.preventDefault();
-                // Show the first project section by default
-                showProjectSection('all');
-            });
-            
-            // Filter buttons
-            filterButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    const filter = button.getAttribute('data-filter');
-                    filterArtworks(filter);
-                });
-            });
-            
-            // Year filter buttons
-            yearFilterButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    const year = button.getAttribute('data-year');
-                    filterByYear(year);
-                });
-            });
-            
-            // Search functionality
-            function setupSearch(searchInput, sectionId) {
-                searchInput.addEventListener('input', (e) => {
-                    const searchTerm = e.target.value.toLowerCase();
-                    if (searchTerm) {
-                        filterBySearch(searchTerm, sectionId);
-                    } else {
-                        // If search is cleared, reapply any existing filters
-                        const artworks = document.querySelectorAll(`#${sectionId}Gallery .artwork`);
-                        artworks.forEach(artwork => {
-                            artwork.style.display = 'block';
-                        });
-                        
-                        // Remove no results message if it exists
-                        const gallery = document.getElementById(sectionId + 'Gallery');
-                        const noResults = gallery.querySelector('.no-results');
-                        if (noResults) {
-                            noResults.remove();
-                        }
-                        
-                        // Reapply category/year filters
-                        if (sectionId === 'all') {
-                            const activeFilter = document.querySelector('#all .filter-btn.active').getAttribute('data-filter');
-                            filterArtworks(activeFilter);
-                        } else if (sectionId === 'previous-works') {
-                            const activeYear = document.querySelector('#previous-works .year-filter-btn.active').getAttribute('data-year');
-                            filterByYear(activeYear);
-                        }
-                    }
-                });
-            }
-            
-            // Setup search for each section
-            setupSearch(allSearch, 'all');
-            setupSearch(scientificSearch, 'scientific-illustration');
-            setupSearch(characterSearch, 'character-design');
-            setupSearch(previousSearch, 'previous-works');
-            setupSearch(miscSearch, 'miscellaneous');
-            
-            // Global search
-            globalSearch.addEventListener('input', (e) => {
-                const searchTerm = e.target.value.toLowerCase();
-                if (searchTerm) {
-                    // Find which section is active
-                    let activeSection = null;
-                    projectSections.forEach(section => {
-                        if (section.classList.contains('active')) {
-                            activeSection = section.id;
-                        }
-                    });
-                    
-                    if (activeSection) {
-                        // Filter the active section
-                        const searchInput = document.getElementById(activeSection + 'Search');
-                        if (searchInput) {
-                            searchInput.value = searchTerm;
-                            filterBySearch(searchTerm, activeSection);
-                        }
-                    } else {
-                        // If no section is active, search all projects
-                        showProjectSection('all');
-                        allSearch.value = searchTerm;
-                        filterBySearch(searchTerm, 'all');
-                    }
-                }
-            });
-            
-            // Scroll event for header shrink
-            window.addEventListener('scroll', handleHeaderScroll);
-            
-            // Close dropdowns when clicking outside (only for mobile)
-            document.addEventListener('click', (e) => {
-                if (window.innerWidth <= 768) {
-                    if (!e.target.matches('.nav-link, .projects-button') && 
-                        !e.target.closest('.dropdown, .home-dropdown')) {
-                        closeAllDropdowns();
-                    }
-                }
-            });
-            
-            // Handle mobile view dropdowns
-            if (window.innerWidth <= 768) {
-                document.querySelectorAll('.nav-link, .projects-button').forEach(element => {
-                    element.addEventListener('click', (e) => {
-                        const dropdown = element.nextElementSibling;
-                        if (dropdown && (dropdown.classList.contains('dropdown') || dropdown.classList.contains('home-dropdown'))) {
-                            e.preventDefault();
-                            const isVisible = dropdown.style.display === 'block';
-                            closeAllDropdowns();
-                            if (!isVisible) {
-                                dropdown.style.display = 'block';
-                            }
-                        }
-                    });
-                });
-            }
-            
-            // Keep dropdowns open on hover for desktop
-            if (window.innerWidth > 768) {
-                document.querySelectorAll('.nav-item, .projects-button-container').forEach(container => {
-                    container.addEventListener('mouseleave', () => {
-                        // Small delay before closing to allow moving to dropdown
-                        setTimeout(() => {
-                            const dropdown = container.querySelector('.dropdown, .home-dropdown');
-                            if (dropdown && !dropdown.matches(':hover')) {
-                                dropdown.style.display = 'none';
-                            }
-                        }, 300);
-                    });
-                    
-                    container.addEventListener('mouseenter', () => {
-                        const dropdown = container.querySelector('.dropdown, .home-dropdown');
-                        if (dropdown) {
-                            dropdown.style.display = 'block';
-                        }
-                    });
-                });
-            }
-        });
-    </script>
-</body>
-</html>
