@@ -409,6 +409,7 @@
         .artwork h3 {
             margin: 15px 0 10px 0;
             font-size: 1.2rem;
+            color: #333;
         }
 
         .artwork p {
@@ -582,25 +583,6 @@
             background: rgba(255, 255, 255, 0.2);
         }
 
-        .magnify-btn {
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 18px;
-            transition: background 0.3s;
-        }
-
-        .magnify-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
         .reset-zoom {
             background: rgba(255, 255, 255, 0.1);
             color: white;
@@ -614,15 +596,6 @@
 
         .reset-zoom:hover {
             background: rgba(255, 255, 255, 0.2);
-        }
-
-        /* Magnify mode styles */
-        .magnify-mode .lightbox-img {
-            cursor: zoom-in;
-        }
-
-        .magnify-mode.active .lightbox-img {
-            cursor: crosshair;
         }
 
         /* === FOOTER === */
@@ -793,7 +766,7 @@
                 left: 10px;
             }
             
-            .zoom-btn, .magnify-btn {
+            .zoom-btn {
                 width: 35px;
                 height: 35px;
                 font-size: 16px;
@@ -1392,7 +1365,7 @@
 
              <!-- Artwork 7 -->
             <div class="artwork" data-index="35">
-                <img src="wiggly arms.jpg" alt="This artwork shows a very happy person, wiggling their arms in the air from excitement">
+                <img src="wigggy arms.jpg" alt="This artwork shows a very happy person, wiggling their arms in the air from excitement">
                 <h3>Wiggly arms</h3>
                 <p>Digital Illustration, 2025</p>
             </div>
@@ -1416,7 +1389,6 @@
             <div class="zoom-controls">
                 <button class="zoom-btn" id="zoomIn">+</button>
                 <button class="zoom-btn" id="zoomOut">-</button>
-                <button class="magnify-btn" id="magnifyBtn">🔍</button>
                 <button class="reset-zoom" id="resetZoom">Reset</button>
             </div>
         </div>
@@ -1451,7 +1423,6 @@
             const zoomInBtn = document.getElementById('zoomIn');
             const zoomOutBtn = document.getElementById('zoomOut');
             const resetZoomBtn = document.getElementById('resetZoom');
-            const magnifyBtn = document.getElementById('magnifyBtn');
             const artworks = document.querySelectorAll('.artwork');
             const projectSections = document.querySelectorAll('.projects-section');
             const filterButtons = document.querySelectorAll('.filter-btn');
@@ -1465,7 +1436,6 @@
             let scale = 1;
             let isDragging = false;
             let startX, startY, scrollLeft, scrollTop;
-            let magnifyMode = false;
             
             // Create an array of image data from your artworks
             const imageData = Array.from(artworks).map(artwork => {
@@ -1537,46 +1507,12 @@
             
             function resetZoom() {
                 scale = 1;
-                magnifyMode = false;
-                lightbox.classList.remove('magnify-mode');
-                magnifyBtn.classList.remove('active');
                 applyZoom();
                 lightboxImgContainer.scrollTo(0, 0);
             }
             
             function applyZoom() {
                 lightboxImg.style.transform = `scale(${scale})`;
-            }
-            
-            // Magnify functions
-            function toggleMagnifyMode() {
-                if (scale !== 1) {
-                    resetZoom();
-                    return;
-                }
-                
-                magnifyMode = !magnifyMode;
-                lightbox.classList.toggle('magnify-mode', magnifyMode);
-                magnifyBtn.classList.toggle('active', magnifyMode);
-                
-                if (magnifyMode) {
-                    lightboxImg.style.cursor = 'crosshair';
-                } else {
-                    lightboxImg.style.cursor = 'grab';
-                }
-            }
-            
-            function handleMagnify(e) {
-                if (!magnifyMode) return;
-                
-                // Calculate position for magnified view
-                const rect = lightboxImg.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                // Show magnified area
-                lightboxImg.style.transformOrigin = `${x}px ${y}px`;
-                lightboxImg.style.transform = 'scale(2)';
             }
             
             // Show specific project section
@@ -1661,7 +1597,7 @@
             }
             
             // Event listeners for artworks
-            artworks.forEach((artwork, index) {
+            artworks.forEach((artwork, index) => {
                 artwork.addEventListener('click', () => {
                     openLightbox(index);
                 });
@@ -1674,8 +1610,6 @@
             zoomInBtn.addEventListener('click', zoomIn);
             zoomOutBtn.addEventListener('click', zoomOut);
             resetZoomBtn.addEventListener('click', resetZoom);
-            magnifyBtn.addEventListener('click', toggleMagnifyMode);
-            lightboxImg.addEventListener('mousemove', handleMagnify);
             
             // Close lightbox when clicking outside the image
             lightbox.addEventListener('click', (e) => {
@@ -1685,7 +1619,7 @@
             });
             
             // Keyboard navigation
-            document.addEventListener('keydown', (e) {
+            document.addEventListener('keydown', (e) => {
                 if (lightbox.classList.contains('active')) {
                     if (e.key === 'Escape') {
                         closeLightbox();
@@ -1699,8 +1633,6 @@
                         zoomOut();
                     } else if (e.key === '0') {
                         resetZoom();
-                    } else if (e.key === 'm' || e.key === 'M') {
-                        toggleMagnifyMode();
                     }
                 }
             });
@@ -1908,4 +1840,3 @@
     </script>
 </body>
 </html>
-                
