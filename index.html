@@ -1507,7 +1507,57 @@
             function applyZoom() {
                 lightboxImg.style.transform = `scale(${scale})`;
             }
+
+             // Magnify functions - Amazon-style magnifier
+            function toggleMagnifyMode() {
+                if (scale !== 1) {
+                    resetZoom();
+                    return;
+                }
+                
+                magnifyMode = !magnifyMode;
+                lightbox.classList.toggle('magnify-mode', magnifyMode);
+                magnifyBtn.classList.toggle('active', magnifyMode);
+                
+                if (magnifyMode) {
+                    magnifierLens.classList.add('active');
+                    lightboxImg.style.cursor = 'none';
+                } else {
+                    magnifierLens.classList.remove('active');
+                    lightboxImg.style.cursor = 'grab';
+                }
+            }
             
+            function handleMagnify(e) {
+                if (!magnifyMode) return;
+                
+                const rect = lightboxImg.getBoundingClientRect();
+                const img = lightboxImg;
+                
+                // Calculate position relative to the image
+                let x = e.clientX - rect.left;
+                let y = e.clientY - rect.top;
+                
+                // Prevent the lens from being positioned outside the image
+                if (x < 0) x = 0;
+                if (y < 0) y = 0;
+                if (x > rect.width) x = rect.width;
+                if (y > rect.height) y = rect.height;
+                
+                // Position the lens at the cursor
+                magnifierLens.style.left = (e.clientX - lensSize/2) + 'px';
+                magnifierLens.style.top = (e.clientY - lensSize/2) + 'px';
+                
+                // Calculate the background position for the lens
+                const bgX = - (x * lensZoom - lensSize/2);
+                const bgY = - (y * lensZoom - lensSize/2);
+                
+                // Set the lens image position and size
+                magnifierLensImg.style.width = (img.naturalWidth * lensZoom) + 'px';
+                magnifierLensImg.style.height = (img.naturalHeight * lensZoom) + 'px';
+                magnifierLensImg.style.left = bgX + 'px';
+                magnifierLensImg.style.top = bgY + 'px';
+            }
             
             // Show specific project section
             function showProjectSection(sectionId) {
