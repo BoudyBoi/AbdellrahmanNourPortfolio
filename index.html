@@ -38,7 +38,7 @@
             background-repeat: repeat;
             opacity: 0.08; /* Increased from 0.04 for less transparency */
             z-index: -1;
-            animation: floatBackground 73s linear infinite; /* Faster animation (100s instead of 120s) */
+            animation: floatBackground 64s linear infinite; /* Faster animation (100s instead of 120s) */
             transform: rotate(6deg);
             pointer-events: none;
         }
@@ -104,7 +104,7 @@
         }
 
         header.shrink .artist-name {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
         }
 
         .logo {
@@ -456,7 +456,7 @@
 
         .lightbox-img {
             max-width: 100%;
-            max-height: 80vh;
+            max-height: 85vh;
             border-radius: 8px;
             box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
             transition: transform 0.3s ease;
@@ -1508,56 +1508,6 @@
                 lightboxImg.style.transform = `scale(${scale})`;
             }
             
-            // Magnify functions - Amazon-style magnifier
-            function toggleMagnifyMode() {
-                if (scale !== 1) {
-                    resetZoom();
-                    return;
-                }
-                
-                magnifyMode = !magnifyMode;
-                lightbox.classList.toggle('magnify-mode', magnifyMode);
-                magnifyBtn.classList.toggle('active', magnifyMode);
-                
-                if (magnifyMode) {
-                    magnifierLens.classList.add('active');
-                    lightboxImg.style.cursor = 'none';
-                } else {
-                    magnifierLens.classList.remove('active');
-                    lightboxImg.style.cursor = 'grab';
-                }
-            }
-            
-            function handleMagnify(e) {
-                if (!magnifyMode) return;
-                
-                const rect = lightboxImg.getBoundingClientRect();
-                const img = lightboxImg;
-                
-                // Calculate position relative to the image
-                let x = e.clientX - rect.left;
-                let y = e.clientY - rect.top;
-                
-                // Prevent the lens from being positioned outside the image
-                if (x < 0) x = 0;
-                if (y < 0) y = 0;
-                if (x > rect.width) x = rect.width;
-                if (y > rect.height) y = rect.height;
-                
-                // Position the lens at the cursor
-                magnifierLens.style.left = (e.clientX - lensSize/2) + 'px';
-                magnifierLens.style.top = (e.clientY - lensSize/2) + 'px';
-                
-                // Calculate the background position for the lens
-                const bgX = - (x * lensZoom - lensSize/2);
-                const bgY = - (y * lensZoom - lensSize/2);
-                
-                // Set the lens image position and size
-                magnifierLensImg.style.width = (img.naturalWidth * lensZoom) + 'px';
-                magnifierLensImg.style.height = (img.naturalHeight * lensZoom) + 'px';
-                magnifierLensImg.style.left = bgX + 'px';
-                magnifierLensImg.style.top = bgY + 'px';
-            }
             
             // Show specific project section
             function showProjectSection(sectionId) {
