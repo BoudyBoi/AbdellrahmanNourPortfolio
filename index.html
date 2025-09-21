@@ -34,11 +34,11 @@
             width: 200%;
             height: 200%;
             background-image: url('hhehehehehe-0514-4906-9fb3-90fd699fe718.PNG-removebg-preview.png');
-            background-size: 200px;
+            background-size: 210px;
             background-repeat: repeat;
-            opacity: 0.09;
+            opacity: 0.093;
             z-index: -1;
-            animation: floatBackground 63.3s linear infinite;
+            animation: floatBackground 73s linear infinite;
             transform: rotate(7deg);
             pointer-events: none;
         }
@@ -445,12 +445,17 @@
             max-height: 90%;
             text-align: center;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .lightbox-img-container {
             position: relative;
             overflow: hidden;
             cursor: grab;
+            max-width: 100%;
+            max-height: 80vh;
         }
 
         .lightbox-img {
@@ -460,18 +465,18 @@
             box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
             transition: transform 0.3s ease;
             transform-origin: center center;
+            object-fit: contain;
         }
 
+        /* CHANGED: Lightbox caption now positioned below image */
         .lightbox-caption {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
             width: 80%;
             background: rgba(0, 0, 0, 0.7);
             padding: 15px;
             border-radius: 8px;
-            z-index: 2001;
+            margin-top: 20px;
+            color: white;
+            text-align: center;
         }
 
         .lightbox-title {
@@ -797,6 +802,13 @@
             .reset-zoom {
                 padding: 6px 12px;
                 font-size: 12px;
+            }
+            
+            /* Lightbox caption adjustments for mobile */
+            .lightbox-caption {
+                width: 90%;
+                padding: 10px;
+                margin-top: 15px;
             }
             
             /* Adjust background animation for mobile */
@@ -1649,7 +1661,7 @@
             }
             
             // Event listeners for artworks
-            artworks.forEach((artwork, index) => {
+            artworks.forEach((artwork, index) {
                 artwork.addEventListener('click', () => {
                     openLightbox(index);
                 });
@@ -1673,7 +1685,7 @@
             });
             
             // Keyboard navigation
-            document.addEventListener('keydown', (e) => {
+            document.addEventListener('keydown', (e) {
                 if (lightbox.classList.contains('active')) {
                     if (e.key === 'Escape') {
                         closeLightbox();
@@ -1884,7 +1896,7 @@
                         }, 300);
                     });
                     
-                    container.addEventListener('mouseenter', () => {
+                    container.addEventListener('mouseenter', () {
                         const dropdown = container.querySelector('.dropdown, .home-dropdown');
                         if (dropdown) {
                             dropdown.style.display = 'block';
