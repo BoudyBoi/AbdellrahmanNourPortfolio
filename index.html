@@ -31,15 +31,15 @@
             position: fixed;
             top: 0;
             left: 0;
-            width: 200%;
-            height: 200%;
+            width: 210%;
+            height: 210%;
             background-image: url('hhehehehehe-0514-4906-9fb3-90fd699fe718.PNG-removebg-preview.png');
-            background-size: 200px;
+            background-size: 180px; /* Increased from 150px for more spacing */
             background-repeat: repeat;
-            opacity: 0.09;
+            opacity: 0.08; /* Increased from 0.04 for less transparency */
             z-index: -1;
-            animation: floatBackground 73s linear infinite;
-            transform: rotate(7deg);
+            animation: floatBackground 73s linear infinite; /* Faster animation (100s instead of 120s) */
+            transform: rotate(6deg);
             pointer-events: none;
         }
 
@@ -443,51 +443,48 @@
             position: relative;
             max-width: 90%;
             max-height: 90%;
-            text-align: center;
+            text-align: left; /* Changed from center to left */
             overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
         }
 
         .lightbox-img-container {
             position: relative;
             overflow: hidden;
             cursor: grab;
-            max-width: 100%;
             max-height: 80vh;
         }
 
         .lightbox-img {
-            max-width: 110%;
+            max-width: 100%;
             max-height: 80vh;
             border-radius: 8px;
             box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
-            transition: transform 0.5s ease;
+            transition: transform 0.3s ease;
             transform-origin: center center;
-            object-fit: contain;
         }
 
-        /* CHANGED: Lightbox caption now positioned below image */
         .lightbox-caption {
-            width: 80%;
+            position: absolute;
+            bottom: 20px;
+            right: 20px; /* Changed from left:50% to right:20px */
+            transform: none; /* Removed translateX(-50%) */
+            width: auto; /* Changed from 80% to auto */
+            max-width: 40%;
             background: rgba(0, 0, 0, 0.7);
             padding: 15px;
             border-radius: 8px;
-            margin-top: 20px;
-            color: white;
-            text-align: center;
+            z-index: 2001;
         }
 
         .lightbox-title {
-            font-size: 1.65rem;
+            font-size: 1.5rem;
             font-weight: bold;
             margin-bottom: 0.5rem;
             color: white;
         }
 
         .lightbox-alt {
-            font-size: 1.15rem;
+            font-size: 1rem;
             color: #bdc3c7;
             font-style: italic;
             line-height: 1.4;
@@ -553,12 +550,16 @@
             left: 20px;
             z-index: 2002;
             display: flex;
+            flex-direction: column; /* Changed to column for 2 rows */
             gap: 10px;
         }
 
-        .zoom-controls {
-            position: static;
-            transform: none;
+        .zoom-controls-row {
+            display: flex;
+            gap: 10px;
+        }
+
+        .magnify-controls-row {
             display: flex;
             gap: 10px;
         }
@@ -580,30 +581,6 @@
 
         .zoom-btn:hover {
             background: rgba(255, 255, 255, 0.2);
-        }
-
-        .reset-zoom {
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            border: none;
-            border-radius: 20px;
-            padding: 8px 15px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: background 0.3s;
-        }
-
-        .reset-zoom:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        /* Magnify mode styles */
-        .magnify-mode .lightbox-img {
-            cursor: zoom-in;
-        }
-
-        .magnify-mode.active .lightbox-img {
-            cursor: crosshair;
         }
 
         /* === FOOTER === */
@@ -785,16 +762,21 @@
                 font-size: 12px;
             }
             
-            /* Lightbox caption adjustments for mobile */
+            /* Lightbox caption for mobile */
             .lightbox-caption {
-                width: 90%;
-                padding: 10px;
-                margin-top: 15px;
+                max-width: 80%;
+                right: 10px;
+                bottom: 10px;
             }
             
             /* Adjust background animation for mobile */
             body::before {
                 animation: floatBackground 180s linear infinite;
+            }
+            
+            /* Hide magnifier lens on mobile */
+            .magnifier-lens {
+                display: none !important;
             }
         }
     </style>
@@ -837,7 +819,7 @@
             <img src="chromosome lookingremovebg-preview.png" alt="Decorative art">
         </div>
         <div class="home-content">
-            <p>Hello, I'm Abdellrahman Ali Nour, a biology enthusiast & passionate scientific illustrator with a deep love for both Science & Art. My artistic passion drives me to transform intricate biological structures into compelling visual narratives that communicate scientific ideas with clarity and beauty, & I hope that this portfolio helps in revealing the kind of artist i am to the world, & show my passion & love for biology, art, & creativity.</p>
+            <p>Hello, I'm Abdellrahman Ali Nour, a biology enthusiast & passionate scientific illustrator with a deep love for both Science & Art. My artistic passion drives me to transform intricate biological structures into compelling visual narratives that communicate scientific ideas with clarity and beauty, & I hope that this portfolio helps in revealing the kind of artist i am to the world, & show my passion & love for Biology, Art, & Creativity.</p>
             <div class="projects-button-container">
                 <div class="projects-button">View Projects</div>
                 <div class="home-dropdown">
@@ -1041,19 +1023,6 @@
                 <p>Digital Illustration, 2024</p>
             </div>
 
-            <div class="artwork" data-category="previous" data-year="2024" data-index="29">
-                <img src="running pots.jpg" alt="This illustartion shows two plant pots running accompanied by yellow orbs surrounding them, this group worked on the positive effects of nanoparticles (the yellow orbs) on improving drought tolerance in Moringa & Mint plants">
-                <h3>"the positive effects of nanoparticles on improving drought tolerance in Moringa & Mint plants"</h3>
-                <p>Digital Illustration, 2024</p>
-            </div>
-
-            <div class="artwork" data-category="previous" data-year="2024" data-index="30">
-                <img src="plants with salt.jpg" alt="This illustartion shows two plants in salted water & a salt shaker">
-                <h3>"halophytes in an ever evolving world"</h3>
-                <p>Digital Illustration, 2024</p>
-            </div>
-
-
             <!-- Miscellaneous Artworks -->
             <div class="artwork" data-category="misc" data-index="29">
                 <img src="jelly.jpg" alt="This artwork shows a cute green jelly jumping up">
@@ -1094,12 +1063,6 @@
             <div class="artwork" data-category="misc" data-index="35">
                 <img src="wiggly arms.jpg" alt="This artwork shows a very happy person, wiggling their arms in the air from excitement">
                 <h3>Wiggly arms</h3>
-                <p>Digital Illustration, 2025</p>
-            </div>
-
-            <div class="artwork" data-category="misc" data-index="38">
-                <img src="wizard frog.jpg" alt="This artwork shows a frog, wearing a wizard atire, with a magical wand in his hand">
-                <h3>Wizard Frog</h3>
                 <p>Digital Illustration, 2025</p>
             </div>
         </div>
@@ -1394,9 +1357,11 @@
         <span class="nav-btn next" id="nextBtn">&#10095;</span>
         
         <div class="lightbox-controls">
-            <div class="zoom-controls">
+            <div class="zoom-controls-row">
                 <button class="zoom-btn" id="zoomIn">+</button>
                 <button class="zoom-btn" id="zoomOut">-</button>
+            </div>
+            <div class="magnify-controls-row">
                 <button class="magnify-btn" id="magnifyBtn">🔍</button>
                 <button class="reset-zoom" id="resetZoom">Reset</button>
             </div>
@@ -1405,6 +1370,9 @@
         <div class="lightbox-content">
             <div class="lightbox-img-container">
                 <img class="lightbox-img" id="lightboxImg" src="" alt="">
+                <div class="magnifier-lens" id="magnifierLens">
+                    <img class="magnifier-lens-img" id="magnifierLensImg" src="" alt="">
+                </div>
             </div>
             <div class="lightbox-caption">
                 <div class="lightbox-title" id="lightboxTitle"></div>
@@ -1433,6 +1401,8 @@
             const zoomOutBtn = document.getElementById('zoomOut');
             const resetZoomBtn = document.getElementById('resetZoom');
             const magnifyBtn = document.getElementById('magnifyBtn');
+            const magnifierLens = document.getElementById('magnifierLens');
+            const magnifierLensImg = document.getElementById('magnifierLensImg');
             const artworks = document.querySelectorAll('.artwork');
             const projectSections = document.querySelectorAll('.projects-section');
             const filterButtons = document.querySelectorAll('.filter-btn');
@@ -1447,6 +1417,8 @@
             let isDragging = false;
             let startX, startY, scrollLeft, scrollTop;
             let magnifyMode = false;
+            let lensSize = 150;
+            let lensZoom = 2;
             
             // Create an array of image data from your artworks
             const imageData = Array.from(artworks).map(artwork => {
@@ -1479,6 +1451,11 @@
             function closeLightbox() {
                 lightbox.classList.remove('active');
                 document.body.style.overflow = '';
+                resetZoom();
+                magnifyMode = false;
+                magnifierLens.classList.remove('active');
+                magnifyBtn.classList.remove('active');
+                lightbox.classList.remove('magnify-mode');
             }
             
             // Update lightbox content with title and alt text
@@ -1486,6 +1463,7 @@
                 const data = imageData[currentIndex];
                 lightboxImg.src = data.src;
                 lightboxImg.alt = data.alt;
+                magnifierLensImg.src = data.src;
                 lightboxTitle.textContent = data.title;
                 lightboxAlt.textContent = data.alt;
             }
@@ -1521,6 +1499,7 @@
                 magnifyMode = false;
                 lightbox.classList.remove('magnify-mode');
                 magnifyBtn.classList.remove('active');
+                magnifierLens.classList.remove('active');
                 applyZoom();
                 lightboxImgContainer.scrollTo(0, 0);
             }
@@ -1529,7 +1508,7 @@
                 lightboxImg.style.transform = `scale(${scale})`;
             }
             
-            // Magnify functions
+            // Magnify functions - Amazon-style magnifier
             function toggleMagnifyMode() {
                 if (scale !== 1) {
                     resetZoom();
@@ -1541,8 +1520,10 @@
                 magnifyBtn.classList.toggle('active', magnifyMode);
                 
                 if (magnifyMode) {
-                    lightboxImg.style.cursor = 'crosshair';
+                    magnifierLens.classList.add('active');
+                    lightboxImg.style.cursor = 'none';
                 } else {
+                    magnifierLens.classList.remove('active');
                     lightboxImg.style.cursor = 'grab';
                 }
             }
@@ -1550,14 +1531,32 @@
             function handleMagnify(e) {
                 if (!magnifyMode) return;
                 
-                // Calculate position for magnified view
                 const rect = lightboxImg.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
+                const img = lightboxImg;
                 
-                // Show magnified area
-                lightboxImg.style.transformOrigin = `${x}px ${y}px`;
-                lightboxImg.style.transform = 'scale(2)';
+                // Calculate position relative to the image
+                let x = e.clientX - rect.left;
+                let y = e.clientY - rect.top;
+                
+                // Prevent the lens from being positioned outside the image
+                if (x < 0) x = 0;
+                if (y < 0) y = 0;
+                if (x > rect.width) x = rect.width;
+                if (y > rect.height) y = rect.height;
+                
+                // Position the lens at the cursor
+                magnifierLens.style.left = (e.clientX - lensSize/2) + 'px';
+                magnifierLens.style.top = (e.clientY - lensSize/2) + 'px';
+                
+                // Calculate the background position for the lens
+                const bgX = - (x * lensZoom - lensSize/2);
+                const bgY = - (y * lensZoom - lensSize/2);
+                
+                // Set the lens image position and size
+                magnifierLensImg.style.width = (img.naturalWidth * lensZoom) + 'px';
+                magnifierLensImg.style.height = (img.naturalHeight * lensZoom) + 'px';
+                magnifierLensImg.style.left = bgX + 'px';
+                magnifierLensImg.style.top = bgY + 'px';
             }
             
             // Show specific project section
@@ -1642,7 +1641,7 @@
             }
             
             // Event listeners for artworks
-            artworks.forEach((artwork, index) {
+            artworks.forEach((artwork, index) => {
                 artwork.addEventListener('click', () => {
                     openLightbox(index);
                 });
@@ -1666,7 +1665,7 @@
             });
             
             // Keyboard navigation
-            document.addEventListener('keydown', (e) {
+            document.addEventListener('keydown', (e) => {
                 if (lightbox.classList.contains('active')) {
                     if (e.key === 'Escape') {
                         closeLightbox();
@@ -1752,7 +1751,7 @@
 
             // Mouse drag for panning when zoomed
             lightboxImgContainer.addEventListener('mousedown', (e) => {
-                if (scale > 1) {
+                if (scale > 1 && !magnifyMode) {
                     isDragging = true;
                     startX = e.pageX - lightboxImgContainer.offsetLeft;
                     startY = e.pageY - lightboxImgContainer.offsetTop;
@@ -1764,12 +1763,16 @@
             
             lightboxImgContainer.addEventListener('mouseleave', () => {
                 isDragging = false;
-                lightboxImgContainer.style.cursor = 'grab';
+                if (!magnifyMode) {
+                    lightboxImgContainer.style.cursor = 'grab';
+                }
             });
             
             lightboxImgContainer.addEventListener('mouseup', () => {
                 isDragging = false;
-                lightboxImgContainer.style.cursor = 'grab';
+                if (!magnifyMode) {
+                    lightboxImgContainer.style.cursor = 'grab';
+                }
             });
             
             lightboxImgContainer.addEventListener('mousemove', (e) => {
@@ -1877,7 +1880,7 @@
                         }, 300);
                     });
                     
-                    container.addEventListener('mouseenter', () {
+                    container.addEventListener('mouseenter', () => {
                         const dropdown = container.querySelector('.dropdown, .home-dropdown');
                         if (dropdown) {
                             dropdown.style.display = 'block';
