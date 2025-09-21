@@ -169,43 +169,49 @@
             transform: scale(1.2);
         }
 
-        /* DROPDOWN MENU - Fixed based on search results */
-        .dropdown {
-            position: static; /* Changed from relative to static for proper positioning */
-            display: inline-block;
-        }
+       /* DROPDOWN MENU */
+.dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #3d3d3d;
+    min-width: 200px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    border-radius: 0 0 5px 5px;
+    display: none;
+    list-style: none;
+    padding: 0.5rem 0;
+    margin: 0;
+    z-index: 1001;
+}
 
-        .dropdown-content {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background-color: #3d3d3d;
-            min-width: 200px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            border-radius: 0 0 5px 5px;
-            display: none;
-            list-style: none;
-            padding: 0.5rem 0;
-            margin: 0;
-            z-index: 1001; /* Ensure proper z-index */
-        }
+.dropdown-link {
+    display: block;
+    padding: 0.8rem 1.5rem;
+    color: #ddd;
+    transition: all 0.3s ease;
+}
 
-        .dropdown-link {
-            display: block;
-            padding: 0.8rem 1.5rem;
-            color: #ddd;
-            transition: all 0.3s ease;
-        }
+.dropdown-link:hover {
+    background-color: #555;
+    color: white;
+}
 
-        .dropdown-link:hover {
-            background-color: #555;
-            color: white;
-        }
+/* Show dropdown on hover */
+.nav-item:hover .dropdown {
+    display: block;
+}
 
-        /* Show dropdown on hover - Fixed selector */
-        .nav-item:hover .dropdown {
-            display: block;
-        }
+        // Close all dropdowns
+function closeAllDropdowns() {
+    dropdowns.forEach(dropdown => {
+        dropdown.style.display = 'none';
+    });
+    // Also remove active class from nav-items and projects-button-container
+    document.querySelectorAll('.nav-item, .projects-button-container').forEach(item => {
+        item.classList.remove('active');
+    });
+}
 
         /* === HOME SECTION === */
         .home-section {
@@ -793,11 +799,21 @@
                 margin-top: 15px;
             }
             
-            /* Dropdown adjustments for mobile */
-            .dropdown-content {
-                position: static; /* Change to static for mobile */
-                width: 100%;
-                box-shadow: none;
+           /* Dropdown adjustments for mobile */
+.dropdown {
+    position: static;
+    width: 100%;
+    box-shadow: none;
+}
+
+/* Mobile dropdown trigger */
+.nav-item.active .dropdown {
+    display: block;
+}
+
+.projects-button-container.active .home-dropdown {
+    display: block;
+}
             }
         }
         
@@ -1411,23 +1427,22 @@
                     }
                 }
             });
-            
-            // Handle mobile view dropdowns
-            if (window.innerWidth <= 768) {
-                document.querySelectorAll('.nav-link, .projects-button').forEach(element => {
-                    element.addEventListener('click', (e) => {
-                        const dropdown = element.nextElementSibling;
-                        if (dropdown && (dropdown.classList.contains('dropdown-content') || dropdown.classList.contains('home-dropdown'))) {
-                            e.preventDefault();
-                            const isVisible = dropdown.style.display === 'block';
-                            closeAllDropdowns();
-                            if (!isVisible) {
-                                dropdown.style.display = 'block';
-                            }
-                        }
-                    });
-                });
+           // Handle mobile view dropdowns
+if (window.innerWidth <= 768) {
+    document.querySelectorAll('.nav-link, .projects-button').forEach(element => {
+        element.addEventListener('click', (e) => {
+            const dropdown = element.nextElementSibling;
+            if (dropdown && (dropdown.classList.contains('dropdown') || dropdown.classList.contains('home-dropdown'))) {
+                e.preventDefault();
+                const isVisible = dropdown.style.display === 'block';
+                closeAllDropdowns();
+                if (!isVisible) {
+                    dropdown.style.display = 'block';
+                }
             }
+        });
+    });
+}
             
             // Keep dropdowns open on hover for desktop
             if (window.innerWidth > 768) {
